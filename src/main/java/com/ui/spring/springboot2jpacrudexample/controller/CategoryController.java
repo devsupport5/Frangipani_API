@@ -1,5 +1,6 @@
 package com.ui.spring.springboot2jpacrudexample.controller;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ui.spring.springboot2jpacrudexample.beans.CategoryDTO;
@@ -61,15 +64,18 @@ public class CategoryController {
 	@PutMapping("/categorys/{id}")
 	public ResponseEntity<Category> updateEmployee(@PathVariable(value = "id") Long categoryId,
 			@Valid @RequestBody Category categoryDetails) throws ResourceNotFoundException {
+		
 		Category category = categoryService.getCategoryById(categoryId)
 				.orElseThrow(() -> new ResourceNotFoundException("Category not found for this id :: " + categoryId));
 
 		category.setId(categoryDetails.getId());
 		category.setCategoryName(categoryDetails.getCategoryName());
 		category.setDescription(categoryDetails.getDescription());
+		category.setIsActive(categoryDetails.getIsActive());
 		final Category updatedCategory = categoryService.updateCategory(categoryDetails);
 		return ResponseEntity.ok(updatedCategory);
 	}
+	
 
 	@DeleteMapping("/categorys/{id}")
 	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId)

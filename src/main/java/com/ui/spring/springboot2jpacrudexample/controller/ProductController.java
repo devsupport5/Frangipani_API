@@ -69,6 +69,7 @@ public class ProductController {
 		Product.setBookPrice(ProductDetails.getBookPrice());
 		Product.setBookTaxes(ProductDetails.getBookTaxes());
 		Product.setDescription(ProductDetails.getDescription());
+		Product.setIsActive(ProductDetails.getIsActive());
 		final Product updatedProduct = ProductService.updateProduct(ProductDetails);
 		return ResponseEntity.ok(updatedProduct);
 	}

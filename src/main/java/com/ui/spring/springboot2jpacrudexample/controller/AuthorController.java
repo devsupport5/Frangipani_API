@@ -62,6 +62,7 @@ public class AuthorController {
 		Author.setId(AuthorDetails.getId());
 		Author.setAuthorName(AuthorDetails.getAuthorName());
 		Author.setDescription(AuthorDetails.getDescription());
+		Author.setIsActive(AuthorDetails.getIsActive());
 		final Author updatedAuthor = authorService.updateAuthor(AuthorDetails);
 		return ResponseEntity.ok(updatedAuthor);
 	}
