@@ -41,4 +41,10 @@ public class ProductServiceImpl implements ProductService{
 	public void deleteProduct(Product product) {
 		this.ProductRepository.delete(product);
 	}
+
+	@Override
+	public List<Product> getProductByCategory(Integer categoryId) {
+		// TODO Auto-generated method stub
+		return this.ProductRepository.getProductByCategory(categoryId);
+	}
 }
