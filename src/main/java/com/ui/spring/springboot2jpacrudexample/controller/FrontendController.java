@@ -1,7 +1,5 @@
 package com.ui.spring.springboot2jpacrudexample.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,4 +49,12 @@ public class FrontendController {
 	}
 	
 	 
+	@RequestMapping("/product/{productId}")
+	public String  product(@PathVariable("productId") int categoryId,Model model) {
+		
+			System.out.println("This is call-------------------");
+			model.addAttribute("product",ProductService.getProductById(Long.parseLong(categoryId+"")).get());
+		return "books_details";
+	}
+	
 }

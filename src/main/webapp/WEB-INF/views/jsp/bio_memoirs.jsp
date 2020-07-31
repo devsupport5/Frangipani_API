@@ -78,19 +78,20 @@
 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 <div class="product">
 <div class="product-img">
-<a href="#">
-<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/books/5.jpg" alt="">
+<a href="<%=request.getContextPath() %>/product/${productList.id }">
+
+<img class="img-responsive" src="${productList.image }" alt="">
 </a>
 </div>
 <div class="product-body">
 <p class="product-category"> Bio & Memoirs </p>
-<h3 class="product-name"><a href="#"> ${productList.bookTitle }  </a></h3>
+<h3 class="product-name"><a href="<%=request.getContextPath() %>/product/${productList.id }"> ${productList.bookTitle }  </a></h3>
 <h4 class="product-price">${productList.bookPrice } </h4>
 <div class="add-to-cart">
 <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 </div>
 
-</div>
+</div> 
 
 </div>
 </div>

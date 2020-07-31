@@ -1,10 +1,14 @@
 package com.ui.spring.springboot2jpacrudexample.controller;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -49,8 +53,25 @@ public class ProductController {
 	}
 
 	@PostMapping("/products")
-	public Product createProduct(@Valid @RequestBody ProductDTO ProductDTO) {
-		return ProductService.createProduct(convertToEntity(ProductDTO));
+	public Product createProduct(@Valid @RequestBody ProductDTO productDTO) {
+		 
+			System.out.println("Length :::::::::::::"+ productDTO.getProductImage());
+			
+			 Blob blob = null;
+		       
+		         byte[] myArray = productDTO.getProductImage().getBytes();
+		         try {
+					blob = new SerialBlob(myArray);
+				} catch (SerialException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		     productDTO.setImage(blob);
+			
+		return ProductService.createProduct(convertToEntity(productDTO));
 	}
 
 	@PutMapping("/products/{id}")

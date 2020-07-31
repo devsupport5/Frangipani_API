@@ -1,11 +1,15 @@
 package com.ui.spring.springboot2jpacrudexample.model;
 
+import java.sql.Blob;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name = "product")
@@ -26,7 +30,12 @@ public class Product {
 	private String featured;
 	private int isActive;
 	private int isDeleted;
+	private int isFeatured;
 	private String createdDate;
+	private double originalPrice;
+	private double discountedPrice;
+	private String image;
+	private String imageString;
 	
 	public Product() {
 		
@@ -103,7 +112,7 @@ public class Product {
 		this.authorId = authorId;
 	}
 
-	@Column(name = "book_price")
+	@Column(name = "book_price", columnDefinition = "double default 0.0")
 	public double getBookPrice() {
 		return bookPrice;
 	}
@@ -119,7 +128,7 @@ public class Product {
 		this.currencyId = currencyId;
 	}
 
-	@Column(name = "book_taxes")
+	@Column(name = "book_taxes", columnDefinition = "double default 0.0")
 	public double getBookTaxes() {
 		return bookTaxes;
 	}
@@ -155,6 +164,16 @@ public class Product {
 		this.isActive = isActive;
 	}
 
+	
+	@Column(name = "is_featured", columnDefinition = "integer default 0")
+	public int getIsFeatured() {
+		return isFeatured;
+	}
+
+	public void setIsFeatured(int isFeatured) {
+		this.isFeatured = isFeatured;
+	}
+
 	@Column(name = "is_deleted", columnDefinition = "integer default 0")
 	public int getIsDeleted() {
 		return isDeleted;
@@ -172,4 +191,39 @@ public class Product {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	@Column(name = "original_price", columnDefinition = "double default 0.0")
+	public double getOriginalPrice() {
+		return originalPrice;
+	}
+	public void setOriginalPrice(double originalPrice) {
+		this.originalPrice = originalPrice;
+	}
+
+	@Column(name = "discounted_price", columnDefinition = "double default 0.0")
+	public double getDiscountedPrice() {
+		return discountedPrice;
+	}
+	public void setDiscountedPrice(double discountedPrice) {
+		this.discountedPrice = discountedPrice;
+	}
+
+	@Column(name = "product_image")
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getImageString() {
+		return imageString;
+	}
+
+	public void setImageString(String imageString) {
+		this.imageString = imageString;
+	}
+	
+	
 }
