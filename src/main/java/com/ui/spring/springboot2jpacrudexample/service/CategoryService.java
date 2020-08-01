@@ -18,4 +18,6 @@ public interface CategoryService {
 	void deleteCategory(Category category);
 	
 	List<Category> getSubCategorys(Integer categoryId);
+	
+	List<Category> getActiveCategory();
 }

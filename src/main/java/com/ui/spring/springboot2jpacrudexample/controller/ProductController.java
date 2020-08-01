@@ -54,23 +54,6 @@ public class ProductController {
 
 	@PostMapping("/products")
 	public Product createProduct(@Valid @RequestBody ProductDTO productDTO) {
-		 
-			System.out.println("Length :::::::::::::"+ productDTO.getProductImage());
-			
-			 Blob blob = null;
-		       
-		         byte[] myArray = productDTO.getProductImage().getBytes();
-		         try {
-					blob = new SerialBlob(myArray);
-				} catch (SerialException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		     productDTO.setImage(blob);
-			
 		return ProductService.createProduct(convertToEntity(productDTO));
 	}
 

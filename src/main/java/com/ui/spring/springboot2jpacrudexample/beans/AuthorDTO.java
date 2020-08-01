@@ -8,7 +8,7 @@ public class AuthorDTO implements Serializable{
 	private long id;
 	private String authorName;
 	private String description;
-	private String imagePath;	 
+	private String image;	 
 	private int isActive;
 	private int isDeleted;
 	private String createdDate;
@@ -47,13 +47,13 @@ public class AuthorDTO implements Serializable{
 	}
 
 
-	public String getImagePath() {
-		return imagePath;
+	public String getImage() {
+		return image;
 	}
 
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 

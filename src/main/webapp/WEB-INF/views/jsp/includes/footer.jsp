@@ -22,12 +22,12 @@ business with The Office of the President of Ghana... </p>
 <div class="footer-widget">
 <h5> Quick Links </h5>
 <ul class="quick-links">
-<li> <a href="about-frangipani-books.html"> About </a></li>
-<li> <a href="books.html"> BOOKS </a></li>
-<li> <a href="books-by-category.html"> CATEGORY </a></li>
-<li> <a href="authors.html"> AUTHORS </a></li>
-<li> <a href="#"> TESTIMONIALS </a></li>
-<li> <a href="contact-us.html"> CONTACT </a></li>
+<li> <a href="<%=request.getContextPath() %>/about-frangipani-books"> About </a></li>
+<li> <a  href="<%=request.getContextPath() %>/book"> BOOKS </a></li>
+<li> <a href="<%=request.getContextPath() %>/books"> CATEGORY </a></li>
+<li> <a href="<%=request.getContextPath() %>/authors"> AUTHORS </a></li>
+<!-- <li> <a href="#"> TESTIMONIALS </a></li> -->
+<li> <a href="<%=request.getContextPath() %>/contact"> CONTACT </a></li>
 </ul>
 </div>
 <!--Footer Widget End--> 
@@ -72,10 +72,10 @@ business with The Office of the President of Ghana... </p>
 <div class="footer-widget">
 <h5> Useful Links </h5>
 <ul class="quick-links">
-<li> <a href="my-account.html"> Login / Signup </a></li>
-<li> <a href="refund-&-cancellation.html"> Refund & Cancellation </a></li>
-<li> <a href="terms-&-conditions.html"> Terms & Conditions </a></li>
-<li> <a href="privacy-policy.html"> Privacy Policy </a></li>
+<li> <a href="<%=request.getContextPath() %>/my_account"> Login / Signup </a></li>
+<li> <a href="<%=request.getContextPath() %>/refund_cancellation"> Refund & Cancellation </a></li>
+<li> <a href="<%=request.getContextPath() %>/terms_conditions"> Terms & Conditions </a></li>
+<li> <a href="<%=request.getContextPath() %>/privacy_policy"> Privacy Policy </a></li>
 
 </ul>
 </div>
@@ -92,7 +92,7 @@ business with The Office of the President of Ghana... </p>
 
 <div class="col-md-7 col-sm-8">
 <p>
-Content Â© 2020 Frangipani Books Ltd. All Rights Reserved. &nbsp;|&nbsp;
+Content © 2020 Frangipani Books Ltd. All Rights Reserved. &nbsp;|&nbsp;
 Powered by:  <a href="#"> Astar Technologies </a></p>
 </div>
 

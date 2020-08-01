@@ -14,7 +14,7 @@ public class Author {
 	private long id;
 	private String authorName;
 	private String description;
-	private String imagePath;
+	private String image;
 	private int isActive;
 	private int isDeleted;
 	private String createdDate;
@@ -38,13 +38,13 @@ public class Author {
 		this.id = id;
 	}
 	
-	@Column(name="image_path")
-	public String getImagePath() {
-		return imagePath;
+	@Column(name="image_path" , columnDefinition = "LONGTEXT")
+	public String getImage() {
+		return image;
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@Column(name="author_name")

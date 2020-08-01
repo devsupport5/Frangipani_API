@@ -7,5 +7,6 @@ import com.ui.spring.springboot2jpacrudexample.model.Author;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long>{
-	 
+
+	
 }

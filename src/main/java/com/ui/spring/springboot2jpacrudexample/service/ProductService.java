@@ -19,4 +19,6 @@ public interface ProductService {
 	
 	List<Product> getProductByCategory(Integer categoryId);
 	
+	
+	
 }

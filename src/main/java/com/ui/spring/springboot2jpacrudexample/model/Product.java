@@ -1,7 +1,5 @@
 package com.ui.spring.springboot2jpacrudexample.model;
 
-import java.sql.Blob;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +33,8 @@ public class Product {
 	private double originalPrice;
 	private double discountedPrice;
 	private String image;
+	private String image1;
+	private String image2;
 	private String imageString;
 	
 	public Product() {
@@ -165,7 +165,7 @@ public class Product {
 	}
 
 	
-	@Column(name = "is_featured", columnDefinition = "integer default 0")
+	@Column(name = "is_featured", columnDefinition = "integer default 1")
 	public int getIsFeatured() {
 		return isFeatured;
 	}
@@ -208,7 +208,7 @@ public class Product {
 		this.discountedPrice = discountedPrice;
 	}
 
-	@Column(name = "product_image")
+	@Column(name = "product_image", columnDefinition = "LONGTEXT")
 	public String getImage() {
 		return image;
 	}
@@ -217,12 +217,31 @@ public class Product {
 		this.image = image;
 	}
 
+	
 	public String getImageString() {
 		return imageString;
 	}
 
 	public void setImageString(String imageString) {
 		this.imageString = imageString;
+	}
+
+	@Column(name = "product_image1", columnDefinition = "LONGTEXT")
+	public String getImage1() {
+		return image1;
+	}
+
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+
+	@Column(name = "product_image2", columnDefinition = "LONGTEXT")
+	public String getImage2() {
+		return image2;
+	}
+
+	public void setImage2(String image2) {
+		this.image2 = image2;
 	}
 	
 	

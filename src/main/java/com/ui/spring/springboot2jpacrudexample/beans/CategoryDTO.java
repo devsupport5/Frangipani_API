@@ -12,6 +12,7 @@ public class CategoryDTO implements Serializable{
 	private int isActive;
 	private int isDeleted;
 	private String createdDate;
+	private String image;
 	 
 	
 	public CategoryDTO() {
@@ -86,6 +87,16 @@ public class CategoryDTO implements Serializable{
 
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
+	}
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 

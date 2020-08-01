@@ -27,7 +27,9 @@ public class ProductDTO implements Serializable{
 	private double originalPrice;
 	private double discountedPrice;
 	private String productImage;
-	private Blob image;
+	private String image;
+	private String image1;
+	private String image2;
 	
 	public ProductDTO() {
 		
@@ -121,11 +123,11 @@ public class ProductDTO implements Serializable{
 	}
 
 
-	public Blob getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(Blob image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
@@ -133,50 +135,23 @@ public class ProductDTO implements Serializable{
 		this.currencyId = currencyId;
 	}
 
-
-
-
-
 	public double getBookTaxes() {
 		return bookTaxes;
 	}
-
-
-
-
-
 	public void setBookTaxes(double bookTaxes) {
 		this.bookTaxes = bookTaxes;
 	}
 
-
-
-
-
 	public String getBindingType() {
 		return bindingType;
 	}
-
-
-
-
-
 	public void setBindingType(String bindingType) {
 		this.bindingType = bindingType;
 	}
 
-
-
-
-
 	public String getFeatured() {
 		return featured;
 	}
-
-
-
-
-
 	public void setFeatured(String featured) {
 		this.featured = featured;
 	}
@@ -242,6 +217,20 @@ public class ProductDTO implements Serializable{
 
 	public void setDiscountedPrice(double discountedPrice) {
 		this.discountedPrice = discountedPrice;
+	}
+
+	public String getImage1() {
+		return image1;
+	}
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+
+	public String getImage2() {
+		return image2;
+	}
+	public void setImage2(String image2) {
+		this.image2 = image2;
 	}
 
 	public static long getSerialversionuid() {

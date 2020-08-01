@@ -14,6 +14,7 @@ public class Category {
 	private long id;
 	private String categoryName;
 	private String description;
+	private String image;
 	private int parentId;
 	private int isActive;
 	private int isDeleted;
@@ -90,5 +91,14 @@ public class Category {
 
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
+	}
+	
+	@Column(name = "category_image", columnDefinition = "LONGTEXT")
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

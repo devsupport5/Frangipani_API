@@ -21,7 +21,7 @@
 
 
 <!-- Font Awesome -->
-<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">                
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/font-awesome-4.7.0/css/font-awesome.min.css">                
 
 <!-- CSS  -->
 <link href="<%=request.getContextPath() %>/resources/css/custom.css" rel="stylesheet">
@@ -52,7 +52,7 @@
 <div class="wrapper">
 
 <!--/header START-->
-<%@include file="includes/header.jsp" %>
+<%@include file="includes/header.jsp" %> 
 <!--/header END-->
 
 
@@ -61,8 +61,8 @@
 <section class="wf100 inner-header">
 <div class="container">
 <ul>
-<li><a href="index.html">Home</a></li> 
-<li><a href="<%=request.getContextPath() %>/category"> ${category.categoryName } </a></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="books.html"> Books </a></li>
 <li> ${product.bookTitle }  </li>
 </ul>
 </div>
@@ -81,36 +81,35 @@
 
 <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
 <!--<div class="pro-large">
-<img src="<%=request.getContextPath() %>/resources/images/books/shoplarge.jpg" alt="">
+<img src="images/books/shoplarge.jpg" alt="">
 </div>-->
 <div class="wrapCarouselFull">
 <div class="owl-carousel carousel-full">
 <div class="item-carousel-full">
 <div class="gallery-img">
-<a href="${product.image }" rel="prettyPhoto[product]">
+<a href="${productList.image }" rel="prettyPhoto[product]">
 <i class="fas fa-search"></i>
 </a>
-<%-- <img src="<%=request.getContextPath() %>/resources/images/books/1.jpg"> --%>
-<img class="img-responsive" src="${product.image }" alt="">
+<img src="${productList.image }">
 </div>
-</div>
+</div> 
 <div class="item-carousel-full">
-<div class="gallery-img">
-<a href="<%=request.getContextPath() %>/resources/images/books/2.jpg" rel="prettyPhoto[product]">
+<div class="gallery-img">  
+<a href="${productList.image }" rel="prettyPhoto[product]">
 <i class="fas fa-search"></i>
 </a>
-<img src="<%=request.getContextPath() %>/resources/images/books/2.jpg">
+<img src="${productList.image }">
 </div>
 </div>
 </div>
 </div>
 
-<%-- <div class="wrapCarouselThumbs">
+<div class="wrapCarouselThumbs">
 <div class="owl-carousel carousel-thumbs">
-<div class="item-carousel-thumbs"><img src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt=""></div>
+<div class="item-carousel-thumbs"><img src="${productList.image }" alt=""></div>
 <div class="item-carousel-thumbs"><img src="<%=request.getContextPath() %>/resources/images/books/2.jpg" alt=""></div>
 </div>
-</div> --%>
+</div>
 
 </div>
 
@@ -119,14 +118,14 @@
 <div class="product-text">
 <h2> ${product.bookTitle } </h2>
 
-<h6> <span>by: </span> ${author.authorName }</h6>
+<h6> <span>by: </span> ABYNA-ANSAA ADJEI</h6>
 
 
-<p>  ${product.description } </p>
+<p>  ${product.description }</p>
 
 <h6> <span>SKU:</span> ${product.bookSKU } </h6>
 
-<div class="pro-pricing"> ${product.originalPrice } </div>
+<div class="pro-pricing"> ${product.bookPrice } </div>
 
 <div class="add-2-cart"> <strong>Quantity:</strong>
 <input type="number" name="quantity" min="1" max="99" placeholder="1" value="1" >
@@ -200,7 +199,7 @@
 <div class="team-details-txt">
 <h2> Abyna-Ansaa Adjei </h2>
 <strong class="trank"> 1879 </strong>
-<p> Abyna-Ansaa Adjei is the author of eleven books. Ghana: The Story So Far is her most recent book. Published in March 2017, to celebrate Ghanas 60 th anniversary of independence, this coffee table book brings Ghanas history alive with its captivating images. Her first book was a biography of the Ashanti King - Otumfuo Osei Tutu II: King of Gold. Originally her undergraduate thesis, this book is found on the shelves of Yale, Harvard, Stanford and many other great institutions worldwide. </p>
+<p> Abyna-Ansaa Adjei is the author of eleven books. Ghana: The Story So Far is her most recent book. Published in March 2017, to celebrate Ghana’s 60 th anniversary of independence, this coffee table book brings Ghana’s history alive with its captivating images. Her first book was a biography of the Ashanti King - Otumfuo Osei Tutu II: King of Gold. Originally her undergraduate thesis, this book is found on the shelves of Yale, Harvard, Stanford and many other great institutions worldwide. </p>
 
 
 </div>
@@ -234,12 +233,6 @@
 
 
 
-<!-- includes function START-->
-<script>
-w3IncludeHTML();
-</script>
-<!-- includes function END-->   
-
 
 <!--   JS Files Start  --> 
 <script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js"></script> 
@@ -248,11 +241,11 @@ w3IncludeHTML();
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/prettyphoto.jquery.js" type="text/javascript" charset="utf-8"></script>
-<!--<script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> -->
+<!--<script src="js/jquery.prettyPhoto.js"></script> -->
 <script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
 
-<!--<script src="<%=request.getContextPath() %>/resources/js/prettyphoto-jquery.min.js" type="text/javascript"></script>-->
+<!--<script src="js/prettyphoto-jquery.min.js" type="text/javascript"></script>-->
 
 
 <script  src="<%=request.getContextPath() %>/resources/js/script.js"></script>

@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
-
+ 
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,15 +54,15 @@
 <section id="home-slider" class="owl-carousel owl-theme wf100">
 
 <div class="item">
-<div class="slider-caption h2slider">
-<div class="container">
-<h1> Demystifying  Science </h1>
-<p> for Basic Schools Ghana </p>
-<a href="resources/#"> Details </a> 
-<a href="resources/#"  class="active"> Buy Now </a> 
-</div>
-</div>
-<img src="resources/images/h2-slide1.jpg" alt=""> 
+	<div class="slider-caption h2slider">
+		<div class="container">
+			<h1> Demystifying  Science </h1>
+			<p> for Basic Schools Ghana </p>
+			<a href="resources/#"> Details </a> 
+			<a href="resources/#"  class="active"> Buy Now </a> 
+		</div>
+	</div>
+	<img src="resources/images/h2-slide1.jpg" alt=""> 
 </div>
 
 <div class="item">
@@ -93,55 +92,25 @@
 <div class="section-title-2">
 <h2> Featured Books </h2>
 </div>
-</div>
-<div class="col-md-6"> <a href="resources/books.html" class="view-more"> View All </a> </div>
+</div>   	
+<div class="col-md-6"> <a href="<%=request.getContextPath() %>/featured/product" class="view-more"> View All </a> </div>
 </div>
 
 <div class="row">
 <!--Pro Box Start-->
-<div class="col-md-3 col-sm-6">
-<div class="product-box">
-<div class="pro-thumb"> <a href="resources/#">Add To Cart</a> <img src="resources/images/pro1.jpg" alt=""></div>
-<div class="pro-txt">
-<h6><a href="resources/#"> Book Name </a></h6>
-<p class="pro-price"><del>$25.00</del> $19.00</p>
-</div>
-</div>
-</div>
+<c:forEach items="${featuredProduct }" var="featuredProduct" >
+	<div class="col-md-3 col-sm-6">
+		<div class="product-box"> 
+			<div class="pro-thumb"> <a href="#">Add To Cart</a> <img src="${featuredProduct.image }" alt=""></div>
+				<div class="pro-txt"> 
+					<h6><a href="<%=request.getContextPath() %>/product/${featuredProduct.id }"> ${featuredProduct.bookTitle } </a></h6>
+					<p class="pro-price"><!-- <del>$25.00</del>  -->${featuredProduct.originalPrice }</p>
+				</div>
+		</div>
+	</div>
+</c:forEach>
 <!--Pro Box End--> 
-<!--Pro Box Start-->
-<div class="col-md-3 col-sm-6">
-<div class="product-box">
-<div class="pro-thumb"> <a href="resources/#">Add To Cart</a> <img src="resources/images/pro2.jpg" alt=""></div>
-<div class="pro-txt">
-<h6><a href="resources/#"> Book Name </a></h6>
-<p class="pro-price"><del>$25.00</del> $19.00</p>
-</div>
-</div>
-</div>
-<!--Pro Box End--> 
-<!--Pro Box Start-->
-<div class="col-md-3 col-sm-6">
-<div class="product-box">
-<div class="pro-thumb"> <a href="resources/#">Add To Cart</a> <img src="resources/images/pro3.jpg" alt=""></div>
-<div class="pro-txt">
-<h6><a href="resources/#"> Book Name </a></h6>
-<p class="pro-price"><del>$25.00</del> $19.00</p>
-</div>
-</div>
-</div>
-<!--Pro Box End--> 
-<!--Pro Box Start-->
-<div class="col-md-3 col-sm-6">
-<div class="product-box">
-<div class="pro-thumb"> <a href="resources/#">Add To Cart</a> <img src="resources/images/pro4.jpg" alt=""></div>
-<div class="pro-txt">
-<h6><a href="resources/#"> Book Name </a></h6>
-<p class="pro-price"><del>$25.00</del> $19.00</p>
-</div>
-</div>
-</div>
-<!--Pro Box End--> 
+ 
 </div>
 </div>
 </section>
@@ -161,7 +130,7 @@
 <h2> Books by Category </h2>
 </div>
 </div>
-<div class="col-md-6"> <a href="resources/books-by-category.html" class="view-more"> View All </a> </div>
+<div class="col-md-6"> <a href="category" class="view-more"> View All </a> </div>
 </div>
 
 
@@ -170,20 +139,17 @@
 
 
 <!--Services Box Start-->
-
 <c:forEach items="${categories }" var="categories">
 	<div class="ser-col col-md-3">
 		<div class="ser-box">
-			<div class="ser-thumb"><a href="resources/#"><i class="fas fa-link"></i></a> <img src="resources/images/serimg2.jpg" alt=""></div>
+			<div class="ser-thumb"><a href="<%=request.getContextPath() %>/productList/${categories.id }/${categories.categoryName }"><i class="fas fa-link"></i></a> <img src="${categories.image}" alt=""></div>
 			<div class="ser-txt"> 
-				<h4> <a href="<%=request.getContextPath() %>/productList/${categories.id }"> ${categories.categoryName } </a></h4>
+				<h4> <a href="<%=request.getContextPath() %>/productList/${categories.id }/${categories.categoryName }"> ${categories.categoryName } </a></h4>
 			<span class="aicon"><i class="fas fa-arrow-right"></i></span> 
 			</div>
 		</div>
 	</div>
 </c:forEach>
-
-
 <!--Services Box End--> 
 
 
@@ -293,107 +259,12 @@ worldwide. </p>
 </div>
 </section>
 <!--Authors Section End--> 
+ 
+<div style="margin-bottom: 350px;">
+&nbsp;  
+</div>
 
-
-
-<!--Testimonials Start-->
-<div class="testimonials-section bg-white wf100 p80">
-<div class="container">
-
-<div class="row mb-2">
-<div class="col-md-6">
-<div class="section-title-2">
-<h2> Testimonials  </h2>
-</div>
-</div>
-<div class="col-md-6"> <a href="resources/#" class="view-more"> View All </a> </div>
-</div>
-    
-
-<div class="row">
-<div class="col-md-12">
-<div id="testimonials" class="owl-carousel owl-theme">
-<!--testimonials box start-->
-<div class="item">
-<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using lorem sum is that it has a more or less normal distribution.</p>
-<div class="tuser"> <img src="resources/images/tuser1.jpg" alt=""> <strong>Danny Scotten</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>As opposed to using 'Content here, content here', making it look like readable English. Many Desktop and Web Pages are using lorem ipsum.</p>
-<div class="tuser"> <img src="resources/images/tuser2.jpg" alt=""> <strong>Richardson</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
-<div class="tuser"> <img src="resources/images/tuser3.jpg" alt=""> <strong>Anna Lillian</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>Those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain.</p>
-<div class="tuser"> <img src="resources/images/tuser1.jpg" alt=""> <strong>Danny Scotten</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using lorem sum is that it has a more or less normal distribution.</p>
-<div class="tuser"> <img src="resources/images/tuser1.jpg" alt=""> <strong>Danny Scotten</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>As opposed to using 'Content here, content here', making it look like readable English. Many Desktop and Web Pages are using lorem ipsum.</p>
-<div class="tuser"> <img src="resources/images/tuser2.jpg" alt=""> <strong>Richardson</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
-<div class="tuser"> <img src="resources/images/tuser3.jpg" alt=""> <strong>Anna Lillian</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>Those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain.</p>
-<div class="tuser"> <img src="resources/images/tuser1.jpg" alt=""> <strong>Danny Scotten</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using lorem sum is that it has a more or less normal distribution.</p>
-<div class="tuser"> <img src="resources/images/tuser1.jpg" alt=""> <strong>Danny Scotten</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>As opposed to using 'Content here, content here', making it look like readable English. Many Desktop and Web Pages are using lorem ipsum.</p>
-<div class="tuser"> <img src="resources/images/tuser2.jpg" alt=""> <strong>Richardson</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
-<div class="tuser"> <img src="resources/images/tuser3.jpg" alt=""> <strong>Anna Lillian</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-<!--testimonials box start-->
-<div class="item">
-<p>Those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain.</p>
-<div class="tuser"> <img src="resources/images/tuser1.jpg" alt=""> <strong>Danny Scotten</strong> Florida Partner </div>
-</div>
-<!--testimonials box End--> 
-</div>
-</div>
-</div>
-</div>
-</div>
-<!--Testimonials End--> 
-
-
-
+  
 
 <!--Why Ecova + Facts Start-->
 <section class="why-ecova wf100">

@@ -5,29 +5,26 @@
 </div>
 </div>
 
-
-
-
-    
-
 <!--Header Start-->
 <header class="header-style-2">
 <nav class="navbar navbar-expand-lg">
-<a class="navbar-brand" href="index.html">
-<img src="images/Logo-FrangipaniBooks.png" alt="">
-</a>
+<a class="navbar-brand" href="<%=request.getContextPath() %>/">
+<img src="<%=request.getContextPath() %>/resources/images/Logo-FrangipaniBooks.png" alt="">
+</a> 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <i class="fas fa-bars"></i> </button>
 
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 <ul class="navbar-nav">
 
-<li class="nav-item"> <a class="nav-link" href="books.html"> Books </a> </li>
-<li class="nav-item"> <a class="nav-link" href="<%=request.getContextPath() %>/books"> Category  </a> </li>
-<li class="nav-item"> <a class="nav-link" href="authors.html"> Authors </a> </li>
-<li class="nav-item"> <a class="nav-link" href="#"> Testimonials </a> </li>
-<li class="nav-item"> <a class="nav-link" href="contact-us.html"> Contact </a> </li>
+<li class="nav-item"> <a class="nav-link" href="<%=request.getContextPath() %>/book"> Books </a> </li>
+<li class="nav-item"> <a class="nav-link" href="<%=request.getContextPath() %>/category"> Category  </a> </li>
+<li class="nav-item"> <a class="nav-link" href="<%=request.getContextPath() %>/authors"> Authors </a> </li>
+<li class="nav-item"> <a class="nav-link" href="#"> Authors </a> </li>
+<!-- <li class="nav-item"> <a class="nav-link" href="#"> Testimonials </a> </li> -->
+<li class="nav-item"> <a class="nav-link" href="<%=request.getContextPath() %>/contact"> Contact </a> </li>
 
+ 
 </ul>
 
 <ul class="topnav-right">
@@ -73,17 +70,17 @@ Recently added item(s)
 
 <li class="item">
 <a href="#" class="preview-image">
-<img class="preview" src="resources/images/books/1.jpg" alt="">
+<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">
 </a>
 <div class="description"> 
 <a href="#"> Things Every Child Show Know About J.B .Danquah </a> 
-<strong class="price"> 1 x â‚µ40.00 </strong> 
+<strong class="price"> 1 x µ40.00 </strong> 
 </div>
 </li>
 
 <li class="item">
 <a href="#" class="preview-image">
-<img class="preview" src="resources/images/books/2.jpg" alt="">
+<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/2.jpg" alt="">
 </a>
 <div class="description"> 
 <a href="#"> Things Every Child Show Know About J.B .Danquah </a> 
