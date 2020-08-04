@@ -42,6 +42,12 @@ public class SliderServiceImpl implements SliderService{
 		this.SliderRepository.delete(slider);
 	}
 
+	@Override
+	public List<Slider> getActiveSliders() {
+		// TODO Auto-generated method stub
+		return this.SliderRepository.getActiveSliders();
+	}
+
 	 
 
 }

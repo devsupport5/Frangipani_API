@@ -21,7 +21,8 @@ public class UserAddress {
 	private String state;
 	private String city;
 	private String pinCode;
-	private int userId;
+	private String specialInstruction;
+	private long userId;
 	private int isActive;
 	private int isDeleted;
 	private int defaultAddress;
@@ -129,11 +130,11 @@ public class UserAddress {
 	}
 
 	@Column(name="user_id", columnDefinition = "integer default 0")
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 	
@@ -173,4 +174,16 @@ public class UserAddress {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+	
+	@Column(name = "special_instruction")
+	public String getSpecialInstruction() {
+		return specialInstruction;
+	}
+
+	public void setSpecialInstruction(String specialInstruction) {
+		this.specialInstruction = specialInstruction;
+	}
+	
+	
+	
 }

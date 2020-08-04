@@ -78,7 +78,17 @@
 
 		<div class="product-img">
 			<a href="#">
-				<img class="img-responsive" src="${products.image }" alt="">
+			
+			 <c:choose>
+				<c:when test="${products.image ne null }">
+					<img style="    height: 274px;" class="img-responsive" src="${products.image }" alt="">	
+				</c:when>
+				<c:otherwise>
+					<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${products.bookTitle }" title="${products.bookTitle }">
+				</c:otherwise>
+			</c:choose>
+			
+			
 			</a>
 		</div>
 		

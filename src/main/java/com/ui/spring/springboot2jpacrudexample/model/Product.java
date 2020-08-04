@@ -14,13 +14,13 @@ import javax.persistence.Table;
 public class Product {
 
 	private long id;
-	private int categoryId;
+	private long categoryId;
 	private int subCategoryId;
 	private String bookTitle;
 	private String description;
 	private String bookSKU;
 	private String bookISNB;
-	private int authorId;
+	private long authorId;
 	private double bookPrice;
 	private int currencyId;
 	private double bookTaxes;
@@ -54,7 +54,7 @@ public class Product {
 		this.id = id;
 	}
 
-	@Column(name = "description", nullable = true)
+	@Column(name = "description", columnDefinition = "LONGTEXT")
 	public String getDescription() {
 		return description;
 	}
@@ -64,10 +64,10 @@ public class Product {
 	}
 	
 	@Column(name = "category_id", columnDefinition = "integer default 0")
-	public int getCategoryId() {
+	public long getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -105,10 +105,10 @@ public class Product {
 	}
 
 	@Column(name = "author_id", columnDefinition = "integer default 0")
-	public int getAuthorId() {
+	public long getAuthorId() {
 		return authorId;
 	}
-	public void setAuthorId(int authorId) {
+	public void setAuthorId(long authorId) {
 		this.authorId = authorId;
 	}
 

@@ -68,12 +68,21 @@
 		<c:forEach items="${categories }" var="categories">
 			<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
 				<div class="vol-box">
-					<div class="vol-thumb"> 
-						<a href="<%=request.getContextPath() %>/productList/${categories.id }/${categories.categoryName }"><img src="${categories.image}" alt=""></a>
-					</div> 
-					<div class="vol-txt"> 
-						<strong> ${categories.categoryName }  </strong> 
-					</div>
+					<a href="<%=request.getContextPath() %>/productList/${categories.id }/${categories.categoryName }">
+						<div class="vol-thumb"> 
+							 <c:choose>
+								<c:when test="${categories.image ne null }">
+									<img class="img-responsive" src="${categories.image }" alt="" style="height: 184px;">	
+								</c:when>
+								<c:otherwise>
+									<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${products.categoryName }" title="${products.categoryName }">
+								</c:otherwise>
+							</c:choose>
+						</div> 
+						<div class="vol-txt"> 
+							<strong>${categories.categoryName }</strong> 
+						</div>
+					</a>
 				</div>
 			</div>
 		</c:forEach>

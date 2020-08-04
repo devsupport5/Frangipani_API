@@ -17,4 +17,5 @@ public interface SliderService {
 
 	void deleteSlider(Slider slider);
 	
+	List<Slider> getActiveSliders();
 }

@@ -51,13 +51,19 @@
 </a>
 <div style="width: 210px; padding: 10px 10px 20px 10px;" class="dropdown-menu cart-box" aria-labelledby="cartdropdown">
 
-<a href="my-orders.html"> My Orders </a>
-<a href="manage-addresses.html"> Manage Addresses  </a>
-<a href="change-password.html"> Change Password </a>
 
-<div class="logout-btn">
-<a  href="#"> Logout </a> 
-</div>
+<% if(session.getAttribute("userName")!=null) {%>
+	<a href="<%=request.getContextPath() %>/my_order"> My Orders </a>
+	<a href="<%=request.getContextPath() %>/manage_address"> Manage Addresses  </a>
+	<a href="#"> Change Password </a>
+	<div class="logout-btn">
+	  	<a href="<%=request.getContextPath() %>/logout"> Logout </a> 
+	</div>
+<% }else{ %> 
+	<a href="<%=request.getContextPath() %>/my_account"> Login </a>	
+<% } %> 
+
+
 </li>
 
 
@@ -68,7 +74,9 @@
 Recently added item(s)
 <ul class="list">
 
-<li class="item">
+<div id="cartData"></div>
+
+<%-- <li class="item">
 <a href="#" class="preview-image">
 <img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">
 </a>
@@ -76,9 +84,9 @@ Recently added item(s)
 <a href="#"> Things Every Child Show Know About J.B .Danquah </a> 
 <strong class="price"> 1 x µ40.00 </strong> 
 </div>
-</li>
+</li> --%>
 
-<li class="item">
+<%-- <li class="item">
 <a href="#" class="preview-image">
 <img class="preview" src="<%=request.getContextPath() %>/resources/images/books/2.jpg" alt="">
 </a>
@@ -86,14 +94,14 @@ Recently added item(s)
 <a href="#"> Things Every Child Show Know About J.B .Danquah </a> 
 <strong class="price"> 1 x â40.00 </strong> 
 </div>
-</li>
+</li> --%>
 
 </ul>
-<div class="total">Total: <strong>âµ80.00</strong></div>
-<div class="view-link">
-<a href="checkout.html">Proceed to Checkout</a> 
-<a href="cart.html">View cart </a></div>
-</div>
+<div class="total">Total: <strong>80.00</strong></div>
+<div class="view-link"> 
+<a href="<%=request.getContextPath() %>/checkout">Proceed to Checkout</a> 
+<a href="<%=request.getContextPath() %>/viewCart">View cart </a></div>
+</div>   
 </li>
 
 
@@ -104,3 +112,5 @@ Recently added item(s)
 </header>
 
 <!--Header End--> 
+
+

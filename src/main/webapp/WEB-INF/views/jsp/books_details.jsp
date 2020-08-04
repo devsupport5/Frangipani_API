@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -46,6 +46,8 @@
 <script src="<%=request.getContextPath() %>/resources/js/w3data.js"></script>
 <!-- includes js File END-->
 
+
+
 </head>
 <body>
 
@@ -61,7 +63,7 @@
 <section class="wf100 inner-header">
 <div class="container">
 <ul>
-<li><a href="index.html">Home</a></li> 
+<li><a href="<%=request.getContextPath() %>/">Home</a></li> 
 <li><a href="<%=request.getContextPath() %>/category"> ${category.categoryName } </a></li>
 <li> ${product.bookTitle }  </li>
 </ul>
@@ -85,15 +87,36 @@
 </div>-->
 <div class="wrapCarouselFull">
 <div class="owl-carousel carousel-full">
-<div class="item-carousel-full">
-<div class="gallery-img">
-<a href="${product.image }" rel="prettyPhoto[product]">
-<i class="fas fa-search"></i>
-</a>
-<%-- <img src="<%=request.getContextPath() %>/resources/images/books/1.jpg"> --%>
-<img class="img-responsive" src="${product.image }" alt="">
-</div>
-</div>
+		
+		
+		<c:choose>
+			<c:when test="${product.image ne null }">
+				<div class="item-carousel-full">
+					<div class="gallery-img">
+						<a href="${product.image }" rel="prettyPhoto[product]">
+							<i class="fas fa-search"></i>
+						</a>
+						<img class="img-responsive" src="${product.image }" alt="">
+					</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				
+				<div class="item-carousel-full">
+					<div class="gallery-img">
+						<a href="<%=request.getContextPath() %>/resources/images/book-default.jpeg" rel="prettyPhoto[product]">
+							<i class="fas fa-search"></i>
+						</a>
+						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${productList.bookTitle }" title="${productList.bookTitle }">
+					</div>
+				</div>
+				
+				<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${productList.bookTitle }" title="${productList.bookTitle }">
+			</c:otherwise>
+		</c:choose>
+				
+		
+		
 <div class="item-carousel-full">
 <div class="gallery-img">
 <a href="<%=request.getContextPath() %>/resources/images/books/2.jpg" rel="prettyPhoto[product]">
@@ -129,9 +152,9 @@
 <div class="pro-pricing"> ${product.originalPrice } </div>
 
 <div class="add-2-cart"> <strong>Quantity:</strong>
-<input type="number" name="quantity" min="1" max="99" placeholder="1" value="1" >
-<input type="submit" value="Add to Cart" name="Add to Cart">
-</div>
+<input type="number" name="quantity" id="quantity" min="1" max="99" placeholder="1" value="1" >   
+<input type="submit" value="Add to Cart" name="Add to Cart" onclick="addToCart('${product.id}')" >
+</div> 
 
 
 
@@ -251,6 +274,7 @@ w3IncludeHTML();
 <!--<script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> -->
 <script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 
 <!--<script src="<%=request.getContextPath() %>/resources/js/prettyphoto-jquery.min.js" type="text/javascript"></script>-->
 
@@ -280,6 +304,66 @@ changepicturecallback: function(){ _bsap.exec(); }
 <!-- Pretty Photo Light box Scrept End-->	
 
 
+<script type="text/javascript">
+
+$( document ).ready(function() {
+	getCart();
+});
+
+
+function addToCart(orderId){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/addToCart",
+		data : {
+			orderId : orderId,
+			qty : $("#quantity").val(), 
+		},success:function(data){
+			 
+			getCart();
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	}); 
+}
+
+function getCart(){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/getCart",
+		data : {
+		},success:function(data){
+			
+			var cartData = "";
+			if(data.length > 0){	
+				for (var i = 0; i < data.length; i++) {
+					cartData += '<li class="item">'+
+					'<a href="#" class="preview-image">'+
+					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
+					'</a>'+
+					'<div class="description">'+ 
+					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
+					'<strong class="price"> '+data[i].qty+' x '+data[i].price+' </strong> '+
+					'</div>'+
+					'</li> <br /> '; 
+				}
+			}else{
+				cartData = "Cart is empty";
+			}
+			
+			
+			$("#cartData").html(cartData);
+			 
+			
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});
+
+}
+
+
+</script>
 
 </body>
 

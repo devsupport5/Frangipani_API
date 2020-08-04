@@ -81,7 +81,7 @@
 <a href="<%=request.getContextPath() %>/product/${productList.id }">
 <c:choose>
 	<c:when test="${productList.image ne null }">
-		<img class="img-responsive" src="${productList.image }" alt="">	
+		<img class="img-responsive" src="${productList.image }" style="height: 275px;" alt="">	
 	</c:when>
 	<c:otherwise>
 		<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${productList.bookPrice }" title="${productList.bookPrice }">
@@ -93,7 +93,7 @@
 <div class="product-body">
 <p class="product-category"> ${categoryName } </p>
 <h3 class="product-name"><a href="<%=request.getContextPath() %>/product/${productList.id }"> ${productList.bookTitle }  </a></h3>
-<h4 class="product-price">${productList.bookPrice } </h4>
+<h4 class="product-price">${productList.originalPrice } </h4>
 <div class="add-to-cart">
 <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 </div>

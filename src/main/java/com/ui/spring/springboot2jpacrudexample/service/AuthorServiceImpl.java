@@ -42,6 +42,12 @@ public class AuthorServiceImpl implements AuthorService{
 		this.authorRepository.delete(Author);
 	}
 
+	@Override
+	public List<Author> getActiveAuthors() {
+		// TODO Auto-generated method stub
+		return this.authorRepository.getActiveAuthors();
+	}
+
 	 
 
 }

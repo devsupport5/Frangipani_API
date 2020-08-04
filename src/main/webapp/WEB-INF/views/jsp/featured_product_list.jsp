@@ -92,7 +92,7 @@
 <div class="product-body">
 <p class="product-category"> ${categoryName } </p>
 <h3 class="product-name"><a href="<%=request.getContextPath() %>/product/${productList.id }"> ${productList.bookTitle }  </a></h3>
-<h4 class="product-price">${productList.bookPrice } </h4>
+<h4 class="product-price">${productList.originalPrice } </h4>
 <div class="add-to-cart">
 <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 </div>

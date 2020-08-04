@@ -14,10 +14,14 @@ public class Slider {
 	private long id;
 	private String sliderName;
 	private String description;
-	private String imagePath;
+	private String image;
 	private int isActive;
 	private int isDeleted;
 	private String createdDate;
+	private String detailLink;
+	private String buyNowLink;
+	private String title;
+	private String subTitle;
 	
 	public Slider() {
 		
@@ -38,13 +42,13 @@ public class Slider {
 		this.id = id;
 	}
 	
-	@Column(name="image_path")
-	public String getImagePath() {
-		return imagePath;
+	@Column(name="image_path" , columnDefinition = "LONGTEXT")
+	public String getImage() {
+		return image;
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@Column(name="slider_name")
@@ -92,4 +96,43 @@ public class Slider {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	@Column(name = "detail_link")
+	public String getDetailLink() {
+		return detailLink;
+	}
+
+	public void setDetailLink(String detailLink) {
+		this.detailLink = detailLink;
+	}
+
+	@Column(name = "buy_now_link")
+	public String getBuyNowLink() {
+		return buyNowLink;
+	}
+
+	public void setBuyNowLink(String buyNowLink) {
+		this.buyNowLink = buyNowLink;
+	}
+	
+	@Column(name = "title")
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	@Column(name = "sub_title")
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+	
+	
+	
 }

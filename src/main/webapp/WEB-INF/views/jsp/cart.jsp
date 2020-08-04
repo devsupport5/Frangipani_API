@@ -1,5 +1,7 @@
 <!doctype html>
 <html lang="en">
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 
 <head>
 <meta charset="utf-8">
@@ -11,26 +13,27 @@
 <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 <meta name="theme-color" content="#ED008C">
 
-<link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-<link rel="manifest" href="images/favicon/site.webmanifest">
-<link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="152x152" href="resources/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="resources/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="resources/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="resources/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="resources/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
-
+ 
 
 <!-- Font Awesome -->
-<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">                
+<link rel="stylesheet" href="resources/font-awesome-4.7.0/css/font-awesome.min.css">                
 
 <!-- CSS  -->
-<link href="css/custom.css" rel="stylesheet">
-<link href="css/color.css" rel="stylesheet">
-<link href="css/responsive.css" rel="stylesheet">
-<link href="css/owl.carousel.min.css" rel="stylesheet">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/prettyPhoto.css" rel="stylesheet">
-<link href="css/all.min.css" rel="stylesheet">
+<link href="resources/css/custom.css" rel="stylesheet">
+<link href="resources/css/color.css" rel="stylesheet">
+<link href="resources/css/responsive.css" rel="stylesheet">
+<link href="resources/css/owl.carousel.min.css" rel="stylesheet">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="resources/css/prettyPhoto.css" rel="stylesheet">
+<link href="resources/css/all.min.css" rel="stylesheet">
+
 <!--<link href="css/cart.css" rel="stylesheet">-->
 <!-- CSS  -->
 
@@ -43,7 +46,7 @@ margin: 40px auto;
 </style>
 
 <!-- includes js File START-->
-<script src="js/w3data.js"></script>
+<script src="resources/js/w3data.js"></script>
 <!-- includes js File END-->
 
 </head>
@@ -52,7 +55,7 @@ margin: 40px auto;
 <div class="wrapper">
 
 <!--/header START-->
-<div w3-include-html="includes/header.html"></div> 
+<%@include file="includes/header.jsp" %>
 <!--/header END-->
 
 
@@ -60,8 +63,8 @@ margin: 40px auto;
 <!--Inner Header Start-->
 <section class="wf100 inner-header">
 <div class="container">
-<ul>
-<li><a href="index.html">Home</a></li>
+<ul> 
+<li><a href="<%=request.getContextPath()%>/">Home</a></li>
 <li><a href="#"> Cart </a></li>
 </ul>
 </div>
@@ -76,11 +79,16 @@ margin: 40px auto;
 <div class="container">
 <div class="row">
 <div class="box box-default">
+<div style="text-align: center;"> ${error }</div>
+
+<c:if test="${fn:length(error) eq 0 }">
+
+
 
 <div class="box-header with-border">
 <h3 class="box-title"> My Cart (03) </h3>
 </div>
-
+		
 <div class="box-body">
 <div class="table-responsive">
 <table class="table table-bordered">
@@ -94,6 +102,101 @@ margin: 40px auto;
 </tr>
 </thead>
 <tbody>
+ 
+
+<c:forEach items="${cartList }" var="cartList">
+<tr>
+
+<td>
+<div class="widget-thumb">
+<a href="#"><img src="images/books/1.jpg" alt=""></a>
+</div>
+<div class="widget-content">
+<h5><a href="#"> ${cartList.bookTitle } </a></h5>
+<span> <strong>Author:</strong> ${cartList.authorName } </span> <br>
+<span> <strong>Book Category:</strong> ${cartList.categoryName }  </span>
+</div>
+<div class="clearfix"></div>
+</td>
+
+<td class="text-right"> ${cartList.price } </td>
+
+<td>
+<div class="input-group">
+
+<span class="input-group-btn">
+<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+<i style="font-size: 11px;" class="fa fa-minus"></i>
+</button>
+</span>
+
+<input style="height: auto; padding: 0px 0px 0px 10px;" type="text" name="quant[1]" class="form-control input-sm input-number" value="${cartList.qty }" min="1" max="10">
+
+<span class="input-group-btn">
+<button type="button" class="btn btn-default btn-sm btn-number" data-type="plus" data-field="quant[1]">
+<i style="font-size: 11px;" class="fa fa-plus"></i>
+</button>
+</span>
+
+</div>
+</td>
+
+<td class="text-right"> ${cartList.qty * cartList.price } </td>
+
+<td class="text-right remove"> 
+<a href="#" onclick="removeToCart(${cartList.orderId})">
+<i class="fa fa-trash"></i> 
+</a>
+</td>
+
+</tr>
+</c:forEach>
+<!-- <tr>
+
+<td>
+<div class="widget-thumb">
+<a href="#"><img src="images/books/1.jpg" alt=""></a>
+</div>
+<div class="widget-content">
+<h5><a href="#"> Things Every Child Show Know About J.B .Danquah </a></h5>
+<span> <strong>Author:</strong> Abyna-Ansaa Adjei </span> <br>
+<span> <strong>Book Category:</strong> Drama, Romance </span>
+</div>
+<div class="clearfix"></div>
+</td>
+
+<td class="text-right"> ₵40.00 </td>
+
+<td>
+<div class="input-group">
+
+<span class="input-group-btn">
+<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+<i style="font-size: 11px;" class="fa fa-minus"></i>
+</button>
+</span>
+
+<input style="    height: auto; padding: 0px 0px 0px 10px;" type="text" name="quant[1]" class="form-control input-sm input-number" value="1" min="1" max="10">
+
+<span class="input-group-btn">
+<button type="button" class="btn btn-default btn-sm btn-number" data-type="plus" data-field="quant[1]">
+<i style="font-size: 11px;" class="fa fa-plus"></i>
+</button>
+</span>
+
+</div>
+</td>
+
+<td class="text-right"> ₵40.00 </td>
+
+<td class="text-right remove"> 
+<a href="#">
+<i class="fa fa-trash"></i> 
+</a>
+</td>
+
+</tr>
+
 
 <tr>
 
@@ -140,100 +243,7 @@ margin: 40px auto;
 </td>
 
 </tr>
-
-<tr>
-
-<td>
-<div class="widget-thumb">
-<a href="#"><img src="images/books/1.jpg" alt=""></a>
-</div>
-<div class="widget-content">
-<h5><a href="#"> Things Every Child Show Know About J.B .Danquah </a></h5>
-<span> <strong>Author:</strong> Abyna-Ansaa Adjei </span> <br>
-<span> <strong>Book Category:</strong> Drama, Romance </span>
-</div>
-<div class="clearfix"></div>
-</td>
-
-<td class="text-right"> ₵40.00 </td>
-
-<td>
-<div class="input-group">
-
-<span class="input-group-btn">
-<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-<i style="font-size: 11px;" class="fa fa-minus"></i>
-</button>
-</span>
-
-<input style="    height: auto; padding: 0px 0px 0px 10px;" type="text" name="quant[1]" class="form-control input-sm input-number" value="1" min="1" max="10">
-
-<span class="input-group-btn">
-<button type="button" class="btn btn-default btn-sm btn-number" data-type="plus" data-field="quant[1]">
-<i style="font-size: 11px;" class="fa fa-plus"></i>
-</button>
-</span>
-
-</div>
-</td>
-
-<td class="text-right"> ₵40.00 </td>
-
-<td class="text-right remove"> 
-<a href="#">
-<i class="fa fa-trash"></i> 
-</a>
-</td>
-
-</tr>
-
-
-<tr>
-
-<td>
-<div class="widget-thumb">
-<a href="#"><img src="images/books/1.jpg" alt=""></a>
-</div>
-<div class="widget-content">
-<h5><a href="#"> Things Every Child Show Know About J.B .Danquah </a></h5>
-<span> <strong>Author:</strong> Abyna-Ansaa Adjei </span> <br>
-<span> <strong>Book Category:</strong> Drama, Romance </span>
-</div>
-<div class="clearfix"></div>
-</td>
-
-<td class="text-right"> ₵40.00 </td>
-
-<td>
-<div class="input-group">
-
-<span class="input-group-btn">
-<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-<i style="font-size: 11px;" class="fa fa-minus"></i>
-</button>
-</span>
-
-<input style="    height: auto; padding: 0px 0px 0px 10px;" type="text" name="quant[1]" class="form-control input-sm input-number" value="1" min="1" max="10">
-
-<span class="input-group-btn">
-<button type="button" class="btn btn-default btn-sm btn-number" data-type="plus" data-field="quant[1]">
-<i style="font-size: 11px;" class="fa fa-plus"></i>
-</button>
-</span>
-
-</div>
-</td>
-
-<td class="text-right"> ₵40.00 </td>
-
-<td class="text-right remove"> 
-<a href="#">
-<i class="fa fa-trash"></i> 
-</a>
-</td>
-
-</tr>
-
+ --> 
 </tbody>
 
 <tfoot>
@@ -248,7 +258,7 @@ margin: 40px auto;
 <tr>
 
 <td colspan="3" class="text-right"><strong> Total: </strong> </td>
-<td class="text-right"><strong> ₵80.00 </strong></td>
+<td class="text-right"><strong> �80.00 </strong></td>
 <td>  </td>
 
 </tr>
@@ -259,9 +269,10 @@ margin: 40px auto;
 </table>
 </div>
 </div><!-- /.box-body -->
-
+</c:if>
+ 
 <div class="box-footer">
-<a class="checkout-btn" href="checkout.html"> Place Order </a>
+<a class="checkout-btn" href="checkout"> Place Order </a>
 </div>
 
 </div><!-- /.box -->
@@ -278,29 +289,22 @@ margin: 40px auto;
 
 
 <!--/#footer START-->
-<div w3-include-html="includes/footer.html"></div> 
+<%@include file="includes/footer.jsp" %>
 <!--/#footer END-->
 
 </div>
-
-
-
-<!-- includes function START-->
-<script>
-w3IncludeHTML();
-</script>
-<!-- includes function END-->   
-
+ 
 
 <!--   JS Files Start  --> 
-<script src="js/jquery-3.3.1.min.js"></script> 
-<script src="js/jquery-migrate-1.4.1.min.js"></script> 
-<script src="js/popper.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/owl.carousel.min.js"></script> 
-<script src="js/jquery.prettyPhoto.js"></script> 
-<script src="js/isotope.min.js"></script> 
-<script src="js/custom.js"></script>
+<script src="resources/js/jquery-3.3.1.min.js"></script> 
+<script src="resources/js/jquery-migrate-1.4.1.min.js"></script> 
+<script src="resources/js/popper.min.js"></script> 
+<script src="resources/js/bootstrap.min.js"></script> 
+<script src="resources/js/owl.carousel.min.js"></script> 
+<script src="resources/js/jquery.prettyPhoto.js"></script> 
+<script src="resources/js/isotope.min.js"></script> 
+<script src="resources/js/custom.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script> 
 
 
 
@@ -380,7 +384,55 @@ e.preventDefault();
 });
 </script>
 
+<script type="text/javascript">
+function removeToCart(orderId){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/removeToCart",
+		data : {
+			orderId : orderId
+		},success:function(data){
+			getCart();			
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});
+} 
+function getCart(){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/getCart",
+		data : {
+		},success:function(data){
+			
+			var cartData = "";
+			if(data.length > 0){	
+				for (var i = 0; i < data.length; i++) {
+					cartData += '<li class="item">'+
+					'<a href="#" class="preview-image">'+
+					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
+					'</a>'+
+					'<div class="description">'+ 
+					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
+					'<strong class="price"> '+data[i].qty+' x '+data[i].price+' </strong> '+
+					'</div>'+
+					'</li> <br /> '; 
+				}
+			}else{
+				cartData = "Cart is empty";
+			}
+			
+			
+			$("#cartData").html(cartData);
+			 
+			
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});
 
+}
+</script>
 
 </body>
 

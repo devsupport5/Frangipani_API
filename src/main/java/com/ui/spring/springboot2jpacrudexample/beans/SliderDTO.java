@@ -8,11 +8,14 @@ public class SliderDTO implements Serializable{
 	private long id;
 	private String sliderName;
 	private String description;
-	private String imagePath;	 
+	private String image;	 
 	private int isActive;
 	private int isDeleted;
 	private String createdDate;
-	 
+	private String detailLink;
+	private String buyNowLink; 
+	private String title;
+	private String subTitle;
 	
 	public SliderDTO() {
 		
@@ -48,13 +51,15 @@ public class SliderDTO implements Serializable{
 		this.description = description;
 	}
 
-	public String getImagePath() {
-		return imagePath;
+	 
+
+	public String getImage() {
+		return image;
 	}
 
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 
@@ -71,20 +76,43 @@ public class SliderDTO implements Serializable{
 	public int getIsDeleted() {
 		return isDeleted;
 	}
-
-
 	public void setIsDeleted(int isDeleted) {
 		this.isDeleted = isDeleted;
 	}
 
-
 	public String getCreatedDate() {
 		return createdDate;
 	}
-
-
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public String getDetailLink() {
+		return detailLink;
+	}
+	public void setDetailLink(String detailLink) {
+		this.detailLink = detailLink;
+	}
+
+	public String getBuyNowLink() {
+		return buyNowLink;
+	}
+	public void setBuyNowLink(String buyNowLink) {
+		this.buyNowLink = buyNowLink;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getSubTitle() {
+		return subTitle;
+	}
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
 	}
 
 
