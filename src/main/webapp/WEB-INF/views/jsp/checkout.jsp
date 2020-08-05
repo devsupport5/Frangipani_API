@@ -854,14 +854,16 @@ function addNewAddress(){
 	});
 }
 
+
 function getCart(){
 	$.ajax({
 		type : "POST", 
 		url : "<%=request.getContextPath()%>/getCart",
 		data : {
 		},success:function(data){
-			
-			var cartData = "";
+			var cartTotal = "";
+			var cartData = "0";
+			var cartFinalTotal = "0";  
 			if(data.length > 0){	
 				for (var i = 0; i < data.length; i++) {
 					cartData += '<li class="item">'+
@@ -873,21 +875,24 @@ function getCart(){
 					'<strong class="price"> '+data[i].qty+' x '+data[i].price+' </strong> '+
 					'</div>'+
 					'</li> <br /> '; 
-				}
+					  
+					cartTotal = data[i].qty * data[i].price; 
+					cartFinalTotal = parseInt(cartTotal) + parseInt(cartFinalTotal);					   
+				}  
 			}else{
 				cartData = "Cart is empty";
 			}
 			
-			
-			$("#cartData").html(cartData);
 			 
-			
-		},error : function(e){
+			$("#cartData").html(cartData);
+			$("#cartTotal").html(cartFinalTotal);
+			$("#cateItemTotal").html(data.length);
+		},error : function(e){ 
 			console.log("Error :::"+e)
 		}
 	});
 
-}
+}  
 
 
 </script>
@@ -906,6 +911,8 @@ function getCart(){
 <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
 
 <script>
+
+
 
 function checkLogin(){
 	$.ajax({
