@@ -84,7 +84,7 @@ public class FrontendController {
 	public String  productList(@PathVariable("categoryId") int categoryId,@PathVariable("categoryName") String categoryName,Model model) {
 		
 			model.addAttribute("categoryName",categoryName);
-			model.addAttribute("productList",productRepository.getProductByCategory(Integer.parseInt(categoryId+"")));
+			model.addAttribute("productList",productRepository.getProductByCategory(Long.parseLong(categoryId+"")));
 		return "product_list";
 	}
 	
@@ -182,6 +182,8 @@ public class FrontendController {
     		return "cart";
     }
     
+     
+    
 	@RequestMapping("/addToCart" )
     @ResponseBody public Integer  addToCart(OrderItem orderItem,HttpSession session) {
       
@@ -200,6 +202,7 @@ public class FrontendController {
     	orderItem.setUserId(userId);
     	orderItem.setCategoryName(categoryRepository.getCategoryById(product.getCategoryId()).get().getCategoryName());
     	
+	
     	
     	List<OrderItem> items = new ArrayList<OrderItem>();
     	if(session.getAttribute("orderItem")==null) {
@@ -245,14 +248,14 @@ public class FrontendController {
 	
 	
 	@RequestMapping("/removeToCart" )
-    public String  removeToCart(OrderItem orderItem,HttpSession session) {
+    @ResponseBody public String  removeToCart(OrderItem orderItem,HttpSession session) {
 		
 		List<OrderItem> items = (List<OrderItem>) session.getAttribute("orderItem");
 		for (int i = 0; i < items.size(); i++) {
 			if(items.get(i).getOrderId()==orderItem.getOrderId()) {
 				items.remove(i);
 			}
-		}
+		} 
 		session.setAttribute("orderItem",items);
 		
 		return "";

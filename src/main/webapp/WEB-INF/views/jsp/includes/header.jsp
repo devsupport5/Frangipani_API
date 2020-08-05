@@ -69,7 +69,7 @@
 
 
 <li class="dropdown">
-<a class="cart-icon" href="#" role="button" id="cartdropdown" data-toggle="dropdown"> <i class="fas fa-shopping-cart"></i> <span class="badge">02</span> </a>
+<a class="cart-icon" href="#" role="button" id="cartdropdown" data-toggle="dropdown"> <i class="fas fa-shopping-cart"></i> <span class="badge" id="cateItemTotal"> </span> </a>
 <div class="dropdown-menu cart-box" aria-labelledby="cartdropdown">
 Recently added item(s)
 <ul class="list">
@@ -96,8 +96,8 @@ Recently added item(s)
 </div>
 </li> --%>
 
-</ul>
-<div class="total">Total: <strong>80.00</strong></div>
+</ul>   
+<div class="total">Total: <strong id="cartTotal"></strong></div>
 <div class="view-link"> 
 <a href="<%=request.getContextPath() %>/checkout">Proceed to Checkout</a> 
 <a href="<%=request.getContextPath() %>/viewCart">View cart </a></div>

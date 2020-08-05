@@ -94,8 +94,8 @@
 <p class="product-category"> ${categoryName } </p>
 <h3 class="product-name"><a href="<%=request.getContextPath() %>/product/${productList.id }"> ${productList.bookTitle }  </a></h3>
 <h4 class="product-price">${productList.originalPrice } </h4>
-<div class="add-to-cart">
-<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+<div class="add-to-cart"> 
+<button class="add-to-cart-btn" onclick="addToCart(${productList.id});" ><i class="fa fa-shopping-cart"></i> add to cart</button>
 </div>
 
 </div> 
@@ -149,6 +149,74 @@
 <script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
+
+
+
+<script type="text/javascript"> 
+
+$( document ).ready(function() {
+	getCart(); 
+});
+
+
+function addToCart(orderId){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/addToCart",
+		data : {
+			orderId : orderId,
+			qty : 1, 
+		},success:function(data){
+			 
+			getCart();
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	}); 
+}
+
+function getCart(){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/getCart",
+		data : {
+		},success:function(data){
+			var cartTotal = "";
+			var cartData = "0";
+			var cartFinalTotal = "0";  
+			if(data.length > 0){	
+				for (var i = 0; i < data.length; i++) {
+					cartData += '<li class="item">'+
+					'<a href="#" class="preview-image">'+ 
+					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
+					'</a>'+
+					'<div class="description">'+ 
+					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
+					'<strong class="price"> '+data[i].qty+' x '+data[i].price+' </strong> '+
+					'</div>'+
+					'</li> <br /> '; 
+					  
+					cartTotal = data[i].qty * data[i].price; 
+					cartFinalTotal = parseInt(cartTotal) + parseInt(cartFinalTotal);					   
+				}  
+			}else{
+				cartData = "Cart is empty";
+			}
+			
+			 
+			$("#cartData").html(cartData);
+			$("#cartTotal").html(cartFinalTotal);
+			$("#cateItemTotal").html(data.length);
+		},error : function(e){ 
+			console.log("Error :::"+e)
+		}
+	});
+
+}
+
+
+</script>  
+
 </body>
 
 

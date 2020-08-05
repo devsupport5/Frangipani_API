@@ -260,8 +260,8 @@ function registration(){
 <div class="row">
 <div class="box box-default">
 
-<div class="box-header with-border">
-<h3 class="box-title"> My Cart (03) </h3>
+<div class="box-header with-border">   
+<h3 class="box-title"> My Cart (<span id="myCart"></span>) </h3>
 </div>
 
 <div class="box-body">
@@ -276,10 +276,10 @@ function registration(){
 			<th  class="text-right">  </th>
 		</tr>
 	</thead>
-<tbody>
+<tbody id="cartList">
  
-	<div id="cartList"></div> 
-<tr>
+	
+<!-- <tr>
 
 <td>
 <div class="widget-thumb">
@@ -324,8 +324,8 @@ function registration(){
 </td>
 
 </tr>
-
-<tr>
+ -->
+<!-- <tr>
 
 <td>
 <div class="widget-thumb">
@@ -416,7 +416,7 @@ function registration(){
 </a>
 </td>
 
-</tr>
+</tr> --> 
 
 </tbody>
 
@@ -424,15 +424,15 @@ function registration(){
 <tr>
 
 <td colspan="3" class="text-right"><strong> Subtotal:  </strong> </td>
-<td class="text-right"><strong> ₵80.00 </strong></td>
-<td>  </td>
+<td class="text-right"><strong id="subTotal">  </strong></td>
+<td>  </td>  
 
 </tr>
 
 <tr>
 
 <td colspan="3" class="text-right"><strong> Total: </strong> </td>
-<td class="text-right"><strong> ₵80.00 </strong></td>
+<td class="text-right"><strong id="finalTotal">  </strong></td>
 <td>  </td>
 
 </tr>
@@ -688,7 +688,7 @@ Forgot Password?
 </div>
 </div>
 
-
+ 
 <div class="alert alert-info mb-0">
 <strong>Note:</strong> 
 You have received Email from us
@@ -826,7 +826,7 @@ $( document ).ready(function() {
 	cartList(); 
 	getAddAddress();
 	getCart(); 
-	 
+	  
 });  	
 
 function addNewAddress(){
@@ -974,39 +974,41 @@ getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10p
 			console.log("Error :::"+e)
 		}
 	});
-}
+} 
 
-
+ 
 function cartList(){
 	$.ajax({  
 		type : "POST",
 		url : "<%=request.getContextPath()%>/getCart",
 		data : {
 		},success:function(data){
-			 
+
+			$('#cartList').empty();
+			
 			var cartList = ""; 
 			for (var i = 0; i < data.length; i++) {
-				cartList += '<tr><td>'+ 
+				cartList = '<tr><td>'+  
 								'<div class="widget-thumb">'+
 									'<a href="#"><img src="images/books/1.jpg" alt=""></a>'+
 								'</div>'+
 								'<div class="widget-content">'+
-									'<h5><a href="#"> Things Every Child Show Know About J.B .Danquah </a></h5>'+
-									'<span> <strong>Author:</strong> Abyna-Ansaa Adjei </span> <br>'+
-									'<span> <strong>Book Category:</strong> Drama, Romance </span>'+
-								'</div>'+
+									'<h5><a href="#"> '+data[i].bookTitle+' </a></h5>'+
+									'<span> <strong>Author:</strong> '+data[i].authorName+' </span> <br>'+
+									'<span> <strong>Book Category:</strong> '+data[i].categoryName+' </span>'+
+								'</div>'+ 
 								'<div class="clearfix"></div>'+	
 							'</td>'+
 
-	'<td class="text-right"> 40.00 </td>'+
+	'<td class="text-right"> '+data[i].price+'</td>'+
 	'<td>'+
 	'<div class="input-group">'+
 '	<span class="input-group-btn">'+
 	'<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">'+
 	'<i style="font-size: 11px;" class="fa fa-minus"></i>'+
 	'</button>'+
-	'</span>'+
-	'<input style="    height: auto; padding: 0px 0px 0px 10px;" type="text" name="quant[1]" class="form-control input-sm input-number" value="1" min="1" max="10">'+
+	'</span>'+ 
+	'<input style="    height: auto; padding: 0px 0px 0px 10px;" type="text" name="quant[1]" class="form-control input-sm input-number" value="'+data[i].qty+'" min="1" max="10">'+
 	'<span class="input-group-btn">'+
 	'<button type="button" class="btn btn-default btn-sm btn-number" data-type="plus" data-field="quant[1]">'+
 	'<i style="font-size: 11px;" class="fa fa-plus"></i>'+
@@ -1014,24 +1016,47 @@ function cartList(){
 	'</span>'+
 	'</div>'+
 	'</td>'+
-	'<td class="text-right"> ₵40.00 </td>'+
-	'<td class="text-right remove"> '+
-	'<a href="#">'+
+	'<td class="text-right"> '+(data[i].qty * data[i].price)+' </td>'+
+	'<td class="text-right remove"> '+ 
+	'<a href="#" onclick="return removeToCart('+data[i].orderId+');">'+
 	'<i class="fa fa-trash"></i> '+
 	'</a>'+
 	'</td>'+
 	'</tr>';
-			} 
-			
-			$("#cartList").html(cartList);
+	
+	$('#cartList').append(cartList);
+	 
+	var subTotal = 0; 
+	 subTotal =  data[i].qty * data[i].price;
+	 $("#subTotal").html(subTotal);
+	 $("#finalTotal").html(subTotal);
+	 $("#myCart").html(data.length); 
+			}    
+			 
+			//$("#cartList").html(cartList);
 
 	
 		},error : function(e){
-			console.log("Error :::"+e)
+			//console.log("Error :::"+e)
 		}
 	
+});
 }
 
+function removeToCart(orderId){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/removeToCart",
+		data : {
+			orderId : orderId
+		},success:function(data){
+			getCart();		
+			cartList(); 
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});
+} 
 
 
 </script>

@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> getProductByCategory(Integer categoryId) {
+	public List<Product> getProductByCategory(Long categoryId) {
 		// TODO Auto-generated method stub
 		return this.ProductRepository.getProductByCategory(categoryId);
 	}

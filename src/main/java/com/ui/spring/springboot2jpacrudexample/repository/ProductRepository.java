@@ -14,14 +14,14 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	
 	
 	@Query("SELECT u FROM Product u WHERE u.categoryId = ?1")
-	List<Product> getProductByCategory(Integer categoryId);
+	List<Product> getProductByCategory(Long categoryId);
 	 
 	
 	@Query("SELECT u FROM Product u WHERE u.isActive = 0 and u.isFeatured = 0")
 	List<Product> getFeaturedProduct();
 	
 	@Query("SELECT u FROM Product u WHERE u.categoryId = ?1 and u.isActive = 0")
-	List<Product> getActiveProductByCategory(Integer categoryId);
+	List<Product> getActiveProductByCategory(Long categoryId);
 	
 	@Query("SELECT u FROM Product u WHERE u.id = ?1")
 	Product getProductById(Long productId);

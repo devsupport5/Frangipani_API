@@ -145,7 +145,7 @@ function getSliderList(){
 <c:forEach items="${featuredProduct }" var="featuredProduct" >
 	<div class="col-md-3 col-sm-6">
 		<div class="product-box"> 
-			<div class="pro-thumb"> <a href="#">Add To Cart</a>
+			<div class="pro-thumb"> <a href="#" onclick="addToCart('${featuredProduct.id}')">Add To Cart</a>
 			
 			<c:choose>
 				<c:when test="${featuredProduct.image ne null }"> 
@@ -354,6 +354,73 @@ w3IncludeHTML();
 <script src="resources/js/jquery.prettyPhoto.js"></script> 
 <script src="resources/js/isotope.min.js"></script> 
 <script src="resources/js/custom.js"></script>
+<%-- <script src="<%=request.getContextPath() %>/resources/js/common.js"></script> --%>
+ 
+
+<script type="text/javascript"> 
+
+$( document ).ready(function() {
+	getCart(); 
+});
+
+
+function addToCart(orderId){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/addToCart",
+		data : {
+			orderId : orderId,
+			qty : 1, 
+		},success:function(data){
+			 
+			getCart();
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	}); 
+}
+
+function getCart(){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/getCart",
+		data : {
+		},success:function(data){
+			var cartTotal = "";
+			var cartData = "0";
+			var cartFinalTotal = "0";  
+			if(data.length > 0){	
+				for (var i = 0; i < data.length; i++) {
+					cartData += '<li class="item">'+
+					'<a href="#" class="preview-image">'+
+					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
+					'</a>'+
+					'<div class="description">'+ 
+					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
+					'<strong class="price"> '+data[i].qty+' x '+data[i].price+' </strong> '+
+					'</div>'+
+					'</li> <br /> '; 
+					  
+					cartTotal = data[i].qty * data[i].price; 
+					cartFinalTotal = parseInt(cartTotal) + parseInt(cartFinalTotal);					   
+				}  
+			}else{
+				cartData = "Cart is empty";
+			}
+			
+			 
+			$("#cartData").html(cartData);
+			$("#cartTotal").html(cartFinalTotal);
+			$("#cateItemTotal").html(data.length);
+		},error : function(e){ 
+			console.log("Error :::"+e)
+		}
+	});
+
+}
+
+
+</script>
 
 </body>
 
