@@ -149,7 +149,7 @@ function getSliderList(){
 			
 			<c:choose>
 				<c:when test="${featuredProduct.image ne null }"> 
-					<img class="img-responsive" src="${featuredProduct.image }" style="height: 275px;" alt="">	
+					<img class="img-responsive" src="${featuredProduct.image }"  alt="">	
 				</c:when>
 				<c:otherwise>
 					<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${featuredProduct.bookTitle }" title="${productList.bookTitle }">
@@ -200,7 +200,7 @@ function getSliderList(){
 			
 			<c:choose>
 				<c:when test="${categories.image ne null }">
-					<img src="${categories.image}" style="height: 295px;" alt="${categories.categoryName }" title="${categories.categoryName }">	
+					<img src="${categories.image}" alt="${categories.categoryName }" title="${categories.categoryName }">	
 				</c:when>
 				<c:otherwise>
 					<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${categories.categoryName }" title="${categories.categoryName }">

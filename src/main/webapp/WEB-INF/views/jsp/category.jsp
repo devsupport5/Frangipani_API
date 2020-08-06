@@ -72,7 +72,7 @@
 						<div class="vol-thumb"> 
 							 <c:choose>
 								<c:when test="${categories.image ne null }">
-									<img class="img-responsive" src="${categories.image }" alt="" style="height: 184px;">	
+									<img class="img-responsive" src="${categories.image }" alt=""  >	
 								</c:when>
 								<c:otherwise>
 									<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${products.categoryName }" title="${products.categoryName }">

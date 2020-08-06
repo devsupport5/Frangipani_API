@@ -444,8 +444,8 @@ function registration(){
 </div>
 </div><!-- /.box-body -->
 
-<div class="box-footer">
-<a class="checkout-btn" href="order-successfully-placed.html">  Make Payment  </a>
+<div class="box-footer">  
+<a class="checkout-btn" href="#">  Make Payment  </a>
 </div>
 
 </div><!-- /.box -->
@@ -465,7 +465,7 @@ function registration(){
 
 
 <!--Price details Start-->
-<div class="col-xs-12 col-sm-3 col-md-3 sidebar">
+<!-- <div class="col-xs-12 col-sm-3 col-md-3 sidebar">
 <div class="box box-primary">
 <div class="box-header with-border">
 <h3 class="box-title"> Order Summary </h3>
@@ -494,10 +494,10 @@ Delivery Charges
 
 </ul></div>
 
-</div><!-- /.box-body -->
+</div>/.box-body
 
-</div>			
-</div>
+</div>		 	
+</div> -->
 
 </div><!-- /.row -->
 </div><!-- /.checkout-box -->

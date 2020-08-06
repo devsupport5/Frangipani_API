@@ -81,7 +81,7 @@
 <a href="<%=request.getContextPath() %>/product/${productList.id }">
 <c:choose>
 	<c:when test="${productList.image ne null }">
-		<img class="img-responsive" src="${productList.image }" style="height: 275px;" alt="">	
+		<img class="img-responsive" src="${productList.image }"  alt="">	
 	</c:when>
 	<c:otherwise>
 		<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${productList.bookPrice }" title="${productList.bookPrice }">

@@ -20,7 +20,6 @@
 <li class="nav-item"> <a class="nav-link" href="<%=request.getContextPath() %>/book"> Books </a> </li>
 <li class="nav-item"> <a class="nav-link" href="<%=request.getContextPath() %>/category"> Category  </a> </li>
 <li class="nav-item"> <a class="nav-link" href="<%=request.getContextPath() %>/authors"> Authors </a> </li>
-<li class="nav-item"> <a class="nav-link" href="#"> Authors </a> </li>
 <!-- <li class="nav-item"> <a class="nav-link" href="#"> Testimonials </a> </li> -->
 <li class="nav-item"> <a class="nav-link" href="<%=request.getContextPath() %>/contact"> Contact </a> </li>
 

@@ -101,7 +101,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				
+				 
 				<div class="item-carousel-full">
 					<div class="gallery-img">
 						<a href="<%=request.getContextPath() %>/resources/images/book-default.jpeg" rel="prettyPhoto[product]">
@@ -113,18 +113,18 @@
 				
 				<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${productList.bookTitle }" title="${productList.bookTitle }">
 			</c:otherwise>
-		</c:choose>
+		</c:choose> 
 				
 		
 		
-<div class="item-carousel-full">
+<%-- <div class="item-carousel-full">
 <div class="gallery-img">
 <a href="<%=request.getContextPath() %>/resources/images/books/2.jpg" rel="prettyPhoto[product]">
 <i class="fas fa-search"></i>
 </a>
 <img src="<%=request.getContextPath() %>/resources/images/books/2.jpg">
 </div>
-</div>
+</div> --%> 
 </div>
 </div>
 

@@ -103,7 +103,7 @@ margin: 40px auto;
 </thead>
 <tbody>
  
-
+<c:set var="subTotal" value="0"></c:set>
 <c:forEach items="${cartList }" var="cartList">
 <tr>
 
@@ -147,110 +147,20 @@ margin: 40px auto;
 <a href="#" onclick="removeToCart(${cartList.orderId})">
 <i class="fa fa-trash"></i> 
 </a>
+<c:set value="${subTotal + (cartList.qty * cartList.price) }" var="subTotal"> </c:set> 
 </td>
 
 </tr>
+
 </c:forEach>
-<!-- <tr>
 
-<td>
-<div class="widget-thumb">
-<a href="#"><img src="images/books/1.jpg" alt=""></a>
-</div>
-<div class="widget-content">
-<h5><a href="#"> Things Every Child Show Know About J.B .Danquah </a></h5>
-<span> <strong>Author:</strong> Abyna-Ansaa Adjei </span> <br>
-<span> <strong>Book Category:</strong> Drama, Romance </span>
-</div>
-<div class="clearfix"></div>
-</td>
-
-<td class="text-right"> ₵40.00 </td>
-
-<td>
-<div class="input-group">
-
-<span class="input-group-btn">
-<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-<i style="font-size: 11px;" class="fa fa-minus"></i>
-</button>
-</span>
-
-<input style="    height: auto; padding: 0px 0px 0px 10px;" type="text" name="quant[1]" class="form-control input-sm input-number" value="1" min="1" max="10">
-
-<span class="input-group-btn">
-<button type="button" class="btn btn-default btn-sm btn-number" data-type="plus" data-field="quant[1]">
-<i style="font-size: 11px;" class="fa fa-plus"></i>
-</button>
-</span>
-
-</div>
-</td>
-
-<td class="text-right"> ₵40.00 </td>
-
-<td class="text-right remove"> 
-<a href="#">
-<i class="fa fa-trash"></i> 
-</a>
-</td>
-
-</tr>
-
-
-<tr>
-
-<td>
-<div class="widget-thumb">
-<a href="#"><img src="images/books/1.jpg" alt=""></a>
-</div>
-<div class="widget-content">
-<h5><a href="#"> Things Every Child Show Know About J.B .Danquah </a></h5>
-<span> <strong>Author:</strong> Abyna-Ansaa Adjei </span> <br>
-<span> <strong>Book Category:</strong> Drama, Romance </span>
-</div>
-<div class="clearfix"></div>
-</td>
-
-<td class="text-right"> ₵40.00 </td>
-
-<td>
-<div class="input-group">
-
-<span class="input-group-btn">
-<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-<i style="font-size: 11px;" class="fa fa-minus"></i>
-</button>
-</span>
-
-<input style="    height: auto; padding: 0px 0px 0px 10px;" type="text" name="quant[1]" class="form-control input-sm input-number" value="1" min="1" max="10">
-
-<span class="input-group-btn">
-<button type="button" class="btn btn-default btn-sm btn-number" data-type="plus" data-field="quant[1]">
-<i style="font-size: 11px;" class="fa fa-plus"></i>
-</button>
-</span>
-
-</div>
-</td>
-
-<td class="text-right"> ₵40.00 </td>
-
-<td class="text-right remove"> 
-<a href="#">
-<i class="fa fa-trash"></i> 
-</a>
-</td>
-
-</tr>
- --> 
 </tbody>
 
 <tfoot>
 <tr>
 
 <td colspan="3" class="text-right"><strong> Subtotal:  </strong> </td>
-<td class="text-right"><strong> ₵80.00 </strong></td>
+<td class="text-right"><strong> ${subTotal }</strong></td>
 <td>  </td>
 
 </tr>
@@ -258,8 +168,8 @@ margin: 40px auto;
 <tr>
 
 <td colspan="3" class="text-right"><strong> Total: </strong> </td>
-<td class="text-right"><strong> �80.00 </strong></td>
-<td>  </td>
+<td class="text-right"><strong> ${subTotal }</strong></td>
+<td>  </td> 
 
 </tr>
 
