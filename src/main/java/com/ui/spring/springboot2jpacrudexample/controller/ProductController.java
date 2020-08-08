@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ui.spring.springboot2jpacrudexample.beans.ProductDTO;
 import com.ui.spring.springboot2jpacrudexample.exception.ResourceNotFoundException;
 import com.ui.spring.springboot2jpacrudexample.model.Product;
+import com.ui.spring.springboot2jpacrudexample.service.CurrencyService;
 import com.ui.spring.springboot2jpacrudexample.service.ProductService;
 
 @CrossOrigin
@@ -38,14 +39,21 @@ public class ProductController {
 	ProductService ProductService;
 	
 	@Autowired
+	CurrencyService currencyService;
+	
+	@Autowired
     private ModelMapper modelMapper;
 	
 	@GetMapping("/products")
 	public List<ProductDTO> getAllProducts() {
-		List<Product> Products = ProductService.getAllProducts();
-		return Products.stream().map(this::convertToDto).collect(Collectors.toList());
+		List<Product> products = ProductService.getAllProducts();
+		
+		for (int i = 0; i < products.size(); i++) {
+			products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
+		}
+		return products.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
-
+ 
 	@GetMapping("/products/{id}")
 	public ResponseEntity<ProductDTO> getProductById(@PathVariable(value = "id") Long ProductId) {
 		Product Product = ProductService.getProductById(ProductId).get();
@@ -92,6 +100,7 @@ public class ProductController {
 	}
 	
 	public ProductDTO convertToDto(Product Product) {
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		ProductDTO ProductDTO = modelMapper.map(Product, ProductDTO.class);
 		return ProductDTO;
 	}

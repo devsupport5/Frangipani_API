@@ -42,6 +42,12 @@ public class CurrencyServiceImpl implements CurrencyService{
 		this.CurrencyRepository.delete(currency);
 	}
 
+	@Override
+	public Currency getDefaultCurrency() {
+		// TODO Auto-generated method stub
+		return this.CurrencyRepository.getDefaultCurrency().get(0);
+	}
+
 	 
 
 }

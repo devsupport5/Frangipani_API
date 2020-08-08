@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
 <meta charset="utf-8">
@@ -93,7 +94,7 @@
 <div class="product-body">
 <p class="product-category"> ${categoryName } </p>
 <h3 class="product-name"><a href="<%=request.getContextPath() %>/product/${productList.id }"> ${productList.bookTitle }  </a></h3>
-<h4 class="product-price">${productList.originalPrice } </h4>
+<h4 class="product-price">${productList.currency.currencySymbol}<fmt:formatNumber type = "number"  minFractionDigits="2" value ="${productList.originalPrice }"></fmt:formatNumber> </h4>
 <div class="add-to-cart"> 
 <button class="add-to-cart-btn" onclick="addToCart(${productList.id});" ><i class="fa fa-shopping-cart"></i> add to cart</button>
 </div>
@@ -150,9 +151,7 @@
 <script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
 
-
-
-<script type="text/javascript"> 
+<script type="text/javascript">
 
 $( document ).ready(function() {
 	getCart(); 
@@ -166,14 +165,16 @@ function addToCart(orderId){
 		data : {
 			orderId : orderId,
 			qty : 1, 
-		},success:function(data){
-			 
+		},success:function(data){   
+			 $("#successMessage"+orderId).html("Product added in cart");
+			    
 			getCart();
 		},error : function(e){
 			console.log("Error :::"+e)
 		}
 	}); 
 }
+ 
 
 function getCart(){
 	$.ajax({
@@ -182,8 +183,8 @@ function getCart(){
 		data : {
 		},success:function(data){
 			var cartTotal = "";
-			var cartData = "0";
-			var cartFinalTotal = "0";  
+			var cartData = "";
+			var cartFinalTotal = 0;  
 			if(data.length > 0){	
 				for (var i = 0; i < data.length; i++) {
 					cartData += '<li class="item">'+
@@ -191,8 +192,8 @@ function getCart(){
 					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
 					'</a>'+
 					'<div class="description">'+ 
-					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
-					'<strong class="price"> '+data[i].qty+' x '+data[i].price+' </strong> '+
+					'<a href="#"> '+data[i].bookTitle+'</a>'+   
+					'<strong class="price"> '+data[i].qty+' x '+ data[i].currencySymbol +data[i].price.toFixed(2)+' </strong> '+
 					'</div>'+
 					'</li> <br /> '; 
 					  
@@ -201,21 +202,25 @@ function getCart(){
 				}  
 			}else{
 				cartData = "Cart is empty";
-			}
-			
-			 
-			$("#cartData").html(cartData);
-			$("#cartTotal").html(cartFinalTotal);
+			} 
+			 /* if(cartData==0)
+				$("#cartData").html("");
+			 else */ 
+				$("#cartData").html(cartData);
+		       
+			//$("#cartData").html(""); 
+			$("#cartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
 			$("#cateItemTotal").html(data.length);
 		},error : function(e){ 
 			console.log("Error :::"+e)
 		}
 	});
 
-}
+} 
+</script>
 
 
-</script>  
+
 
 </body>
 

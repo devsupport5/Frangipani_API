@@ -1,6 +1,7 @@
 package com.ui.spring.springboot2jpacrudexample.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,17 @@ public class UserServiceImpl implements UserAddressService{
 		// TODO Auto-generated method stub
 		this.userAddressRepository.delete(userAddress);
 		
+	}
+
+	@Override
+	public Optional<UserAddress> getUserAddressById(Long id) {
+		// TODO Auto-generated method stub
+		return this.userAddressRepository.findById(id);
+	}
+
+	@Override
+	public List<UserAddress> getGuestUserAddress(String emailAddress) {
+		// TODO Auto-generated method stub
+		return this.userAddressRepository.getGuestUserAddress(emailAddress);
 	}
 }

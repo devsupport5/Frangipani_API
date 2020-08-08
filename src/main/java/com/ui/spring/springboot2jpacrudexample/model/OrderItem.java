@@ -5,6 +5,7 @@ public class OrderItem {
 	private long orderId;
 	private String bookTitle;
 	private String categoryName;
+	private String currencySymbol;
 	private String authorName;
 	private int qty;
 	private int userId;
@@ -67,6 +68,14 @@ public class OrderItem {
 
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
+	}
+
+	public String getCurrencySymbol() {
+		return currencySymbol;
+	}
+
+	public void setCurrencySymbol(String currencySymbol) {
+		this.currencySymbol = currencySymbol;
 	}
 
 	

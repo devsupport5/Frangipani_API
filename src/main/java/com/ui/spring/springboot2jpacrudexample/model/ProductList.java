@@ -1,21 +1,15 @@
 package com.ui.spring.springboot2jpacrudexample.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
-
-@Entity
-@Table(name = "product")
-public class Product {
+ 
+public class ProductList {
 
 	private long id;
 	private long categoryId;
@@ -40,15 +34,14 @@ public class Product {
 	private String image1;
 	private String image2;
 	private String imageString;
-	private Currency currency;
+	private String currencyName; 
+	private String currencySymbol;
 	
-   
-	
-	public Product() {
+	public ProductList() {
 		
 	}
 	
-	public Product(String description) {
+	public ProductList(String description) {
 		this.description = description;
 	}
 	
@@ -128,10 +121,8 @@ public class Product {
 	}
 
 	@Column(name = "currency_id", columnDefinition = "integer default 0")
-	/*@OneToOne(targetEntity = Currency.class, mappedBy = "curId", 
-    cascade = CascadeType.ALL, fetch = FetchType.EAGER)*/
 	public int getCurrencyId() {
-		return currencyId; 
+		return currencyId;
 	}
 	public void setCurrencyId(int currencyId) {
 		this.currencyId = currencyId;
@@ -253,25 +244,23 @@ public class Product {
 		this.image2 = image2;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="id")
-	public Currency getCurrency() {
-		return currency;
+	@Column(name = "currency_name")
+	public String getCurrencyName() {
+		return currencyName;
 	}
 
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
+	public void setCurrencyName(String currencyName) {
+		this.currencyName = currencyName;
 	}
-  
-	/*@JoinColumn(name="id")
-	@OneToOne(targetEntity=Currency.class, mappedBy="currency", fetch=FetchType.EAGER)*/
-    
-    /**/
-	
-	/*@Access(AccessType.PROPERTY)
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="curId")*/
-	 
+
+	@Column(name = "currency_symbol")
+	public String getCurrencySymbol() {
+		return currencySymbol;
+	}
+
+	public void setCurrencySymbol(String currencySymbol) {
+		this.currencySymbol = currencySymbol;
+	}
 	
 	
 }

@@ -33,16 +33,8 @@ business with The Office of the President of Ghana... </p>
 <!--Footer Widget End--> 
 </div>
 
-
-
-
-
-
-
-
-
-<div class="col-lg-4 col-sm-6">
-<!--Footer Widget Start-->
+<!-- <div class="col-lg-4 col-sm-6">
+Footer Widget Start
 <div class="footer-widget">
 <h5>Books by Category</h5>
 <ul class="ftags">
@@ -58,11 +50,11 @@ business with The Office of the President of Ghana... </p>
 <li><a href="#"> History </a></li>
 <li><a href="#"> Horror </a></li>
 <li><a href="#"> Romance </a></li>
-</ul>
+</ul> 
 </div>
-<!--Footer Widget End--> 
+Footer Widget End 
 </div>
-
+ --> 
 
 
 

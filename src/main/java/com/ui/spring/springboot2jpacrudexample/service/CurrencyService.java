@@ -17,4 +17,6 @@ public interface CurrencyService {
 
 	void deleteCurrency(Currency currency);
 	
+	Currency getDefaultCurrency();
+	
 }

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -146,16 +147,16 @@
 
 
 <p>  ${product.description } </p>
+  
+<h6> <span>ISBN:</span> ${product.bookISNB } </h6>
+  
+<div class="pro-pricing">${product.currency.currencySymbol}<fmt:formatNumber type = "number"  minFractionDigits="2" value =" ${product.originalPrice } "></fmt:formatNumber></div>
 
-<h6> <span>SKU:</span> ${product.bookSKU } </h6>
-
-<div class="pro-pricing"> ${product.originalPrice } </div>
-
-<div class="add-2-cart"> <strong>Quantity:</strong>
-<input type="number" name="quantity" id="quantity" min="1" max="99" placeholder="1" value="1" >   
+<div class="add-2-cart"> <strong>Quantity:</strong>  
+<input type="text" name="quantity" id="quantity" min="1" max="99" maxlength="2" placeholder="1" value="1" >   
 <input type="submit" value="Add to Cart" name="Add to Cart" onclick="addToCart('${product.id}')" >
-</div> 
-
+</div>  
+ 
 
 
 </div>
@@ -167,19 +168,19 @@
 <div class="col-md-12">
 <div class="products-tabs wf100 p80">
 
-<nav>
+<!-- <nav>
 <div class="nav nav-tabs" id="nav-tab" role="tablist"> 
 <a class="nav-item nav-link active" id="nav-one-tab" data-toggle="tab" href="#nav-one" role="tab" aria-controls="nav-one" aria-selected="true"> Overview </a> 
 <a class="nav-item nav-link" id="nav-two-tab" data-toggle="tab" href="#nav-two" role="tab" aria-controls="nav-two" aria-selected="true"> Details </a> 
 <a class="nav-item nav-link" id="nav-three-tab" data-toggle="tab" href="#nav-three" role="tab" aria-controls="nav-three" aria-selected="false"> Meet the Author </a>
 </div>
-</nav>
+</nav> -->
 
 
 
 
 
-<div class="tab-content" id="nav-tabContent">
+<%-- <div class="tab-content" id="nav-tabContent">
 
 <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-one-tab">
 <p> On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. </p>
@@ -233,11 +234,11 @@
 </div>
 </div>
 
+ 
 
-
+</div> --%>
 </div>
-</div>
-</div>
+</div> 
 </div>
 
 
@@ -335,17 +336,17 @@ function getCart(){
 		data : {
 		},success:function(data){
 			var cartTotal = "";
-			var cartData = "0";
+			var cartData = "";
 			var cartFinalTotal = "0";  
 			if(data.length > 0){	
 				for (var i = 0; i < data.length; i++) {
-					cartData += '<li class="item">'+
+					cartData = '<li class="item">'+
 					'<a href="#" class="preview-image">'+
 					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
 					'</a>'+
 					'<div class="description">'+ 
 					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
-					'<strong class="price"> '+data[i].qty+' x '+data[i].price+' </strong> '+
+					'<strong class="price"> '+data[i].qty+' x '+data[i].currencySymbol +data[i].price+' </strong> '+
 					'</div>'+
 					'</li> <br /> '; 
 					  
@@ -356,9 +357,11 @@ function getCart(){
 				cartData = "Cart is empty";
 			}
 			
-			 
-			$("#cartData").html(cartData);
-			$("#cartTotal").html(cartFinalTotal);
+			 if(cartData==0)
+				$("#cartData").html("");
+			 else
+				$("#cartData").html(cartData);
+			$("#cartTotal").html($("#currencySymbol").val()+""+cartFinalTotal);
 			$("#cateItemTotal").html(data.length);
 		},error : function(e){ 
 			console.log("Error :::"+e)
@@ -368,6 +371,17 @@ function getCart(){
 } 
 
 </script>
+<input type="hidden" name="currencySymbol" id="currencySymbol" value="<%=session.getAttribute("currencySymbol")%>">
+<style>
+ 
+.add-2-cart input[type="text"] {
+    height: 48px;
+    border: 1px solid #dddddd;
+    width: 75px;
+    padding: 0 10px;
+    margin-right: 10px;
+}
+</style>
 
 </body>
 

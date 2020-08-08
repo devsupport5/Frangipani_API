@@ -144,9 +144,8 @@ function registration(){
 </h4>
 </div>
 <!-- panel-heading -->
-<% if(session.getAttribute("userName")==null) {%>
 
-  
+<c:if test="${fn:length(guestMobileNumber) == 0  }">
 <div id="collapseOne" class="panel-collapse collapse in" >
 
 <!-- panel-body  -->
@@ -235,7 +234,7 @@ function registration(){
 <!-- panel-body  -->
 
 </div><!-- row -->
-<%} %> 
+</c:if>
 </div>
 <!-- checkout-step-01  -->
 
@@ -787,13 +786,13 @@ Add a new address
 
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="E-mail" name="newUserEmail" id="newUserEmail" type="text" />
+<input class="form-control" placeholder="E-mail" name="newUserEmail" id="newUserEmail" type="text"  value="${guestEmailAddress }" disabled="disabled" />
 </div>
 </div>
 
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="Mobile Number" id="mobileNumber" name="mobileNumber" type="text" />
+<input class="form-control" placeholder="Mobile Number" id="mobileNumber" name="mobileNumber" type="text" value="${guestMobileNumber }" disabled="disabled"   />
 </div>
 </div>
 
@@ -824,25 +823,24 @@ Add a new address
 	
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 		<select class="form-control"id="state" name="state">
-			 
 			<option value="State">State </option>
 			<option value="Ashanti">Ashanti</option>
-<option value="Bono Region">Bono Region</option>
-<option value="Bono East Region">Bono East Region</option>
-<option value="Ahafo Region">Ahafo Region</option>
-<option value="Central">Central</option>
-<option value="Central">Central</option>
-<option value="Greater Accra">Greater Accra</option>
-<option value="Northern">Northern</option>
-<option value="Savannah">Savannah</option>
-<option value="North East">North East</option>
-<option value="Upper East">Upper East</option>
-<option value="Upper West">Upper West</option>
-<option value="Volta Region">Volta Region</option>
-<option value="Oti">Oti</option>
-<option value="Western Region">Western Region</option>
-<option value="Western North">Western North</option>
-		</select> 
+			<option value="Bono Region">Bono Region</option>
+			<option value="Bono East Region">Bono East Region</option>
+			<option value="Ahafo Region">Ahafo Region</option>
+			<option value="Central">Central</option>
+			<option value="Central">Central</option>
+			<option value="Greater Accra">Greater Accra</option>
+			<option value="Northern">Northern</option>
+			<option value="Savannah">Savannah</option>
+			<option value="North East">North East</option>
+			<option value="Upper East">Upper East</option>
+			<option value="Upper West">Upper West</option>
+			<option value="Volta Region">Volta Region</option>
+			<option value="Oti">Oti</option>
+			<option value="Western Region">Western Region</option>
+			<option value="Western North">Western North</option>
+		</select>  
 	</div>
 </div>
 
@@ -949,13 +947,14 @@ function getCart(){
 				cartData = "Cart is empty";
 			}
 			 
-			$("#cartData").html(cartData);  
+			 
+			$("#cartData").html(cartData); 
 			$("#cartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
 			$("#cateItemTotal").html(data.length);
-			$("#orderCartItem").html(data.length); 
+			$("#orderCartItem").html(data.length);
 			$("#orderCartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2)); 
 			$("#orderCartFinalTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
-		},error : function(e){  
+		},error : function(e){ 
 			console.log("Error :::"+e)
 		}
 	});
@@ -968,14 +967,14 @@ function getCart(){
 
 <script src="<%=request.getContextPath() %>/resources/checkout/bootstrap.min.js"></script> 
 
-<!--   JS Files Start  -->  
-<!--<script src="js/jquery-3.3.1.min.js"></script> --> 
-<%-- <script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
-<script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> --%> 
-<script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
-<%-- <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
+<!--   JS Files Start  --> 
+<!--<script src="js/jquery-3.3.1.min.js"></script> -->
+<script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> 
+<!--<script src="js/bootstrap.min.js"></script> -->
+<script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> 
-<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> --%>  
+<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
 
 <script>
@@ -1008,9 +1007,10 @@ function checkLogin(){
 
 function getAddAddress(){
 	$.ajax({  
-		type : "POST",
-		url : "<%=request.getContextPath()%>/getUserAddress",
-		data : {
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/getGuestUserAddress",
+		data : { 
+			guestEmailAddress : $("#newUserEmail").val()
 		},success:function(data){
 			
 			var getAddressList = "";
@@ -1022,11 +1022,11 @@ function getAddAddress(){
 				if(data[i].defaultAddress=="0"){
 					cssStyle = "box-success";
 					backStyle = "aliceblue";
-					isActive ="checked";
+					isActive =""; 
 				}else{
 					cssStyle = "box-default";
 					backStyle = "#fff";
-					isActive ="";
+					isActive ="checked";
 				}  					
 					 
 getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10px 0px 10px;" class="box  '+cssStyle+'">'+
@@ -1043,11 +1043,11 @@ getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10p
 				'</div>'+
  
 				'<div class="box-body">'+
-					'<p> '+data[i].add1  +', '+data[i].add2  +'</p>'+
-					'<p> '+data[i].city+' '+data[i].state +' </p>'+
-					'<p> '+data[i].country+' '+data[i].pinCode+'  </p>'+
-					'<p>Mobile: '+data[i].mobileNumber+' </p>'+
-				'</div>'+
+				'<p> '+data[i].add1  +', '+data[i].add2  +'</p>'+
+				'<p> '+data[i].city+' '+data[i].state +' </p>'+
+				'<p> '+data[i].country+' '+data[i].pinCode+'  </p>'+
+				'<p>Mobile: '+data[i].mobileNumber+' </p>'+
+			   '</div>'+ 
 				'</div>';
 			}
 				$("#addreesList").html(getAddressList);
@@ -1056,7 +1056,7 @@ getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10p
 		}
 	});
 } 
- 
+
  
 function cartList(){
 	$.ajax({  
@@ -1149,6 +1149,7 @@ minusButtonStatus  +
 	
 }); 
 }
+   
   
 function removeToCart(orderId){
 	$.ajax({
@@ -1206,41 +1207,42 @@ function removeToCart(orderId){
 			}
 		});
  }
-    
-
+ 
  function addToCart(orderId){
- 	$.ajax({
- 		type : "POST", 
- 		url : "<%=request.getContextPath()%>/addToCart",
- 		data : {
- 			orderId : orderId,
- 			qty : 1, 
- 		},success:function(data){
- 			cartList();  
- 			getCart();
- 		},error : function(e){
- 			console.log("Error :::"+e)
- 		}
- 	}); 
- }    
+	 	$.ajax({
+	 		type : "POST", 
+	 		url : "<%=request.getContextPath()%>/addToCart",
+	 		data : {
+	 			orderId : orderId,
+	 			qty : 1, 
+	 		},success:function(data){
+	 			cartList();  
+	 			getCart();
+	 		},error : function(e){
+	 			console.log("Error :::"+e)
+	 		}
+	 	}); 
+	 }    
 
- function removeToCartButton(orderId){
- 	$.ajax({
- 		type : "POST",  
- 		url : "<%=request.getContextPath()%>/removeToCartButton",
- 		data : {
- 			orderId : orderId,
- 			qty : -1, 
- 		},success:function(data){
- 			cartList();  
- 			getCart();
- 		},error : function(e){
- 			console.log("Error :::"+e)
- 		}
- 	}); 
- }
-    </script>
-    <input type="hidden" name="currencySymbol" id="currencySymbol" value="<%=session.getAttribute("currencySymbol")%>"> 
+	 function removeToCartButton(orderId){
+	 	$.ajax({
+	 		type : "POST",  
+	 		url : "<%=request.getContextPath()%>/removeToCartButton",
+	 		data : {
+	 			orderId : orderId,
+	 			qty : -1, 
+	 		},success:function(data){
+	 			cartList();  
+	 			getCart();
+	 		},error : function(e){
+	 			console.log("Error :::"+e)
+	 		}
+	 	}); 
+	 }
+    
+    </script> 
+    
+    <input type="hidden" name="currencySymbol" id="currencySymbol" value="<%=session.getAttribute("currencySymbol")%>">
 </body>
 
 

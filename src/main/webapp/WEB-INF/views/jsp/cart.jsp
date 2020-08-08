@@ -49,8 +49,8 @@ margin: 40px auto;
 <script src="resources/js/w3data.js"></script>
 <!-- includes js File END-->
 
-</head>
-<body>
+</head> 
+<body onload="cartList();" >
 
 <div class="wrapper">
 
@@ -73,23 +73,27 @@ margin: 40px auto;
 
 
 
-<!--Inner Header Start-->
-<section style="background-color: #e9ecef9c;     padding: 5em 0em 10em 0em;" class="wf100 ">
+<!--Inner Header Start-->  
+<section style="background-color: #e9ecef9c;     padding: 1em 0em 10em 0em;" class="wf100 ">
+
 
 <div class="container">
+
+<div style="text-align: center;padding: 15px;" id="deleteMessage"> ${error }</div>
+
 <div class="row">
-<div class="box box-default">
-<div style="text-align: center;"> ${error }</div>
+<div class="box box-default" id="cartMessage">
+
 
 <c:if test="${fn:length(error) eq 0 }">
 
 
 
-<div class="box-header with-border">
-<h3 class="box-title"> My Cart (03) </h3>
+<div class="box-header with-border"> 
+<h3 class="box-title" > My Cart (<span id="myCart"></span>) </h3>
 </div>
 		
-<div class="box-body">
+<div class="box-body" id="pleaceOrder">
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
@@ -101,10 +105,10 @@ margin: 40px auto;
 <th  class="text-right">  </th>
 </tr>
 </thead>
-<tbody>
+<tbody id="cartList">
  
-<c:set var="subTotal" value="0"></c:set>
-<c:forEach items="${cartList }" var="cartList">
+<%-- <c:set var="subTotal" value="0"></c:set> --%>
+<%-- <c:forEach items="${cartList }" var="cartList">
 <tr>
 
 <td>
@@ -152,7 +156,7 @@ margin: 40px auto;
 
 </tr>
 
-</c:forEach>
+</c:forEach> --%>
 
 </tbody>
 
@@ -160,7 +164,7 @@ margin: 40px auto;
 <tr>
 
 <td colspan="3" class="text-right"><strong> Subtotal:  </strong> </td>
-<td class="text-right"><strong> ${subTotal }</strong></td>
+<td class="text-right"><strong id="subTotal"></strong></td>
 <td>  </td>
 
 </tr>
@@ -168,7 +172,7 @@ margin: 40px auto;
 <tr>
 
 <td colspan="3" class="text-right"><strong> Total: </strong> </td>
-<td class="text-right"><strong> ${subTotal }</strong></td>
+<td class="text-right"><strong id="finalTotal"> </strong></td>
 <td>  </td> 
 
 </tr>
@@ -181,8 +185,8 @@ margin: 40px auto;
 </div><!-- /.box-body -->
 </c:if>
  
-<div class="box-footer">
-<a class="checkout-btn" href="checkout"> Place Order </a>
+<div class="box-footer" id="pleaceOrderButton">
+	<a class="checkout-btn" href="checkout" > Place Order </a>
 </div>
 
 </div><!-- /.box -->
@@ -303,47 +307,170 @@ function removeToCart(orderId){
 			orderId : orderId
 		},success:function(data){
 			getCart();			
+			cartList(); 
+			$("#deleteMessage").html("Book deleted successfully");
+			setTimeout(function(){ $("#deleteMessage").html(""); }, 7000);
+			
 		},error : function(e){
 			console.log("Error :::"+e)
 		}
 	});
 } 
+ 
 function getCart(){
 	$.ajax({
 		type : "POST", 
 		url : "<%=request.getContextPath()%>/getCart",
 		data : {
 		},success:function(data){
-			
-			var cartData = "";
+			var cartTotal = "";
+			var cartData = "";  
+			var cartFinalTotal = 0;  
 			if(data.length > 0){	
 				for (var i = 0; i < data.length; i++) {
 					cartData += '<li class="item">'+
-					'<a href="#" class="preview-image">'+
+					'<a href="#" class="preview-image">'+ 
 					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
 					'</a>'+
 					'<div class="description">'+ 
-					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
-					'<strong class="price"> '+data[i].qty+' x '+data[i].price+' </strong> '+
+					'<a href="#"> '+data[i].bookTitle+'</a>'+  
+					'<strong class="price"> '+data[i].qty+' x '+data[i].currencySymbol +data[i].price.toFixed(2)+' </strong> '+
 					'</div>'+
 					'</li> <br /> '; 
-				}
+					  
+					cartTotal = data[i].qty * data[i].price; 
+					cartFinalTotal = parseInt(cartTotal) + parseInt(cartFinalTotal);					   
+				}  
 			}else{
 				cartData = "Cart is empty";
 			}
 			
-			
-			$("#cartData").html(cartData);
 			 
-			
-		},error : function(e){
+			$("#cartData").html(cartData); 
+			$("#cartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+			$("#cateItemTotal").html(data.length);
+		},error : function(e){ 
 			console.log("Error :::"+e)
 		}
 	});
 
 }
-</script>
+function cartList(){
+	$.ajax({  
+		type : "POST",
+		url : "<%=request.getContextPath()%>/getCart",
+		data : {
+		},success:function(data){
 
+			$('#cartList').empty();
+			  
+			var cartList = ""; 
+			var subTotal = 0; 
+			var cartFinalTotal = 0;
+			for (var i = 0; i < data.length; i++) {
+				var minusButtonStatus = "";
+				if(data[i].qty==1){
+					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">'; 
+				}else{
+					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number" onclick="removeToCartButton('+data[i].orderId+')"  data-type="minus" data-field="quant[1]">';
+				}
+				
+				
+				cartList = '<tr><td>'+  
+								'<div class="widget-thumb">'+
+									'<a href="#"><img src="images/books/1.jpg" alt=""></a>'+
+								'</div>'+
+								'<div class="widget-content">'+
+									'<h5><a href="#"> '+data[i].bookTitle+' </a></h5>'+
+									'<span> <strong>Author:</strong> '+data[i].authorName+' </span> <br>'+
+									'<span> <strong>Book Category:</strong> '+data[i].categoryName+' </span>'+
+								'</div>'+ 
+								'<div class="clearfix"></div>'+	
+							'</td>'+
+
+	'<td class="text-right"> '+$("#currencySymbol").val()+""+data[i].price.toFixed(2)+'</td>'+
+	'<td>'+
+	'<div class="input-group">'+
+'	<span class="input-group-btn">'+
+	minusButtonStatus  
+	+'<i style="font-size: 11px;" class="fa fa-minus"></i>'+
+	'</button>'+
+	'</span>'+  
+	'<input style="    height: auto; padding: 0px 0px 0px 10px;" type="text" name="quant[1]"  class="form-control input-sm input-number" value="'+data[i].qty+'" min="1" max="10">'+
+	'<span class="input-group-btn">'+  
+	'<button type="button" class="btn btn-default btn-sm btn-number" data-type="plus" onclick="addToCart('+data[i].orderId+')" data-field="quant[1]">'+
+	'<i style="font-size: 11px;" class="fa fa-plus"></i>'+
+	'</button>'+
+	'</span>'+
+	'</div>'+
+	'</td>'+ 
+	'<td class="text-right"> '+$("#currencySymbol").val()+""+(data[i].qty * data[i].price).toFixed(2)+' </td>'+
+	'<td class="text-right remove"> '+ 
+	'<a href="#" onclick="return removeToCart('+data[i].orderId+');">'+
+	'<i class="fa fa-trash"></i> '+
+	'</a>'+
+	'</td>'+
+	'</tr>';
+	
+		$('#cartList').append(cartList);
+	   
+		//subTotal =  data[i].qty * data[i].price;
+		subTotal = data[i].qty * data[i].price; 
+		cartFinalTotal = parseInt(subTotal) + parseInt(cartFinalTotal);
+	} 
+			 
+			
+			 $("#subTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+			 $("#finalTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+			 $("#myCart").html(data.length); 
+	
+			 if(data.length==0){
+				 $("#pleaceOrder").hide();  
+				 $("#pleaceOrderButton").hide();  
+				 $("#cartMessage").html("<div style='text-align:center;padding: 15px;'> Cart is empty <div>"); 
+			 }
+			 
+		},error : function(e){
+			//console.log("Error :::"+e)
+		}
+	
+});
+}
+
+function addToCart(orderId){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/addToCart",
+		data : {
+			orderId : orderId,
+			qty : 1, 
+		},success:function(data){
+			cartList();  
+			getCart();
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	}); 
+}    
+
+function removeToCartButton(orderId){
+	$.ajax({
+		type : "POST",  
+		url : "<%=request.getContextPath()%>/removeToCartButton",
+		data : {
+			orderId : orderId,
+			qty : -1, 
+		},success:function(data){
+			cartList();  
+			getCart();
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	}); 
+}
+
+</script>
+<input type="hidden" name="currencySymbol" id="currencySymbol" value="<%=session.getAttribute("currencySymbol")%>"> 
 </body>
 
 

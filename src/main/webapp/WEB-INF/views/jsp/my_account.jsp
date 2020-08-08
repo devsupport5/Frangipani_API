@@ -32,47 +32,7 @@
 <link href="resources/css/prettyPhoto.css" rel="stylesheet">
 <link href="resources/css/all.min.css" rel="stylesheet">
 <!-- CSS  -->
-
-<script type="text/javascript">
-function registration(){
-	
-	$.ajax({
-		type : "POST",
-		url : "registration",
-		data : {
-			
-			yourName : $("#yourName").val(),
-			contact : $("#contact").val(), 
-			userEmail : $("#userEmail").val(),
-			userName : $("#userName").val(),
-			password : $("#password").val(),
-			
-		},success:function(data){
-			
-		},error : function(e){
-			console.log("Error :::"+e)
-		}
-	});
-}
-
-
-function checkLogin(){
-	$.ajax({
-		type : "POST",
-		url : "checkValidUser",
-		data : {
-			"userEmailId" : $("#userEmailId").val(),
-			"userPassword" : $("#userPassword").val(), 
-		},success:function(data){
-			if(data==true){ 
-				window.location.reload();
-			}
-		},error : function(e){
-			console.log("Error :::"+e)
-		}
-	});
-}
-</script>
+ 
 
 
 </head>
@@ -109,10 +69,14 @@ function checkLogin(){
 
 <div class="col-lg-4">
 <div class="login-box">
-<h3>Login Account</h3>
+<h3>Login Account</h3> 
+<span><font size="errorValidUser" id="errorValidUser" color="white"></font> </span> 
+<span><font size="erroruserEmailId" id="erroruserEmailId" color="white"></font> </span>
 <div class="input-group">
+
 <input type="text" class="form-control" name="userEmailId" id="userEmailId" placeholder="Username/Email" required>
 </div>
+<span><font size="erroruserPassword" id="erroruserPassword" color="white"></font> </span>
 <div class="input-group">
 <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Password" required>
 </div>
@@ -121,6 +85,7 @@ function checkLogin(){
 <label class="form-check-label" for="exampleCheck2">Remember Me</label>
 <a href="#" class="fp">Forgot Password</a> 
 </div>
+
 <div class="input-group">
 <button class="login-btn" onclick="return checkLogin();">Login Account</button>
 </div>
@@ -130,48 +95,55 @@ function checkLogin(){
 <div class="col-lg-8">
 <div class="myaccount-form">
 <h3>Register Your Account</h3>
-<form action="#" >
+<form >
 <ul class="row">
 <li class="col-md-6">
-<div class="input-group">
-<input type="text" class="form-control" name="yourName" id="yourName" placeholder="Your Name" required>
+<span><font size="errorCheckName" id="errorCheckName" color="red"></font> </span>
+<div class="input-group">   
+<input type="text" class="form-control" name="yourName" id="yourName" placeholder="Your Name*" required>
 </div>
 </li>
 <li class="col-md-6">
+<span><font size="errorContact" id="errorContact" color="red"></font> </span>
 <div class="input-group">
-<input type="text" class="form-control" name="contact" id="contact" placeholder="Contact #" required>
+<input type="text" class="form-control" name="contact" id="contact" placeholder="Contact*" required>
 </div>
 </li>
 <li class="col-md-6">
+<span><font size="errorUserEmail" id="errorUserEmail" color="red"></font> </span>
 <div class="input-group">
-<input type="text" class="form-control" name="userEmail" id="userEmail" placeholder="Email Address" required>
+<input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="Email Address*" required>
+</div> 
+</li>
+<li class="col-md-6">
+<span><font size="errorUserName" id="errorUserName" color="red"></font> </span>
+<div class="input-group">
+<input type="text" class="form-control" placeholder="User Name*" name="userName" id="userName" required>
 </div>
 </li>
 <li class="col-md-6">
+<span><font size="errorPassword" id="errorPassword" color="red"></font> </span>
 <div class="input-group">
-<input type="text" class="form-control" placeholder="User Name" name="userName" id="userName">
+<input type="password" class="form-control" tabindex="1" placeholder="Password*" name="password" id="password" required>
 </div>
 </li>
-<li class="col-md-6">
-<div class="input-group">
-<input type="text" class="form-control" placeholder="Password" name="password" id="password">
+<li class="col-md-6"> 
+<span><font size="errorRePassword" id="errorRePassword" color="red"></font> </span>
+<div class="input-group"> 
+<input type="password" class="form-control" tabindex="2" placeholder="Re-enter Password*" name="repassword" id="repassword">
 </div>
-</li>
-<li class="col-md-6">
-<div class="input-group">
-<input type="text" class="form-control" placeholder="Re-enter Password" name="repassword" id="repassword">
-</div>
-</li>
+</li> 
 
-<li class="col-md-12">
+<li class="col-md-12"> 
+<span><font size="errortermsConditionChk" id="errortermsConditionChk" color="red"></font> </span>
 <div class="input-group form-check">
-<input type="checkbox" class="form-check-input" id="exampleCheck1">
+<input type="checkbox" class="form-check-input" id="termsConditionChk">
 <label class="form-check-label" for="exampleCheck1">I agree to the Terms of <a href="#">Services & Privacy Plicy</a></label>
 </div>
 </li>
-
-			<li class="col-md-12"> 
-				<button class="register" onclick="registration()">Register Your Account</button>
+  
+			<li class="col-md-12">   
+				<button class="register" onclick="return registration();">Register Your Account</button>
 			</li>
 
 </ul>
@@ -209,6 +181,172 @@ function checkLogin(){
 <script src="resources/js/jquery.prettyPhoto.js"></script> 
 <script src="resources/js/isotope.min.js"></script> 
 <script src="resources/js/custom.js"></script>
+
+
+<script type="text/javascript">
+function registration(){
+	 
+	var status = true;
+	if($("#yourName").val()==""){ 
+		$("#errorCheckName").html("Please enter your name");
+		setTimeout(function(){ $("#errorCheckName").html(""); }, 7000);
+		$("#yourName").focus();
+		status = false;
+	}  
+	if($("#contact").val()==""){
+		$("#errorContact").html("Please enter contact number");
+		setTimeout(function(){ $("#errorContact").html(""); }, 7000);
+		$("#contact").focus();
+		status = false;
+	}   
+	
+	if($("#userEmail").val()==""){
+		$("#errorUserEmail").html("Please enter email address");
+		$("#userEmail").focus();
+		setTimeout(function(){ $("#errorUserEmail").html(""); }, 7000);
+		status = false;
+	}
+	
+	if($("#userName").val()==""){
+		$("#errorUserName").html("Please enter username");
+		$("#userName").focus();
+		setTimeout(function(){ $("#errorUserName").html(""); }, 7000);
+		status = false;
+	}
+	if($("#password").val()==""){
+		$("#errorPassword").html("Please enter password");
+		$("#password").focus();  
+		setTimeout(function(){ $("#errorPassword").html(""); }, 7000);
+		status = false;
+	}else if($("#password").val().length < 6){
+		$("#errorPassword").html("Password length greter then six characters");
+		$("#password").focus();  
+		setTimeout(function(){ $("#errorPassword").html(""); }, 7000);
+		status = false;
+	} 
+	 
+	if($("#repassword").val()==""){
+		$("#errorRePassword").html("Please retype password");
+		$("#repassword").focus();
+		setTimeout(function(){ $("#errorRePassword").html(""); }, 7000);
+		status = false;  
+	}else if($("#password").val() != $("#repassword").val()){
+		$("#errorRePassword").html("Passwords did not match."); 
+		$("#repassword").focus(); 
+		setTimeout(function(){ $("#errorRePassword").html(""); }, 7000);
+		status = false;
+	}
+	
+	
+	if($("#termsConditionChk").is(":checked")==false){ 
+		$("#errortermsConditionChk").html("Please check Services & Privacy Plicy");
+		setTimeout(function(){ $("#errortermsConditionChk").html(""); }, 7000);
+		status = false;
+	}
+  
+	if(status){  
+ 	 $.ajax({
+		type : "POST",
+		url : "registration",
+		data : {
+			
+			yourName : $("#yourName").val(),
+			contact : $("#contact").val(), 
+			userEmail : $("#userEmail").val(),
+			userName : $("#userName").val(),
+			password : $("#password").val(),
+			
+		},success:function(data){
+			window.location.reload(); 
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	}); 
+  }	  
+ 	 return false; 
+}/* 
+function registration(){
+	     
+	  
+	/*   var validator = $("#registrationForm").validate({
+          rules: {
+              password: "required",
+              confirmpassword: {
+                  equalTo: "#password"
+              }
+          },
+          messages: {
+              password: " Enter Password",
+              confirmpassword: " Enter Confirm Password Same as Password"
+          }
+      });
+	  
+      if (validator.form()) {
+          alert('Sucess'); 
+           
+          $.ajax({
+      		type : "POST",
+      		url : "registration",
+      		data : {
+      			
+      			yourName : $("#yourName").val(),
+      			contact : $("#contact").val(), 
+      			userEmail : $("#userEmail").val(),
+      			userName : $("#userName").val(),
+      			password : $("#password").val(),
+      			
+      		},success:function(data){
+      			
+      		},error : function(e){
+      			console.log("Error :::"+e)
+      		}
+      	});
+          
+     /*  } 
+	//return false;
+	
+} */
+
+
+function checkLogin(){
+	
+	
+	var status = true;
+	if($("#userEmailId").val()==""){ 
+		$("#erroruserEmailId").html("Please enter username");
+		setTimeout(function(){ $("#erroruserEmailId").html(""); }, 7000);
+		$("#userEmailId").focus();
+		status = false;
+	}  
+	if($("#userPassword").val()==""){
+		$("#erroruserPassword").html("Please enter password");
+		setTimeout(function(){ $("#erroruserPassword").html(""); }, 7000);
+		$("#userPassword").focus(); 
+		status = false;
+	}  
+if(status){	
+	$.ajax({
+		type : "POST",
+		url : "checkValidUser",
+		data : {
+			"userEmailId" : $("#userEmailId").val(),
+			"userPassword" : $("#userPassword").val(), 
+		},success:function(data){
+			if(data==true){ 
+				window.location.reload();
+			}else{ 
+				$("#errorValidUser").html("Please enter valid username & password");
+				setTimeout(function(){ $("#errorValidUser").html(""); }, 7000);
+			}
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});
+}
+}  
+</script>
+ 
+
 </body>
 
 

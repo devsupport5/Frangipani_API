@@ -14,6 +14,7 @@ public class Currency {
 	private long id;
 	private String currencyName;
 	private String currencySymbol;
+	private int isDefault;
 	private int isActive;
 	private int isDeleted;
 	private String createdDate;
@@ -25,13 +26,14 @@ public class Currency {
 	 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+	 
 	   
 
 	@Column(name = "currency_name")
@@ -75,7 +77,19 @@ public class Currency {
 		return createdDate;
 	}
 
+	@Column(name = "is_default", columnDefinition = "integer default 1")
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
+
+	public int getIsDefault() {
+		return isDefault;
+	}
+
+
+	public void setIsDefault(int isDefault) {
+		this.isDefault = isDefault;
+	}
+	
 }

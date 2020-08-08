@@ -79,35 +79,15 @@
 
 <div class="row">
 <div class="col-lg-12">
-<!-- Default box -->
-<div style="padding: 0px 10px 0px 10px;     background: #f8f9fa;
-    border: 1px solid #eeeeee;" class="box  box-default">
-<div class="box-headerwith-border">
+<!-- Default box --> 
+<div id="addreesList"></div>
 
-<h3 style="font-size: 17px;
-padding: 15px 0px 15px 0px;
-border-bottom: 1px solid #ccc;" class="box-title"> Bargav N. Bhatt 
-    <span class="label label-default">Home</span>
-</h3>
-
-<div class="box-tools pull-right">
-<button data-toggle="modal" data-target="#AddNewAddressModal"  style="margin-top: -97px;  padding: 5px 15px 5px 15px;" class="btn bg-teal btn-sm"><i class="fa fa-ellipsis-v"></i></button>
-
-</div>
-
-</div>
-
-<div class="box-body">
-<p> 507 Sears Gotri Road, Sevasi, Vadodara, Gujarat 391101 </p>
-<p>Mobile: 9427611304 </p>
-</div><!-- /.box-body -->
-
-</div><!-- /.box -->
+ 
 
 
 
 <!-- Default box -->
-<div style="padding: 0px 10px 0px 10px;     background: #f8f9fa;
+<!-- <div style="padding: 0px 10px 0px 10px;     background: #f8f9fa;
     border: 1px solid #eeeeee;" class="box  box-default">
 <div class="box-headerwith-border">
 
@@ -127,16 +107,16 @@ border-bottom: 1px solid #ccc;" class="box-title"> Bargav N. Bhatt
 <div class="box-body">
 <p> 507 Sears Gotri Road, Sevasi, Vadodara, Gujarat 391101 </p>
 <p>Mobile: 9427611304 </p>
-</div><!-- /.box-body -->
-
-</div><!-- /.box -->
+</div>/.box-body
+  
+</div>/.box -->
 
 
 </div>
 </div>
 
 
-<div class="row">
+<!-- <div class="row">
 <div class="col-md-12">
 <div class="gt-pagination mt20">
 <nav>
@@ -151,7 +131,7 @@ border-bottom: 1px solid #ccc;" class="box-title"> Bargav N. Bhatt
 </div>
 </div>
 </div>
-
+ --> 
 </div>
 </div>
 </section>
@@ -170,7 +150,7 @@ border-bottom: 1px solid #ccc;" class="box-title"> Bargav N. Bhatt
 <div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">
-<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
 <h3 class="modal-title" id="lineModalLabel">
 Add a new address
 </h3>
@@ -180,82 +160,87 @@ Add a new address
 
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<input class="form-control" placeholder="Full Name" type="text" />
+<input class="form-control" name="fullName" id="fullName" placeholder="Full Name" type="text" />
 </div>
 </div>
 
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="E-mail" type="text" />
+<input class="form-control" placeholder="E-mail" name="newUserEmail" id="newUserEmail" type="text"  />
 </div>
 </div>
-
+ 
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="Mobile Number" type="text" />
+<input class="form-control" placeholder="Mobile Number" id="mobileNumber" name="mobileNumber" type="text" />
 </div>
 </div>
-
-
-<div class="form-group row">
-<div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="Address line 1" type="text" />
-</div>
-</div>
-
 
 
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="Address line 2" type="text" />
+<input class="form-control" placeholder="Address line 1" name="add1" id="add1" type="text" />
 </div>
 </div>
 
 
 
 <div class="form-group row">
+<div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
+<input class="form-control" placeholder="Address line 2" id="add2" name="add2" type="text" />
+</div>
+</div>
+
+
+
+<div class="form-group row">
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<select class="form-control" name="country" id="country">
+			<option>Select Country</option>
+			<option value="Ghana">Ghana </option>
+		</select>
+	</div>
+	
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<select class="form-control"id="state" name="state">
+			<option value="State">State </option>
+			<option value="Ashanti">Ashanti</option>
+			<option value="Bono Region">Bono Region</option>
+			<option value="Bono East Region">Bono East Region</option>
+			<option value="Ahafo Region">Ahafo Region</option>
+			<option value="Central">Central</option>
+			<option value="Central">Central</option>
+			<option value="Greater Accra">Greater Accra</option>
+			<option value="Northern">Northern</option>
+			<option value="Savannah">Savannah</option>
+			<option value="North East">North East</option>
+			<option value="Upper East">Upper East</option>
+			<option value="Upper West">Upper West</option>
+			<option value="Volta Region">Volta Region</option>
+			<option value="Oti">Oti</option>
+			<option value="Western Region">Western Region</option>
+			<option value="Western North">Western North</option>
+		</select> 
+	</div>
+</div>
+
+
+<div class="form-group row">
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<input class="form-control" placeholder="City" name="city" id="city" type="text" />
+	</div>
+
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<select class="form-control">
-<option>Select Country</option>
-<option> Country </option>
-<option> Country </option>
-<option> Country </option>
-<option> Country </option>
-</select>
-</div>
-
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<select class="form-control">
-<option>Select State</option>
-<option> State </option>
-<option> State </option>
-<option> State </option>
-<option> State </option>
-</select>
-</div>
-</div>
-
-
-<div class="form-group row">
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<select class="form-control">
-<option>Select City</option>
-<option> City </option>
-<option> City </option>
-<option> City </option>
-<option> City </option>
-</select>
-</div>
-
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<input class="form-control" placeholder="PIN" type="text" />
+<input class="form-control" placeholder="PIN" name="pinCode" id="pinCode" type="text" />
 </div>
 </div>
 
 
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<textarea class="form-control" placeholder="Special Instructions: (Max Length: 100 Characters)" rows="3"></textarea>
+<textarea class="form-control" name="specialInstruction" id="specialInstruction" placeholder="Special Instructions: (Max Length: 500 Characters)" rows="3"></textarea>
+<input type="hidden" name="addressId" id="addressId">
+
 </div>
 </div>
 
@@ -267,7 +252,7 @@ Add a new address
 <div class="modal-footer">
 <div class="row">
 <div class="col-lg-12">
-<button type="submit" class="btn-upper wf100 btn btn-primary checkout-page-button checkout-continue "> Add </button>
+<button type="button" onclick="return addNewAddress();" class="btn-upper wf100 btn btn-primary checkout-page-button checkout-continue "> Add </button>
 </div>
 </div>
 </div>
@@ -278,6 +263,131 @@ Add a new address
 <!-- Add a new address Modal End-->
 
 <script src="<%=request.getContextPath() %>/resources/checkout/jquery-1.11.1.min.js"></script> 
+<script type="text/javascript">
+$( document ).ready(function() {
+	getAddAddress();
+});  
+function addNewAddress(){
+	$.ajax({
+		type : "POST",
+		url : "addNewAddress",
+		data : { 
+			fullName : $("#fullName").val(),
+			userEmail : $("#newUserEmail").val(),
+			mobileNumber : $("#mobileNumber").val(),
+			add1 : $("#add1").val(),
+			add2 : $("#add2").val(),
+			country : $("#country").val(),
+			state : $("#state").val(),
+			city : $("#city").val(),
+			pinCode : $("#pinCode").val(),
+			specialInstruction : $("#specialInstruction").val(),
+			id : $("#addressId").val()   
+		},success:function(data){
+			getAddAddress();  
+			$('#AddNewAddressModal').modal('hide');
+		},error : function(e){
+			console.log("Error :::"+e)
+		} 
+	});
+}
+
+function updateNewAddress(){
+	$.ajax({
+		type : "POST",
+		url : "addNewAddress",
+		data : { 
+			fullName : $("#fullName").val(),
+			userEmail : $("#newUserEmail").val(),
+			mobileNumber : $("#mobileNumber").val(),
+			add1 : $("#add1").val(),
+			add2 : $("#add2").val(),
+			country : $("#country").val(),
+			state : $("#state").val(),
+			city : $("#city").val(),
+			pinCode : $("#pinCode").val(),
+			specialInstruction : $("#specialInstruction").val(),
+			
+			
+		},success:function(data){
+			getAddAddress();  
+			$('#AddNewAddressModal').modal('hide');
+		},error : function(e){
+			console.log("Error :::"+e)
+		} 
+	});
+}
+
+
+function getAddAddress(){
+	$.ajax({  
+		type : "POST",
+		url : "<%=request.getContextPath()%>/getUserAddress",
+		data : {
+		},success:function(data){
+			
+			var getAddressList = "";
+			for (var i = 0; i < data.length; i++) {
+				getAddressList +=	'<div style="padding: 0px 10px 0px 10px;     background: #f8f9fa;border: 1px solid #eeeeee;" class="box  box-default">'+
+				'<div class="box-headerwith-border">'+
+				 
+				'<h3 style="font-size: 17px;padding: 15px 0px 15px 0px;border-bottom: 1px solid #ccc;" class="box-title">'+data[i].fullName +  
+				    /* '<span class="label label-default">Home</span>'+ */ 
+				'</h3>'+
+				
+					'<div class="box-tools pull-right">'+ 
+					'<button data-toggle="modal" data-target="#AddNewAddressModal"  style="margin-top: -97px;  padding: 5px 15px 5px 15px;" onclick="getAddressById('+data[i].id+')"  class="btn bg-teal btn-sm"><i class="fa fa-ellipsis-v"></i></button>'+
+					'</div>'+				
+				'</div>'+
+				
+				'<div class="box-body">'+
+				'<p> '+data[i].add1  +' '+data[i].add2  +'</p>'+
+				'<p> '+data[i].country+' '+data[i].state +' </p>'+
+				'<p> '+data[i].city+' '+data[i].pinCode+'  </p>'+
+				'<p>Mobile: '+data[i].mobileNumber+' </p>'+
+				'</div>'+
+				
+				'</div>';
+				
+				
+				
+				
+			}
+				$("#addreesList").html(getAddressList);
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});
+} 
+
+function getAddressById(addressId){
+	
+	$.ajax({  
+		type : "POST",
+		url : "<%=request.getContextPath()%>/getAddressById",
+		data : {
+			addressId : addressId,
+		},success:function(data){	
+			$("#fullName").val(data.fullName);
+			  $("#newUserEmail").val(data.userEmail);
+			  $("#mobileNumber").val(data.mobileNumber);
+			  $("#add1").val(data.add1);
+			  $("#add2").val(data.add2);
+			  $("#country").val(data.country);
+			  $("#state").val(data.state);
+			  $("#city").val(data.city);
+			  $("#pinCode").val(data.pinCode);
+			  $("#specialInstruction").val(data.specialInstruction); 
+			  $("#addressId").val(addressId);
+			 
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});
+}
+
+</script>
+
 <script src="<%=request.getContextPath() %>/resources/checkout/bootstrap.min.js"></script> 
 
 <!--   JS Files Start  --> 

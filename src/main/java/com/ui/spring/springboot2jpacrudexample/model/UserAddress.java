@@ -175,7 +175,7 @@ public class UserAddress {
 		this.createdDate = createdDate;
 	}
 	
-	@Column(name = "special_instruction")
+	@Column(name = "special_instruction", columnDefinition = "LONGTEXT")
 	public String getSpecialInstruction() {
 		return specialInstruction;
 	}

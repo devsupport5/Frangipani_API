@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!doctype html>
 <html lang="en">
  
@@ -158,7 +160,9 @@ function getSliderList(){
 		 </div>
 				<div class="pro-txt"> 
 					<h6><a href="<%=request.getContextPath() %>/product/${featuredProduct.id }"> ${featuredProduct.bookTitle } </a></h6>
-					<p class="pro-price"><!-- <del>$25.00</del>  -->${featuredProduct.originalPrice }</p>
+					<span id="successMessage${featuredProduct.id}"></span>  
+					<p class="pro-price"><!-- <del>$25.00</del>  --> 
+					 ${featuredProduct.currency.currencySymbol}<fmt:formatNumber type = "number"  minFractionDigits="2" value ="${featuredProduct.originalPrice }"></fmt:formatNumber></p>
 				</div>
 		</div>
 	</div>
@@ -357,7 +361,7 @@ w3IncludeHTML();
 <%-- <script src="<%=request.getContextPath() %>/resources/js/common.js"></script> --%>
  
 
-<script type="text/javascript"> 
+<%-- <script type="text/javascript"> 
 
 $( document ).ready(function() {
 	getCart(); 
@@ -388,7 +392,7 @@ function getCart(){
 		},success:function(data){
 			var cartTotal = "";
 			var cartData = "0";
-			var cartFinalTotal = "0";  
+			var cartFinalTotal = "0";   
 			if(data.length > 0){	
 				for (var i = 0; i < data.length; i++) {
 					cartData += '<li class="item">'+
@@ -397,8 +401,8 @@ function getCart(){
 					'</a>'+
 					'<div class="description">'+ 
 					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
-					'<strong class="price"> '+data[i].qty+' x '+data[i].price+' </strong> '+
-					'</div>'+
+					'<strong class="price"> '+data[i].qty+' x '+data[i].price.toFixed(2)+' </strong> '+
+					'</div>'+ 
 					'</li> <br /> '; 
 					  
 					cartTotal = data[i].qty * data[i].price; 
@@ -409,8 +413,8 @@ function getCart(){
 			}
 			
 			 
-			$("#cartData").html(cartData);
-			$("#cartTotal").html(cartFinalTotal);
+			$("#cartData").html(cartData); 
+			$("#cartTotal").html(cartFinalTotal.toFixed(2));
 			$("#cateItemTotal").html(data.length);
 		},error : function(e){ 
 			console.log("Error :::"+e)
@@ -419,8 +423,8 @@ function getCart(){
 
 }
 
-
-</script>
+ 
+</script> --%>
 
 </body>
 

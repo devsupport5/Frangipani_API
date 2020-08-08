@@ -3,6 +3,8 @@ package com.ui.spring.springboot2jpacrudexample.beans;
 import java.io.Serializable;
 import java.sql.Blob;
 
+import com.ui.spring.springboot2jpacrudexample.model.Currency;
+
 public class ProductDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -30,6 +32,8 @@ public class ProductDTO implements Serializable{
 	private String image;
 	private String image1;
 	private String image2;
+	 private Currency currency;
+	
 	
 	public ProductDTO() {
 		
@@ -231,6 +235,16 @@ public class ProductDTO implements Serializable{
 	}
 	public void setImage2(String image2) {
 		this.image2 = image2;
+	}
+	
+	
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
 	}
 
 	public static long getSerialversionuid() {

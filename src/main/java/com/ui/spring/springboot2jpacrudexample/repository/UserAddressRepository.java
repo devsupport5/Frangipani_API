@@ -14,4 +14,8 @@ public interface UserAddressRepository extends JpaRepository<UserAddress, Long>{
 	@Query("SELECT u FROM UserAddress u WHERE u.userId = ?1")
 	List<UserAddress> getUserAddress(Long userId);
 	
+	@Query("SELECT u FROM UserAddress u WHERE u.userEmail = ?1")
+	List<UserAddress> getGuestUserAddress(String emailAddress);
+	
+	
 }

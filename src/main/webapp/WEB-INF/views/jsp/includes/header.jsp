@@ -71,10 +71,8 @@
 <a class="cart-icon" href="#" role="button" id="cartdropdown" data-toggle="dropdown"> <i class="fas fa-shopping-cart"></i> <span class="badge" id="cateItemTotal"> </span> </a>
 <div class="dropdown-menu cart-box" aria-labelledby="cartdropdown">
 Recently added item(s)
-<ul class="list">
-
-<div id="cartData"></div>
-
+<ul class="list" id="cartData">
+ 
 <%-- <li class="item">
 <a href="#" class="preview-image">
 <img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">
@@ -112,4 +110,89 @@ Recently added item(s)
 
 <!--Header End--> 
 
+<script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js"></script>  
+<script type="text/javascript"> 
+
+$( document ).ready(function() {
+	getCart(); 
+});
+
+
+function addToCart(orderId){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/addToCart",
+		data : {
+			orderId : orderId,
+			qty : 1, 
+		},success:function(data){   
+			 $("#successMessage"+orderId).html("Product added in cart");
+			   alert(orderId);
+			getCart();
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	}); 
+}
+
+function getCart(){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/getCart",
+		data : {
+		},success:function(data){
+			var cartTotal = "";
+			var cartData = "";
+			var cartFinalTotal = "0";  
+			if(data.length > 0){	
+				for (var i = 0; i < data.length; i++) {
+					cartData += '<li class="item">'+
+					'<a href="#" class="preview-image">'+ 
+					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
+					'</a>'+
+					'<div class="description">'+ 
+					'<a href="#"> '+data[i].bookTitle+'</a>'+   
+					'<strong class="price"> '+data[i].qty+' x '+ data[i].currencySymbol +data[i].price.toFixed(2)+' </strong> '+
+					'</div>'+
+					'</li> <br /> '; 
+					  
+					cartTotal = data[i].qty * data[i].price; 
+					cartFinalTotal = parseInt(cartTotal) + parseInt(cartFinalTotal);					   
+				}  
+			}else{
+				cartData = "Cart is empty";
+			} 
+			 /* if(cartData==0)
+				$("#cartData").html("");
+			 else */ 
+				$("#cartData").html(cartData);
+		       
+			//$("#cartData").html(""); 
+			$("#cartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+			$("#cateItemTotal").html(data.length);
+		},error : function(e){ 
+			console.log("Error :::"+e)
+		}
+	});
+
+}
+function addToCart(orderId){
+	$.ajax({
+		type : "POST", 
+		url : "<%=request.getContextPath()%>/addToCart",
+		data : {
+			orderId : orderId,
+			qty : 1, 
+		},success:function(data){
+			 
+			getCart();
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	}); 
+}  
+
+</script>   
+ 
+<input type="hidden" name="currencySymbol" id="currencySymbol" value="<%=session.getAttribute("currencySymbol")%>">
 

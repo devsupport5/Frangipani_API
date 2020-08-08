@@ -2,11 +2,12 @@ package com.ui.spring.springboot2jpacrudexample.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ui.spring.springboot2jpacrudexample.beans.ProductDTO;
 import com.ui.spring.springboot2jpacrudexample.model.OrderItem;
 import com.ui.spring.springboot2jpacrudexample.model.Product;
 import com.ui.spring.springboot2jpacrudexample.model.RegisterUser;
@@ -22,6 +24,7 @@ import com.ui.spring.springboot2jpacrudexample.model.UserAddress;
 import com.ui.spring.springboot2jpacrudexample.repository.ProductRepository;
 import com.ui.spring.springboot2jpacrudexample.service.AuthorService;
 import com.ui.spring.springboot2jpacrudexample.service.CategoryService;
+import com.ui.spring.springboot2jpacrudexample.service.CurrencyService;
 import com.ui.spring.springboot2jpacrudexample.service.ProductService;
 import com.ui.spring.springboot2jpacrudexample.service.RegisterUserService;
 import com.ui.spring.springboot2jpacrudexample.service.SliderService;
@@ -34,10 +37,16 @@ public class FrontendController {
 	FrontendService frontendService;*/
 	
 	@Autowired
+    private ModelMapper modelMapper;
+	
+	@Autowired
 	RegisterUserService registerUserService;
 	
 	@Autowired
 	private CategoryService  categoryRepository;
+	
+	@Autowired
+	CurrencyService currencyService;
 	
 	@Autowired
 	private ProductRepository  productRepository;
@@ -50,22 +59,41 @@ public class FrontendController {
 	
 	@Autowired
 	private SliderService  sliderService;
-	
+
+	/*@Autowired
+	private ProductListRepository productListRepository;;
+	*/
 	@Autowired
 	private UserAddressService userAddressService;
 	
 	
 	@RequestMapping("/")
-	public String  home(Model model) {
+	public String  home(Model model,HttpSession session) {
+		
+		System.out.println(currencyService.getDefaultCurrency().getCurrencySymbol());
+		
+		session.setAttribute("currencySymbol",currencyService.getDefaultCurrency().getCurrencySymbol());
 		
 		model.addAttribute("sliderList", sliderService.getActiveSliders());
 		model.addAttribute("authorList", authorService.getActiveAuthors());
 		
 		model.addAttribute("categories",categoryRepository.getActiveCategory());
-		model.addAttribute("featuredProduct",productRepository.getFeaturedProduct());
+		
+		List<Product> products = productRepository.getFeaturedProduct();
+		
+		for (int i = 0; i < products.size(); i++) {
+			products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
+		}
+		model.addAttribute("featuredProduct",products.stream().map(this::convertToDto).collect(Collectors.toList()));
+		
 		return "index";
 	}
 	 
+	/*@RequestMapping("/getProductListData" )
+	@ResponseBody public List<ProductList>  getProductListData() {
+		return productListRepository.getProductLists();
+	}*/
+	
 	@RequestMapping("/getSliderList" )
 	@ResponseBody public List<Slider>  getSliderList() {
 		return sliderService.getAllSliders();
@@ -84,13 +112,24 @@ public class FrontendController {
 	public String  productList(@PathVariable("categoryId") int categoryId,@PathVariable("categoryName") String categoryName,Model model) {
 		
 			model.addAttribute("categoryName",categoryName);
-			model.addAttribute("productList",productRepository.getProductByCategory(Long.parseLong(categoryId+"")));
+			
+			List<Product> products = productRepository.getProductByCategory(Long.parseLong(categoryId+""));
+			for (int i = 0; i < products.size(); i++) {
+				products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
+			}
+			model.addAttribute("productList",products.stream().map(this::convertToDto).collect(Collectors.toList()));
 		return "product_list";
 	}
 	
 	@RequestMapping("/featured/product")
 	public String  featured(Model model) {
-			model.addAttribute("productList",productRepository.getFeaturedProduct());
+		
+		List<Product> products = productRepository.getFeaturedProduct();
+		for (int i = 0; i < products.size(); i++) {
+			products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
+		}
+		model.addAttribute("productList",products.stream().map(this::convertToDto).collect(Collectors.toList()));
+			
 		return "featured_product_list";
 	}
 	 
@@ -102,7 +141,7 @@ public class FrontendController {
 			if(product!=null){
 				
 				System.out.println(product.getAuthorId() +"-----------------");
-				
+					product.setCurrency(currencyService.getCurrencyById(Long.parseLong(product.getCurrencyId()+"")).get());
 					model.addAttribute("author",authorService.getAuthorById(Long.parseLong(product.getAuthorId()+"")).get());
 					model.addAttribute("category",categoryRepository.getCategoryById(Long.parseLong(product.getCategoryId()+"")).get());
 				}
@@ -129,8 +168,13 @@ public class FrontendController {
     @RequestMapping("/book")
     public String  getAllbookes(Model model) {
         
-    	model.addAttribute("products",productService.getAllProducts());
-        
+    	
+    	List<Product> products = productService.getAllProducts();
+		
+		for (int i = 0; i < products.size(); i++) {
+			products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
+		}
+		model.addAttribute("products",products.stream().map(this::convertToDto).collect(Collectors.toList()));
         return "books";
     }
     
@@ -152,10 +196,16 @@ public class FrontendController {
     @RequestMapping("/addNewAddress" )
     @ResponseBody  public List<UserAddress> addNewAddress(UserAddress userAddress,HttpSession session) {
     	
-    	userAddress.setUserId(Integer.parseInt(session.getAttribute("userId")+""));
-    	userAddressService.createAddress(userAddress);
+    	long userId = 0;
+    	if(session.getAttribute("userId")!=null)
+    		userId = Long.parseLong(session.getAttribute("userId")+"");
+    	else
+    		userId = 0;
     	
-    	return userAddressService.getUserAddress(Long.parseLong(session.getAttribute("userId")+""));
+    	userAddress.setUserId(Integer.parseInt(userId +""));
+    	userAddressService.createAddress(userAddress);
+    	 
+    	return userAddressService.getUserAddress(userId);
     }
     
     @RequestMapping("/getUserAddress" )
@@ -167,17 +217,28 @@ public class FrontendController {
     		return null;
     }
     
+    @RequestMapping("/getGuestUserAddress" )
+    @ResponseBody  public List<UserAddress> getGuestUserAddress(HttpSession session,String guestEmailAddress) {
+		return userAddressService.getGuestUserAddress(guestEmailAddress);
+    	
+    }
+    
+    @RequestMapping("/getAddressById" )
+    @ResponseBody  public UserAddress getAddressById(HttpServletRequest request) {
+    	return userAddressService.getUserAddressById(Long.parseLong(request.getParameter("addressId")+"")).get();
+    }
+    
     @RequestMapping("/viewCart" )
     public String  viewCart(HttpSession session,Model model) {
     	  
-    if(session.getAttribute("orderItem")!=null) {	
+    /*if(session.getAttribute("orderItem")!=null) {	
 		List<OrderItem> items = (List<OrderItem>) session.getAttribute("orderItem");
 		if(items.size()>0)
 			model.addAttribute("cartList", items);
 		else
 			model.addAttribute("error", "Cart is empty");
 		}else
-			model.addAttribute("error", "Cart is empty");
+			model.addAttribute("error", "Cart is empty");*/ 
     
     		return "cart";
     }
@@ -201,7 +262,7 @@ public class FrontendController {
     	orderItem.setPrice(product.getOriginalPrice());
     	orderItem.setUserId(userId);
     	orderItem.setCategoryName(categoryRepository.getCategoryById(product.getCategoryId()).get().getCategoryName());
-    	
+    	orderItem.setCurrencySymbol(currencyService.getCurrencyById(Long.parseLong(product.getCurrencyId()+"")).get().getCurrencySymbol());
 	
     	
     	List<OrderItem> items = new ArrayList<OrderItem>();
@@ -261,6 +322,26 @@ public class FrontendController {
 		return "";
 	}
     
+	@RequestMapping("/removeToCartButton" )
+    @ResponseBody public String  removeToCartButton(OrderItem orderItem,HttpSession session) {
+		
+		List<OrderItem> items = (List<OrderItem>) session.getAttribute("orderItem");
+		for (int i = 0; i < items.size(); i++) {
+			if(items.get(i).getOrderId()==orderItem.getOrderId()) {
+				 
+				if(items.get(i).getQty() == 1) {
+					items.remove(i);	
+				}else {
+					items.get(i).setQty(items.get(i).getQty()-1);
+				}
+				
+				
+			}
+		} 
+		session.setAttribute("orderItem",items);
+		
+		return "";
+	}
     
     @RequestMapping("/checkValidUser" )
     @ResponseBody public boolean  checkValidUser(HttpSession session,RegisterUser registerUser,HttpServletRequest request) {
@@ -295,6 +376,16 @@ public class FrontendController {
   	  	return "checkout";
     }
     
+    @RequestMapping("/checkoutGuest" )
+    public String checkoutGuest(HttpSession session,HttpServletRequest request,Model model) {
+    	 
+    	model.addAttribute("guestMobileNumber",request.getParameter("guestMobileNumber"));
+    	model.addAttribute("guestEmailAddress",request.getParameter("guestEmailAddress"));
+  	  	 
+  	  	return "checkout_guest";
+    }
+    
+    
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
     	session.setAttribute("userId",null);
@@ -321,11 +412,17 @@ public class FrontendController {
         return "my_orders";
     }
     
+    
     @RequestMapping("/manage_address")
-    public String  manage_address(Model model) {
+    public String  manage_address(HttpSession session,Model model) {
         
       System.out.println("-------manage_address------->>>");
-       
+      Integer userId = 0;
+  		if(session.getAttribute("userId")!=null)    	
+  			userId = Integer.parseInt(session.getAttribute("userId")+"");
+  		
+      
+      
         return "manage_addresses";
     }
     
@@ -351,5 +448,11 @@ public class FrontendController {
       
         return "privacy_policy";
     }
-	
+
+    public ProductDTO convertToDto(Product Product) {
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
+		ProductDTO ProductDTO = modelMapper.map(Product, ProductDTO.class);
+		return ProductDTO;
+	}
+    
 }
