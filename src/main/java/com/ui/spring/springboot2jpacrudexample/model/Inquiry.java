@@ -14,9 +14,11 @@ public class Inquiry {
 	private long id;
 	private String fullName;
 	private String message;
+	private String contactSubject;
 	private String emailAddress;
 	private String contactNumber;
 	private String createdDate;
+	
 	
 	public Inquiry() {
 		
@@ -79,4 +81,14 @@ public class Inquiry {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	@Column(name = "contact_subject")
+	public String getContactSubject() {
+		return contactSubject;
+	}
+
+	public void setContactSubject(String contactSubject) {
+		this.contactSubject = contactSubject;
+	}
+	
 }

@@ -146,7 +146,7 @@ function getSliderList(){
 <!--Pro Box Start-->
 <c:forEach items="${featuredProduct }" var="featuredProduct" >
 	<div class="col-md-3 col-sm-6">
-		<div class="product-box"> 
+		<div class="product-box">  
 			<div class="pro-thumb"> <a href="#" onclick="addToCart('${featuredProduct.id}')">Add To Cart</a>
 			
 			<c:choose>
@@ -158,9 +158,9 @@ function getSliderList(){
 				</c:otherwise>
 			</c:choose>
 		 </div>
-				<div class="pro-txt"> 
-					<h6><a href="<%=request.getContextPath() %>/product/${featuredProduct.id }"> ${featuredProduct.bookTitle } </a></h6>
-					<span id="successMessage${featuredProduct.id}"></span>  
+				<div class="pro-txt">   
+					<span><font size="3" id="successAddtoCart${featuredProduct.id}" color="green"></font> </span> 
+					<h6><a href="<%=request.getContextPath() %>/product/${featuredProduct.id }" class="text_length"> ${featuredProduct.bookTitle } </a></h6>
 					<p class="pro-price"><!-- <del>$25.00</del>  --> 
 					 ${featuredProduct.currency.currencySymbol}<fmt:formatNumber type = "number"  minFractionDigits="2" value ="${featuredProduct.originalPrice }"></fmt:formatNumber></p>
 				</div>
@@ -212,8 +212,8 @@ function getSliderList(){
 			</c:choose>
 			
 			 </div>
-			<div class="ser-txt"> 
-				<h4> <a href="<%=request.getContextPath() %>/productList/${categories.id }/${categories.categoryName }"> ${categories.categoryName } </a></h4>
+			<div class="ser-txt">  
+				<h4> <a href="<%=request.getContextPath() %>/productList/${categories.id }/${categories.categoryName }" class="text_length"> ${categories.categoryName } </a></h4>
 			<span class="aicon"><i class="fas fa-arrow-right"></i></span> 
 			</div>
 		</div>

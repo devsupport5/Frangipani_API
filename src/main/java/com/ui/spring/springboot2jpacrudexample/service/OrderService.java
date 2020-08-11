@@ -9,7 +9,7 @@ public interface OrderService {
 	
 	List<Order> getAllOrders();
 	
-	List<Order> getUserOrdersHistory(Long userId);
+	List<Order> getUserOrdersHistory(Integer userId);
 
 	Optional<Order> getOrderById(Long sliderId);
 

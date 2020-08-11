@@ -33,7 +33,7 @@ function getCart(){
 				for (var i = 0; i < data.length; i++) {
 					cartData += '<li class="item">'+
 					'<a href="#" class="preview-image">'+
-					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
+					'<img class="preview" src="'+data[i].image+'" alt="">'+
 					'</a>'+
 					'<div class="description">'+ 
 					'<a href="#"> '+data[i].bookTitle+'</a>'+ 

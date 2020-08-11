@@ -932,7 +932,7 @@ function getCart(){
 				for (var i = 0; i < data.length; i++) {
 					cartData += '<li class="item">'+
 					'<a href="#" class="preview-image">'+
-					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
+					'<img class="preview" src="'+data[i].image+'" alt="">'+
 					'</a>'+
 					'<div class="description">'+ 
 					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
@@ -1075,7 +1075,7 @@ function cartList(){
 				if(data[i].qty==1){
 					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">'; 
 				}else{
-					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number" onclick="removeToCartButton('+data[i].orderId+')"  data-type="minus" data-field="quant[1]">';
+					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number"  onclick="removeToCartButton('+data[i].orderId+')"  data-type="minus" data-field="quant[1]">';
 				}
 				
 				
@@ -1110,7 +1110,7 @@ minusButtonStatus  +
 	'<td class="text-right"> '+$("#currencySymbol").val()+""+(data[i].qty * data[i].price).toFixed(2)+' </td>'+
 	'<td class="text-right remove"> '+ 
 	'<a href="#" onclick="return removeToCart('+data[i].orderId+');">'+
-	'<i class="fa fa-trash"></i> '+
+	'<i style="cursor: pointer;" class="fa fa-trash"></i> '+
 	'</a>'+
 	'</td>'+
 	'</tr>';

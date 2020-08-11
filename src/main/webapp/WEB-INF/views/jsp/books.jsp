@@ -52,8 +52,8 @@
 <!--Inner Header Start-->
 <section class="wf100 inner-header">
 <div class="container">
-<ul>
-<li><a href="resources/index.html">Home</a></li>
+<ul> 
+<li><a href="<%=request.getContextPath()%>/">Home</a></li>
 <li> Books </li>
 </ul>
 </div>
@@ -96,10 +96,11 @@
 				
 		<div class="product-body">
 			<p class="product-category"> Details  </p>
-				<h3 class="product-name"><a href="<%=request.getContextPath() %>/product/${products.id }"> ${products.bookTitle } </a></h3>
+				<h3 class="product-name"><a href="<%=request.getContextPath() %>/product/${products.id }" class="text_length"> ${products.bookTitle } </a></h3>
 				<h4 class="product-price">
 				${products.currency.currencySymbol}<fmt:formatNumber type = "number"  minFractionDigits="2" value ="${products.originalPrice }"></fmt:formatNumber></h4>
-			<div class="add-to-cart">
+			<div class="add-to-cart">  
+				<span><font size="3" id="successAddtoCart${products.id}" color="green"></font> </span>
 				<button class="add-to-cart-btn" onclick="addToCart(${products.id })"><i class="fa fa-shopping-cart"></i> add to cart</button>
 			</div> 
 		 
@@ -119,7 +120,7 @@
 <!-- /store products -->
 
 <!-- store bottom filter -->
-<div class="store-filter clearfix">
+<!-- <div class="store-filter clearfix">
 <span class="store-qty">Showing 20-100 products</span>
 <ul class="store-pagination">
 <li class="active">1</li>
@@ -127,8 +128,8 @@
 <li><a href="#">3</a></li>
 <li><a href="#">4</a></li>
 <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-</ul>
-</div>
+</ul> 
+</div> -->
 <!-- /store bottom filter -->
 
 

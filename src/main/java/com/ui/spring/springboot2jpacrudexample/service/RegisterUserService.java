@@ -19,5 +19,9 @@ public interface RegisterUserService {
 	
 	RegisterUser checkRegisterUser(String userEmail,String password);
 	
+	RegisterUser checkUserName(String userName);
+	
+	RegisterUser checkEmailAddress(String userName);
+	
 	//List<Author> getActiveRegisterUser();
 }

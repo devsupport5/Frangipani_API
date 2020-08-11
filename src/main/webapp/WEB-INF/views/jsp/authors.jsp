@@ -6,10 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title> Books by Category | Frangipani Books </title>
+<title> Authors | Frangipani Books </title>
 
 <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 <meta name="theme-color" content="#ED008C">
+
+
 
 <link rel="apple-touch-icon" sizes="152x152" href="resources/images/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="resources/images/favicon/favicon-32x32.png">
@@ -32,6 +34,7 @@
 <link href="resources/css/prettyPhoto.css" rel="stylesheet">
 <link href="resources/css/all.min.css" rel="stylesheet">
 <!-- CSS  -->
+   
 
 <!-- includes js File START-->
 <script src="resources/js/w3data.js"></script>
@@ -52,7 +55,7 @@
 <section class="wf100 inner-header">
 <div class="container">
 <ul>
-<li><a href="resources/index.jsp">Home</a></li>
+<li><a href="<%=request.getContextPath()%>/">Home</a></li>
 <li> Authors </li>
 </ul>
 </div>
@@ -60,63 +63,49 @@
 <!--Inner Header End--> 
 
 
-<!--Blog Start-->
-<section class="wf100 p80 team">
 
-<%-- <c:forEach items="${author }" var="author"> --%>
-<div class="team-details">
+
+<!--Authors Section Start-->
+<section class="wf100 p60 authors-list">
 <div class="container">
+
 <div class="row">
 
-<div class="col-md-3">
-<div class="team-large-img"> <img src="images/Authors-photo.jpg" alt=""> </div>
-</div>
-<div class="col-md-9">
-<div class="team-details-txt">
-<h2> ABYNA-ANSAA ADJEI </h2>
-<%--  <h2>     ${author.authorName } </h2> --%>
-<strong style="    color: #333;" class="trank"> 1879 </strong>
+<!--Team Box Start-->
+<c:forEach items="${authors }" var="authors">
+	<div class="col-md-3 col-sm-4">
+		<div class="team-box">
+			<a href="<%=request.getContextPath()%>/author/${authors.id}"><img src="${authors.image }" alt=""></a>
+			<div class="team-info"> 
+				<h3><a href="<%=request.getContextPath()%>/author/${authors.id}"> ${authors.authorName } </a></h3>
+				<p> ${authors.description } </p> 
+			</div>
+		</div>
+	</div>
+</c:forEach>
 
-<%-- <p> ${author.description }  </p> --%>
- <p style="color: #222;"> Abyna-Ansaa Adjei is the author of eleven books. Ghana: The Story So Far is
-her most recent book. Published in March 2017, to celebrate Ghana’s 60 th
-anniversary of independence, this coffee table book brings Ghana’s history
-alive with its captivating images. </p>
-<p style="color: #222;"> Her first book was a biography of the Ashanti King – Otumfuo Osei Tutu II:
-King of Gold. Originally her undergraduate thesis, this book is found on the
-shelves of Yale, Harvard, Stanford and many other great institutions
-worldwide. </p>
+<!--Team Box Start--> 
+ 
 
 
-<div class="share-post wf100"> 
-<a href="#" class="fb"><i class="fab fa-facebook-f"></i></a> 
-<a href="#" class="tw"><i class="fab fa-twitter"></i></a> 
-<a href="#" class="link"><i class="fab fa-linkedin-in"></i></a> 
-<a href="#" class="insta"><i class="fab fa-instagram"></i></a> 
 </div>
 
 </div>
-</div>
-</div>
-</div>
-</div>
-<%-- </c:forEach> --%>
 </section>
-<!--Blog End--> 
+<!--Authors Section End--> 
+
+
 
     
-   
 <!--/#footer START-->
 <%@include file="includes/footer.jsp" %>
 <!--/#footer END-->
 
 </div>
-<!-- <!-- includes function START 
-<script>
-w3IncludeHTML();
-</script>  
-includes function END   
- -->
+
+
+  
+
 
 <!--   JS Files Start  --> 
 <script src="resources/js/jquery-3.3.1.min.js"></script> 
@@ -128,4 +117,6 @@ includes function END
 <script src="resources/js/isotope.min.js"></script> 
 <script src="resources/js/custom.js"></script>
 </body>
+
+
 </html>

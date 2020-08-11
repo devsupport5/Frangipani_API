@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ui.spring.springboot2jpacrudexample.beans.ProductDTO;
+import com.ui.spring.springboot2jpacrudexample.model.Inquiry;
 import com.ui.spring.springboot2jpacrudexample.model.OrderItem;
 import com.ui.spring.springboot2jpacrudexample.model.Product;
 import com.ui.spring.springboot2jpacrudexample.model.RegisterUser;
@@ -25,10 +26,14 @@ import com.ui.spring.springboot2jpacrudexample.repository.ProductRepository;
 import com.ui.spring.springboot2jpacrudexample.service.AuthorService;
 import com.ui.spring.springboot2jpacrudexample.service.CategoryService;
 import com.ui.spring.springboot2jpacrudexample.service.CurrencyService;
+import com.ui.spring.springboot2jpacrudexample.service.InquiryService;
+import com.ui.spring.springboot2jpacrudexample.service.OrderService;
 import com.ui.spring.springboot2jpacrudexample.service.ProductService;
+import com.ui.spring.springboot2jpacrudexample.service.ProductTabService;
 import com.ui.spring.springboot2jpacrudexample.service.RegisterUserService;
 import com.ui.spring.springboot2jpacrudexample.service.SliderService;
 import com.ui.spring.springboot2jpacrudexample.service.UserAddressService;
+import com.ui.spring.springboot2jpacrudexample.service.UserService;
 
 @Controller
 public class FrontendController {
@@ -66,11 +71,24 @@ public class FrontendController {
 	@Autowired
 	private UserAddressService userAddressService;
 	
+	@Autowired
+	private InquiryService inquiryService;
+	
+	@Autowired
+	private OrderService orderService; 
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private ProductTabService productTabService;
+	
+	
 	
 	@RequestMapping("/")
 	public String  home(Model model,HttpSession session) {
 		
-		System.out.println(currencyService.getDefaultCurrency().getCurrencySymbol());
+		//System.out.println(currencyService.getDefaultCurrency().getCurrencySymbol());
 		
 		session.setAttribute("currencySymbol",currencyService.getDefaultCurrency().getCurrencySymbol());
 		
@@ -82,7 +100,8 @@ public class FrontendController {
 		List<Product> products = productRepository.getFeaturedProduct();
 		
 		for (int i = 0; i < products.size(); i++) {
-			products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
+			if(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).isPresent())
+				products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
 		}
 		model.addAttribute("featuredProduct",products.stream().map(this::convertToDto).collect(Collectors.toList()));
 		
@@ -115,7 +134,8 @@ public class FrontendController {
 			
 			List<Product> products = productRepository.getProductByCategory(Long.parseLong(categoryId+""));
 			for (int i = 0; i < products.size(); i++) {
-				products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
+				if(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).isPresent())
+					products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
 			}
 			model.addAttribute("productList",products.stream().map(this::convertToDto).collect(Collectors.toList()));
 		return "product_list";
@@ -126,7 +146,8 @@ public class FrontendController {
 		
 		List<Product> products = productRepository.getFeaturedProduct();
 		for (int i = 0; i < products.size(); i++) {
-			products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
+			if(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).isPresent())
+				products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
 		}
 		model.addAttribute("productList",products.stream().map(this::convertToDto).collect(Collectors.toList()));
 			
@@ -140,13 +161,21 @@ public class FrontendController {
 		
 			if(product!=null){
 				
-				System.out.println(product.getAuthorId() +"-----------------");
+				
+				if(currencyService.getCurrencyById(Long.parseLong(product.getCurrencyId()+"")).isPresent())
 					product.setCurrency(currencyService.getCurrencyById(Long.parseLong(product.getCurrencyId()+"")).get());
+				
+				if(authorService.getAuthorById(Long.parseLong(product.getAuthorId()+"")).isPresent())
 					model.addAttribute("author",authorService.getAuthorById(Long.parseLong(product.getAuthorId()+"")).get());
+				
+				if(categoryRepository.getCategoryById(Long.parseLong(product.getCategoryId()+"")).isPresent())
 					model.addAttribute("category",categoryRepository.getCategoryById(Long.parseLong(product.getCategoryId()+"")).get());
+				
+				model.addAttribute("productTabList",productTabService.getActiveProductTabByProduct(Integer.parseInt(product.getId()+"")));
 				}
 				
 			model.addAttribute("product",product);
+			
 		return "books_details";
 	}
 	
@@ -158,6 +187,13 @@ public class FrontendController {
          
          
          return "authors";
+     }
+	 
+	 @RequestMapping("/author/{authorId}")
+     public String  getAllauthorss(Model model,@PathVariable(value = "authorId") Long authorId ) {
+         
+         model.addAttribute("authors",authorService.getAuthorById(authorId).get());
+         return "authors_details";
      }
     
     @RequestMapping("/contact")
@@ -172,7 +208,8 @@ public class FrontendController {
     	List<Product> products = productService.getAllProducts();
 		
 		for (int i = 0; i < products.size(); i++) {
-			products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
+			if(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).isPresent())
+				products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
 		}
 		model.addAttribute("products",products.stream().map(this::convertToDto).collect(Collectors.toList()));
         return "books";
@@ -228,6 +265,12 @@ public class FrontendController {
     	return userAddressService.getUserAddressById(Long.parseLong(request.getParameter("addressId")+"")).get();
     }
     
+    @RequestMapping("/insertContactus" )
+    @ResponseBody  public boolean insertContactus(Inquiry inquiry) {
+    	  inquiryService.createInquiry(inquiry);
+    	  return true;
+    }
+    
     @RequestMapping("/viewCart" )
     public String  viewCart(HttpSession session,Model model) {
     	  
@@ -248,7 +291,7 @@ public class FrontendController {
 	@RequestMapping("/addToCart" )
     @ResponseBody public Integer  addToCart(OrderItem orderItem,HttpSession session) {
       
-    	System.out.println("-------------------This is call-------------------------");
+    	//System.out.println("-------------------This is call-------------------------");
     	
     	Integer userId = 0;
     	if(session.getAttribute("userId")!=null)    	
@@ -256,13 +299,18 @@ public class FrontendController {
     	
     	
     	Product product =  productService.getProductById(orderItem.getOrderId()).get();
+    	if(authorService.getAuthorById(product.getAuthorId()).isPresent())
+    		orderItem.setAuthorName(authorService.getAuthorById(product.getAuthorId()).get().getAuthorName());
     	
-    	orderItem.setAuthorName(authorService.getAuthorById(product.getAuthorId()).get().getAuthorName());
     	orderItem.setBookTitle(product.getBookTitle());
     	orderItem.setPrice(product.getOriginalPrice());
-    	orderItem.setUserId(userId);
-    	orderItem.setCategoryName(categoryRepository.getCategoryById(product.getCategoryId()).get().getCategoryName());
-    	orderItem.setCurrencySymbol(currencyService.getCurrencyById(Long.parseLong(product.getCurrencyId()+"")).get().getCurrencySymbol());
+    	orderItem.setUserId(userId); 
+    	orderItem.setImage(product.getImage());
+    	
+    	if(categoryRepository.getCategoryById(product.getCategoryId()).isPresent())
+    		orderItem.setCategoryName(categoryRepository.getCategoryById(product.getCategoryId()).get().getCategoryName());
+    	if(currencyService.getCurrencyById(Long.parseLong(product.getCurrencyId()+"")).isPresent())
+    		orderItem.setCurrencySymbol(currencyService.getCurrencyById(Long.parseLong(product.getCurrencyId()+"")).get().getCurrencySymbol());
 	
     	
     	List<OrderItem> items = new ArrayList<OrderItem>();
@@ -276,7 +324,7 @@ public class FrontendController {
     		boolean checkStatus = true;
     		for (int i = 0; i < items.size(); i++) {
     			
-    			System.out.println(items.get(i).getOrderId() +"---"+orderItem.getOrderId());
+    			//System.out.println(items.get(i).getOrderId() +"---"+orderItem.getOrderId());
     			
     			if(items.get(i).getOrderId()==orderItem.getOrderId()) {
     				items.get(i).setQty(items.get(i).getQty() + orderItem.getQty());
@@ -294,9 +342,7 @@ public class FrontendController {
     	}
     	
     	
-    	for (int i = 0; i < items.size(); i++) {
-			System.out.println(items.get(i).getOrderId() +"---"+items.get(i).getPrice() +"-------"+items.get(i).getQty());
-		}
+    	 
     	
     	
     	return items.size();       
@@ -348,7 +394,7 @@ public class FrontendController {
       RegisterUser user = registerUserService.checkRegisterUser(request.getParameter("userEmailId"), request.getParameter("userPassword"));
       
       
-      System.out.println(request.getParameter("userEmailId") +"-----------"+request.getParameter("password"));
+      //System.out.println(request.getParameter("userEmailId") +"-----------"+request.getParameter("password"));
       
       if(user!=null) {
     	  session.setAttribute("userId",user.getId());
@@ -398,45 +444,92 @@ public class FrontendController {
     @RequestMapping("/refund_cancellation")
     public String  refund_cancellation(Model model) {
         
-      System.out.println("-------refund-&-cancellation------->>>");
+      //System.out.println("-------refund-&-cancellation------->>>");
       
         return "refund_cancellation";
     }
     
     @RequestMapping("/my_order")
-    public String  my_order(HttpSession session) {
+    public String  my_order(HttpSession session,Model model) {
         
-      System.out.println("-------my-orders------->>>");
-      int userId =  (int) session.getAttribute("userId");
+      //System.out.println("-------my-orders------->>>");
+      Long userId =  (long) session.getAttribute("userId");
+      model.addAttribute("orderList",orderService.getUserOrdersHistory(Integer.parseInt(userId+"")));
       
-        return "my_orders";
+      return "my_orders";
+    }
+    
+    @RequestMapping("/changePasswprd")
+    public String  changePasswprd(HttpSession session,Model model) {
+        
+      return "change_password";
+    }
+    
+    @RequestMapping("/forgotPasswprd")
+    public String  forgotPasswprd(HttpSession session,Model model) {
+        
+      return "forgot_password";
+    }
+    
+    @RequestMapping("/updatePassword")
+    @ResponseBody public boolean updatePassword(HttpSession session,String updatePassword) {
+      Long userId =  (long) session.getAttribute("userId");
+      RegisterUser registerUser = registerUserService.getRegisterUserById(userId).get();
+      registerUser.setPassword(updatePassword);
+      registerUserService.updateRegisterUser(registerUser);
+      return true;
+    }
+    
+    @RequestMapping("/checkUserPassword")
+    @ResponseBody public boolean  checkUserPassword(HttpSession session,String currentPassword) {
+      Long userId =  (long) session.getAttribute("userId"); 
+      return registerUserService.getRegisterUserById(userId).get().getPassword().equals(currentPassword);
+      
+    }
+    
+    @RequestMapping("/checkUserStatus")
+    @ResponseBody public boolean  checkUserStatus(HttpSession session,String value,String  action) {
+      RegisterUser registerUser = new RegisterUser();
+      if(action.equalsIgnoreCase("userName")) {
+    	  registerUser = registerUserService.checkUserName(value);
+      }else if(action.equalsIgnoreCase("userEmail")){
+    	  registerUser = registerUserService.checkEmailAddress(value);
+      }
+      
+      //System.out.println("User naem ::"+value +"------"+action);
+      
+      if(registerUser!=null) {
+    	  return true;
+      }else {
+    	  return false;
+      }
+      
+      
     }
     
     
     @RequestMapping("/manage_address")
     public String  manage_address(HttpSession session,Model model) {
         
-      System.out.println("-------manage_address------->>>");
+      //System.out.println("-------manage_address------->>>");
       Integer userId = 0;
   		if(session.getAttribute("userId")!=null)    	
   			userId = Integer.parseInt(session.getAttribute("userId")+"");
   		
-      
-      
         return "manage_addresses";
     }
     
     @RequestMapping("/terms_conditions")
     public String  terms_conditions(Model model) {
         
-      System.out.println("-------terms-conditions------->>>");
+      //System.out.println("-------terms-conditions------->>>");
       
         return "terms_conditions";
     }
     @RequestMapping("/privacy_policy")
     public String  privacy_policy(Model model) {
         
-      System.out.println("-------privacy-policy------->>>");
+      //System.out.println("-------privacy-policy------->>>");
       
         return "privacy_policy";
     }
@@ -444,7 +537,7 @@ public class FrontendController {
     @RequestMapping("/cart")
     public String  cart(Model model) {
         
-      System.out.println("-------privacy-policy------->>>");
+      //System.out.println("-------privacy-policy------->>>");
       
         return "privacy_policy";
     }

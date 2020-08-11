@@ -8026,3 +8026,18 @@ color: #d8373e;
     width: 100%;
     text-align: center;
 }
+
+.text_length{
+	display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;	
+    height: 35px;
+}
+
+.text_length1{
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+} 

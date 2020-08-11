@@ -18,4 +18,7 @@ public interface ProductTabRepository extends JpaRepository<ProductTab, Long>{
 	@Query("SELECT u FROM ProductTab u WHERE u.productId = ?1")
 	List<ProductTab> getProductTabByProduct(Integer productId);
 	
+	@Query("SELECT u FROM ProductTab u WHERE u.productId = ?1 and u.isActive = 0")
+	List<ProductTab> getActiveProductTabByProduct(Integer productId);
+	
 }

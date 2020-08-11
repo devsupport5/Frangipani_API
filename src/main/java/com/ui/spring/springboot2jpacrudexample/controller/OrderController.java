@@ -44,7 +44,7 @@ public class OrderController {
 	} 
 	
 	@GetMapping("/getUserOrdersHistory/{userId}")
-	public List<OrderDTO> getUserOrdersHistory(@PathVariable(value = "userId") Long orderDTO) {
+	public List<OrderDTO> getUserOrdersHistory(@PathVariable(value = "userId") Integer orderDTO) {
 		List<Order> orders = orderService.getUserOrdersHistory(orderDTO);
 		return orders.stream().map(this::convertToDto).collect(Collectors.toList());
 	} 

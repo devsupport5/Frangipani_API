@@ -162,9 +162,12 @@ function registration(){
 <div class="login-box-chec">
 <h3>Login Account</h3> 
 <form action="#" method="post">
+<span><font size="errorValidUser" id="errorValidUser" color="white"></font> </span> 
+<span><font size="erroruserEmailId" id="erroruserEmailId" color="white"></font> </span>
 <div class="input-group">
 <input type="text" class="form-control" name="userEmailId" id="userEmailId" placeholder="Username/Email" required  >
 </div>
+<span><font size="erroruserPassword" id="erroruserPassword" color="white"></font> </span>
 <div class="input-group">
 <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Password" required>
 </div>  
@@ -172,7 +175,7 @@ function registration(){
 <input type="checkbox" class="form-check-input" id="exampleCheck2">
 <label class="form-check-label" for="exampleCheck2">Remember Me</label>
 
-
+ 
   
 <a data-toggle="modal" data-target="#FPasswordModal" href="#" class="fp">Forgot Password</a>
  
@@ -727,13 +730,14 @@ Forgot Password?
 
 <!-- content goes here -->
 <form>
-
+ 
 <div class="row">
 <div class="col-lg-12">
-<label for="exampleInputEmail1"> Email address *</label>
+<label for="exampleInputEmail1"> Email address *</label> <br/> 
+<span><font size="3" id="errorEmailAddress" color="red"></font> </span>
 <div class="form-group input-group">
 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-<input type="text" class="form-control" placeholder="Enter your Email">
+<input type="text" class="form-control" placeholder="Enter your Email" id="FGemailAddress">
 </div>
 </div>
 </div>
@@ -751,7 +755,7 @@ You have received Email from us
 <div class="modal-footer">
 <div class="row">
 <div class="col-lg-12">
-<button type="submit" class="btn-upper wf100 btn btn-primary checkout-page-button checkout-continue ">Submit </button>
+<button type="submit" onclick="forgotPassword()" class="btn-upper wf100 btn btn-primary checkout-page-button checkout-continue ">Submit </button>
 </div>
 </div>
 </div>
@@ -891,8 +895,6 @@ Add a new address
 $( document ).ready(function() {
 	cartList(); 
 	getAddAddress();
-	
-	  
 });  	
 
 function addNewAddress(){
@@ -912,8 +914,8 @@ function addNewAddress(){
 			specialInstruction : $("#specialInstruction").val(),
 			
 		},success:function(data){
-			getAddAddress();  
 			$('#AddNewAddressModal').modal('hide');
+			getAddAddress(); 			 
 		},error : function(e){
 			console.log("Error :::"+e)
 		} 
@@ -928,13 +930,13 @@ function getCart(){
 		data : {
 		},success:function(data){
 			var cartTotal = "";
-			var cartData = "0";
+			var cartData = ""; 
 			var cartFinalTotal = "0";  
 			if(data.length > 0){	
 				for (var i = 0; i < data.length; i++) {
 					cartData += '<li class="item">'+
 					'<a href="#" class="preview-image">'+
-					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
+					'<img class="preview" src="'+data[i].image+'" alt="">'+
 					'</a>'+
 					'<div class="description">'+ 
 					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
@@ -972,17 +974,33 @@ function getCart(){
 <!--<script src="js/jquery-3.3.1.min.js"></script> --> 
 <%-- <script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> --%> 
-<script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
-<%-- <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
+<%-- <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script> --%> 
+<script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> 
-<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> --%>  
+<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script>  
 <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
-
+ 
 <script>
 
 
 
 function checkLogin(){
+	
+	var status = true;
+	if($("#userEmailId").val()==""){ 
+		$("#erroruserEmailId").html("Please enter username");
+		setTimeout(function(){ $("#erroruserEmailId").html(""); }, 7000);
+		$("#userEmailId").focus();
+		status = false;
+	}  
+	if($("#userPassword").val()==""){
+		$("#erroruserPassword").html("Please enter password");
+		setTimeout(function(){ $("#erroruserPassword").html(""); }, 7000);
+		$("#userPassword").focus(); 
+		status = false;
+	}  
+	
+	if(status){
 	$.ajax({
 		type : "POST",
 		url : "checkValidUser",
@@ -1002,10 +1020,11 @@ function checkLogin(){
 			console.log("Error :::"+e)
 		}
 	});
+  }	
 	return false;
 }
 //setTimeout(function(){ alert("Hello"); }, 3000);
-
+var checkBoxs = "";
 function getAddAddress(){
 	$.ajax({  
 		type : "POST",
@@ -1022,7 +1041,7 @@ function getAddAddress(){
 				if(data[i].defaultAddress=="0"){
 					cssStyle = "box-success";
 					backStyle = "aliceblue";
-					isActive ="checked";
+					//isActive ="checked";
 				}else{
 					cssStyle = "box-default";
 					backStyle = "#fff";
@@ -1035,8 +1054,8 @@ getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10p
 						+'<span class="label label-default">Home</span>'+
 					'</h3>'+
 					'<div class="box-tools pull-right">'+
-						'<div  class="input-group form-check">'+
-							'<input type="checkbox" '+isActive+' class="form-check-input" id="exampleCheck2">'+
+						'<div  class="input-group form-check">'+  
+							'<input type="checkbox" '+isActive+' class="form-check-input"  onclick="deliveryHere('+data[i].id+')" id="address'+data[i].id+'">'+
 							'<label class="form-check-label" for="exampleCheck2"> Deliver Here </label>'+
 						'</div>'+ 
 					'</div>'+
@@ -1049,7 +1068,15 @@ getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10p
 					'<p>Mobile: '+data[i].mobileNumber+' </p>'+
 				'</div>'+
 				'</div>';
+				
+				if(checkBoxs==""){ 
+					checkBoxs =   data[i].id;
+				}else{
+					checkBoxs =  checkBoxs +","+ data[i].id;
+				}
+					  
 			}
+			
 				$("#addreesList").html(getAddressList);
 		},error : function(e){
 			console.log("Error :::"+e)
@@ -1057,6 +1084,18 @@ getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10p
 	});
 } 
  
+ function deliveryHere(addressId){
+	/* alert(checkBoxs);
+	alert(addressId); */  
+	var res = checkBoxs.split(",");
+	for (var i = 0; i < res.length; i++) {
+		if(res[i]==addressId){  
+			$("#address"+res[i]).prop("checked", true); 	
+		}else{
+			$("#address"+res[i]).prop("checked", false);
+		}
+	}
+ }
  
 function cartList(){
 	$.ajax({  
@@ -1074,8 +1113,8 @@ function cartList(){
 				var minusButtonStatus = "";
 				if(data[i].qty==1){
 					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">'; 
-				}else{
-					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number" onclick="removeToCartButton('+data[i].orderId+')"  data-type="minus" data-field="quant[1]">';
+				}else{ 
+					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number"  onclick="removeToCartButton('+data[i].orderId+')"  data-type="minus" data-field="quant[1]">';
 				}
 				
 				
@@ -1108,9 +1147,8 @@ minusButtonStatus  +
 	'</div>'+
 	'</td>'+
 	'<td class="text-right"> '+$("#currencySymbol").val()+""+(data[i].qty * data[i].price).toFixed(2)+' </td>'+
-	'<td class="text-right remove"> '+ 
-	'<a href="#" onclick="return removeToCart('+data[i].orderId+');">'+
-	'<i class="fa fa-trash"></i> '+
+	'<td class="text-right remove"> '+     
+	'<i style="cursor: pointer;" onclick="return removeToCart('+data[i].orderId+');" class="fa fa-trash"></i> '+
 	'</a>'+
 	'</td>'+
 	'</tr>';
@@ -1239,6 +1277,31 @@ function removeToCart(orderId){
  		}
  	}); 
  }
+ 
+ function forgotPassword(){
+	 
+	 var status = true;
+		if($("#FGemailAddress").val()==""){ 
+			$("#errorEmailAddress").html("Please enter email address");
+			setTimeout(function(){ $("#errorEmailAddress").html(""); }, 7000);
+			$("#FGemailAddress").focus();
+			status = false;
+		}  
+		 
+		
+		
+	  if(status){
+		  $('#FPasswordModal').modal('hide');
+		  $("#successCurrentEmail").html("Password sent successfully.");
+			setTimeout(function(){ $("#successCurrentEmail").html(""); }, 7000);
+			
+	  }	
+	 
+	 
+	 
+	 
+ }
+ 
     </script>
     <input type="hidden" name="currencySymbol" id="currencySymbol" value="<%=session.getAttribute("currencySymbol")%>"> 
 </body>

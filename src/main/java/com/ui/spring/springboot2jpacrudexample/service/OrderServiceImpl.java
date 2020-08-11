@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<Order> getUserOrdersHistory(Long userId) {
+	public List<Order> getUserOrdersHistory(Integer userId) {
 		// TODO Auto-generated method stub
 		return this.orderRepository.getUserOrdersHistory(userId);
 	}

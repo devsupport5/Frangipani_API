@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title> Books by Category | Frangipani Books </title>
+<title> Contact-us | Frangipani Books </title>
 
 <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 <meta name="theme-color" content="#ED008C">
@@ -36,6 +36,8 @@
 <!-- includes js File START-->
 <script src="resources/js/w3data.js"></script>
 <!-- includes js File END-->
+
+
 
 </head>
 <body>
@@ -98,25 +100,34 @@ Osu- Accra P.O. Box 0259 00000 Osu, Accra
 <div class="contact-form mb60">
 <h3> Feel Free To Send Any Message For Any Enquiry </h3>
 <ul class="cform">
-<li class="half pr-15">
-<input type="text" class="form-control" placeholder="Full Name">
+<li class="half pr-15"> 
+<span><font size="errorUserName" id="errorUserName" color="red"></font> </span>
+<input type="text" class="form-control" placeholder="Full Name" id="fullName" required>
 </li>
 <li class="half pl-15">
-<input type="text" class="form-control" placeholder="Email">
+<span><font size="errorUserName" id="errorEmailAddress" color="red"></font> </span>
+<input type="text" class="form-control" placeholder="Email" id="emailAddress">
 </li>
 <li class="half pr-15">
-<input type="text" class="form-control" placeholder="Contact">
+<span><font size="errorContactNumber" id="errorContactNumber" color="red"></font> </span>
+<input type="text" class="form-control" placeholder="Contact" id="contactNumber" >
 </li>
 <li class="half pl-15">
-<input type="text" class="form-control" placeholder="Subject">
+<span><font size="errorUserName" id="errorUserName" color="red"></font> </span>
+<input type="text" class="form-control" placeholder="Subject" id="contactSubject">
 </li>
 <li class="full">
-<textarea class="textarea-control" placeholder="Message"></textarea>
+
+<textarea class="textarea-control" placeholder="Message" id="message"></textarea>
 </li>
-<li class="full">
-<input type="submit" value="Contact us" class="fsubmit">
+<li class="full"> 
+<div style="text-align: center;"><font size="4" color="red" id="successMessage"></font> </div> 
+<input type="button" onclick="return saveInquiryData();" value="Contact us" class="fsubmit">
 </li>
 </ul>
+
+
+
 </div>
 </div>
 </div>
@@ -146,5 +157,63 @@ includes function END
 <script src="resources/js/jquery.prettyPhoto.js"></script> 
 <script src="resources/js/isotope.min.js"></script> 
 <script src="resources/js/custom.js"></script>
+
+
+<script type="text/javascript">
+
+function saveInquiryData(){
+	
+	var status = true;
+	
+	
+	if($("#fullName").val()==""){
+		$("#errorUserName").html("Please enter fullname");
+		$("#fullName").focus();
+		setTimeout(function(){ $("#errorUserName").html(""); }, 7000);
+		status = false;
+	}
+	 
+	if($("#emailAddress").val()==""){
+		$("#errorEmailAddress").html("Please enter email address");
+		$("#emailAddress").focus();
+		setTimeout(function(){ $("#errorEmailAddress").html(""); }, 7000);
+		status = false;
+	}
+	
+	if($("#contactNumber").val()==""){
+		$("#errorContactNumber").html("Please enter contact number");
+		setTimeout(function(){ $("#errorContactNumber").html(""); }, 7000);
+		$("#contactNumber").focus();
+		status = false;
+	}   
+	if(status){
+		$.ajax({
+			type : "POST",
+			url  : "insertContactus",
+			data : {
+				fullName : $("#fullName").val(),
+				message : $("#message").val(),
+				contactSubject : $("#contactSubject").val(),
+				emailAddress : $("#emailAddress").val(),
+				contactNumber : $("#contactNumber").val(), 
+			},
+			success : function(data){
+				
+				if(data==true){
+					$("#successMessage").html("We will contact you soon.");		
+				}
+				
+				  
+			
+			},error :function(e){
+				console.log("Error ::"+e);
+			}
+		
+		});
+	}	
+}
+
+</script>
+
 </body>
 </html> 

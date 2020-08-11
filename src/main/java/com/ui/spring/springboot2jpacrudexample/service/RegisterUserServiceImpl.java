@@ -48,6 +48,18 @@ public class RegisterUserServiceImpl implements RegisterUserService{
 		return this.registerUserRepository.checkRegisterUser(userEmail, password);
 	}
 
+	@Override
+	public RegisterUser checkUserName(String userName) {
+		// TODO Auto-generated method stub
+		return this.registerUserRepository.checkUserName(userName);
+	}
+
+	@Override
+	public RegisterUser checkEmailAddress(String userName) {
+		// TODO Auto-generated method stub
+		return this.registerUserRepository.checkEmailAddress(userName);
+	}
+
 	/*@Override
 	public List<RegisterUser> getActiveRegisterUser() {
 		// TODO Auto-generated method stub

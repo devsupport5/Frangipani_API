@@ -83,8 +83,8 @@
 <div class="input-group form-check">
 <input type="checkbox" class="form-check-input" id="exampleCheck2">
 <label class="form-check-label" for="exampleCheck2">Remember Me</label>
-<a href="#" class="fp">Forgot Password</a> 
-</div>
+<a href="<%=request.getContextPath()%>/forgotPasswprd" class="fp">Forgot Password</a> 
+</div> 
 
 <div class="input-group">
 <button class="login-btn" onclick="return checkLogin();">Login Account</button>
@@ -112,13 +112,13 @@
 <li class="col-md-6">
 <span><font size="errorUserEmail" id="errorUserEmail" color="red"></font> </span>
 <div class="input-group">
-<input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="Email Address*" required>
+<input type="email" class="form-control" name="userEmail" id="userEmail" onchange="checkUserName(this,'userEmail')" placeholder="Email Address*" required>
 </div> 
 </li>
 <li class="col-md-6">
 <span><font size="errorUserName" id="errorUserName" color="red"></font> </span>
 <div class="input-group">
-<input type="text" class="form-control" placeholder="User Name*" name="userName" id="userName" required>
+<input type="text" class="form-control" placeholder="User Name*" name="userName" id="userName" onchange="checkUserName(this,'userName')" required>
 </div>
 </li>
 <li class="col-md-6">
@@ -344,6 +344,37 @@ if(status){
 	});
 }
 }  
+
+function checkUserName(type,action){
+	 $.ajax({
+		type : "POST",
+		url : "checkUserStatus",
+		data : {  
+			"value" : type.value,
+			"action" : action, 
+		},success:function(data){
+			if(data==true){  
+				if(action=="userEmail"){
+					$("#userEmail").focus();
+					$("#userEmail").val("");
+					
+					$("#errorUserEmail").html("Email address already registered.");
+					setTimeout(function(){ $("#errorUserEmail").html(""); }, 7000);
+					
+				}else if(action=="userName"){
+					$("#userName").focus();
+					$("#userName").val("");
+					 
+					$("#errorUserName").html("Username already registered.");
+					setTimeout(function(){ $("#errorUserName").html(""); }, 7000);
+				}
+			}
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});   
+}
+
 </script>
  
 

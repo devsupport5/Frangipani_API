@@ -45,7 +45,11 @@ public class CurrencyServiceImpl implements CurrencyService{
 	@Override
 	public Currency getDefaultCurrency() {
 		// TODO Auto-generated method stub
-		return this.CurrencyRepository.getDefaultCurrency().get(0);
+		System.out.println("size-----------------"+ this.CurrencyRepository.getDefaultCurrency().size());
+		if(this.CurrencyRepository.getDefaultCurrency().size() > 0)
+			return this.CurrencyRepository.getDefaultCurrency().get(0);
+		else
+			return new Currency();
 	}
 
 	 

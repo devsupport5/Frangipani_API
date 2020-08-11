@@ -41,5 +41,11 @@ public class ProductTabServiceImpl implements ProductTabService{
 	public void deleteProductTab(ProductTab product) {
 		this.productTabRepository.delete(product);
 	}
+
+	@Override
+	public List<ProductTab> getActiveProductTabByProduct(Integer productId) {
+		// TODO Auto-generated method stub
+		return this.productTabRepository.getActiveProductTabByProduct(productId);
+	}
 	 
 }

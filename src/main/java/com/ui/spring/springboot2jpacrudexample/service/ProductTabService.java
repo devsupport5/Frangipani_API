@@ -17,4 +17,6 @@ public interface ProductTabService {
 
 	void deleteProductTab(ProductTab product);
 	
+	List<ProductTab> getActiveProductTabByProduct(Integer productId);
+	
 }

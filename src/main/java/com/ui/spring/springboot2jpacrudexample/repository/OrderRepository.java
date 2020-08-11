@@ -15,5 +15,5 @@ public interface OrderRepository extends JpaRepository<Order, Long>{
 	List<Category> getAllCategorys();*/
 	
 	@Query("SELECT u FROM Order u WHERE u.userId = ?1")
-	List<Order> getUserOrdersHistory(Long userId);
+	List<Order> getUserOrdersHistory(Integer userId);
 }

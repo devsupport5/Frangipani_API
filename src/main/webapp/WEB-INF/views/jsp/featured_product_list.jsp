@@ -92,9 +92,10 @@
 </div>
 <div class="product-body">
 <p class="product-category"> ${categoryName } </p>
-<h3 class="product-name"><a href="<%=request.getContextPath() %>/product/${productList.id }"> ${productList.bookTitle }  </a></h3>
+<h3 class="product-name"><a href="<%=request.getContextPath() %>/product/${productList.id }" class="text_length" > ${productList.bookTitle }  </a></h3>
 <h4 class="product-price">${productList.currency.currencySymbol }<fmt:formatNumber type = "number"  minFractionDigits="2" value ="${productList.originalPrice }"></fmt:formatNumber> </h4>
-<div class="add-to-cart">
+<div class="add-to-cart"> 
+<span><font size="3" id="successAddtoCart${productList.id}" color="green"></font> </span> 
 <button class="add-to-cart-btn" onclick="addToCart(${productList.id})"><i class="fa fa-shopping-cart"></i> add to cart</button>
 </div>
 

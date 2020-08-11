@@ -7,6 +7,7 @@ public class OrderItem {
 	private String categoryName;
 	private String currencySymbol;
 	private String authorName;
+	private String image;
 	private int qty;
 	private int userId;
 	private double price;
@@ -14,6 +15,20 @@ public class OrderItem {
 	public OrderItem() {
 	}
 	
+	
+	
+	public String getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
+
 	public OrderItem(String categoryName, String description, String emailId) {
 	}
 

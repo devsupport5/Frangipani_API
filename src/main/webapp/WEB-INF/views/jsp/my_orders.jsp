@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -70,8 +71,36 @@
 <div class="row">
 <div class="col-lg-12 col-md-12">
 
+
 <!--Order Box Start-->
+<c:forEach items="${orderList }" var="orderList">
 <div class="event-list-box">
+
+<div class="event-thumb"> 
+<a href="#"><i class="fas fa-link"></i></a> <img src="images/books/1.jpg" alt=""> 
+</div>
+
+<div class="event-txt">
+<h4> <a href="#">  ${orderList.bankName }  </a> </h4>
+<p> ${orderList.otherInformation }  </p>
+
+<a href="books-details.html" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
+
+<p style="    font-size: 13px;
+    padding-top: 7px;     color: #878787;" class="product-category"> DRAMA, ROMANCE </p>
+    
+</div>
+
+<ul class="event-meta">
+<li> <div class="_30ud5x _3ELbo9"></div> ${orderList.createdDate } </li> 
+<li>   <fmt:formatNumber type = "number"  minFractionDigits="2" value ="${orderList.amount }"></fmt:formatNumber></li>
+</ul>
+</div>
+</c:forEach>
+<!--Order Box Start-->
+
+<!--Order Box Start-->
+<!-- <div class="event-list-box">
 
 <div class="event-thumb"> 
 <a href="#"><i class="fas fa-link"></i></a> <img src="images/books/1.jpg" alt=""> 
@@ -93,92 +122,8 @@
 <li>  ₵40.00 </li>
 </ul>
     
-</div>
+</div> -->
 <!--Order Box Start-->
-
-<!--Order Box Start-->
-<div class="event-list-box">
-
-<div class="event-thumb"> 
-<a href="#"><i class="fas fa-link"></i></a> <img src="images/books/1.jpg" alt=""> 
-</div>
-
-<div class="event-txt">
-<h4> <a href="books-details.html">  Things Every Child Show Know About J.B .Danquah  </a> </h4>
-<p> Things Every Child Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,  </p>
-
-<a href="books-details.html" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
-
-<p style="    font-size: 13px;
-    padding-top: 7px;     color: #878787;" class="product-category"> DRAMA, ROMANCE </p>
-    
-</div>
-
-<ul class="event-meta">
-<li> <div class="_30ud5x _3ELbo9"></div> Delivered on Jun 24 </li>
-<li>  ₵40.00 </li>
-</ul>
-    
-</div>
-<!--Order Box Start-->
-
-
-
-<!--Order Box Start-->
-<div class="event-list-box">
-
-<div class="event-thumb"> 
-<a href="#"><i class="fas fa-link"></i></a> <img src="images/books/1.jpg" alt=""> 
-</div>
-
-<div class="event-txt">
-<h4> <a href="books-details.html">  Things Every Child Show Know About J.B .Danquah  </a> </h4>
-<p> Things Every Child Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,  </p>
-
-<a href="books-details.html" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
-
-<p style="    font-size: 13px;
-    padding-top: 7px;     color: #878787;" class="product-category"> DRAMA, ROMANCE </p>
-    
-</div>
-
-<ul class="event-meta">
-<li> <div class="_30ud5x _3ELbo9"></div> Delivered on Jun 24 </li>
-<li>  ₵40.00 </li>
-</ul>
-    
-</div>
-<!--Order Box Start-->
-
-
-
-<!--Order Box Start-->
-<div class="event-list-box">
-
-<div class="event-thumb"> 
-<a href="#"><i class="fas fa-link"></i></a> <img src="images/books/1.jpg" alt=""> 
-</div>
-
-<div class="event-txt">
-<h4> <a href="books-details.html">  Things Every Child Show Know About J.B .Danquah  </a> </h4>
-<p> Things Every Child Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,  </p>
-
-<a href="books-details.html" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
-
-<p style="    font-size: 13px;
-    padding-top: 7px;     color: #878787;" class="product-category"> DRAMA, ROMANCE </p>
-    
-</div>
-
-<ul class="event-meta">
-<li> <div class="_30ud5x _3ELbo9"></div> Delivered on Jun 24 </li>
-<li>  ₵40.00 </li>
-</ul>
-    
-</div>
-<!--Order Box Start-->
-
-
 
 </div>
 
@@ -186,15 +131,15 @@
 <div class="row">
 <div class="col-md-12">
 <div class="gt-pagination mt20">
-<nav>
+<!-- <nav>
 <ul class="pagination">
 <li class="page-item"> <a class="page-link" href="#" aria-label="Previous"> <i class="fas fa-angle-left"></i> </a> </li>
 <li class="page-item"><a class="page-link" href="#">1</a></li>
 <li class="page-item active"><a class="page-link" href="#">2</a></li>
 <li class="page-item"><a class="page-link" href="#">3</a></li>
 <li class="page-item"> <a class="page-link" href="#" aria-label="Next"> <i class="fas fa-angle-right"></i> </a> </li>
-</ul>
-</nav>
+</ul> 
+</nav> -->
 </div>
 </div>
 </div>

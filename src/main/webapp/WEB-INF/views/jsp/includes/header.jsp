@@ -54,8 +54,8 @@
 <% if(session.getAttribute("userName")!=null) {%>
 	<a href="<%=request.getContextPath() %>/my_order"> My Orders </a>
 	<a href="<%=request.getContextPath() %>/manage_address"> Manage Addresses  </a>
-	<a href="#"> Change Password </a>
-	<div class="logout-btn">
+	<a href="<%=request.getContextPath() %>/changePasswprd"> Change Password </a>
+	<div class="logout-btn">  
 	  	<a href="<%=request.getContextPath() %>/logout"> Logout </a> 
 	</div>
 <% }else{ %> 
@@ -125,10 +125,10 @@ function addToCart(orderId){
 		data : {
 			orderId : orderId,
 			qty : 1, 
-		},success:function(data){   
-			 $("#successMessage"+orderId).html("Product added in cart");
-			   alert(orderId);
-			getCart();
+		},success:function(data){
+			getCart();    
+			$("#successAddtoCart"+orderId).html("Product added in cart");
+			setTimeout(function(){ $("#successAddtoCart"+orderId).html(""); }, 7000);
 		},error : function(e){
 			console.log("Error :::"+e)
 		}
@@ -148,7 +148,7 @@ function getCart(){
 				for (var i = 0; i < data.length; i++) {
 					cartData += '<li class="item">'+
 					'<a href="#" class="preview-image">'+ 
-					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
+					'<img class="preview" src="'+data[i].image+'" alt="">'+ 
 					'</a>'+
 					'<div class="description">'+ 
 					'<a href="#"> '+data[i].bookTitle+'</a>'+   
@@ -176,7 +176,7 @@ function getCart(){
 	});
 
 }
-function addToCart(orderId){
+<%-- function addToCart(orderId){
 	$.ajax({
 		type : "POST", 
 		url : "<%=request.getContextPath()%>/addToCart",
@@ -184,15 +184,14 @@ function addToCart(orderId){
 			orderId : orderId,
 			qty : 1, 
 		},success:function(data){
-			 
+			$("#successAddtoCart"+orderId).html("Product added in cart");  
 			getCart();
 		},error : function(e){
 			console.log("Error :::"+e)
 		}
 	}); 
-}  
+}  --%> 
 
 </script>   
- 
-<input type="hidden" name="currencySymbol" id="currencySymbol" value="<%=session.getAttribute("currencySymbol")%>">
 
+<input type="hidden" name="currencySymbol" id="currencySymbol"  value="<%=session.getAttribute("currencySymbol")%>" >

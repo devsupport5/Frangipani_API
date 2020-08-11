@@ -80,7 +80,7 @@
 							</c:choose>
 						</div> 
 						<div class="vol-txt"> 
-							<strong>${categories.categoryName }</strong> 
+							<strong class="text_length">${categories.categoryName }</strong> 
 						</div>
 					</a>
 				</div>

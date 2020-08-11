@@ -330,7 +330,7 @@ function getCart(){
 				for (var i = 0; i < data.length; i++) {
 					cartData += '<li class="item">'+
 					'<a href="#" class="preview-image">'+ 
-					'<img class="preview" src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt="">'+
+					'<img class="preview" src="'+data[i].image+'" alt="">'+
 					'</a>'+
 					'<div class="description">'+ 
 					'<a href="#"> '+data[i].bookTitle+'</a>'+  
@@ -418,7 +418,6 @@ function cartList(){
 		subTotal = data[i].qty * data[i].price; 
 		cartFinalTotal = parseInt(subTotal) + parseInt(cartFinalTotal);
 	} 
-			 
 			
 			 $("#subTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
 			 $("#finalTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));

@@ -1,14 +1,10 @@
 package com.ui.spring.springboot2jpacrudexample.controller;
 
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -47,10 +43,6 @@ public class ProductController {
 	@GetMapping("/products")
 	public List<ProductDTO> getAllProducts() {
 		List<Product> products = ProductService.getAllProducts();
-		
-		for (int i = 0; i < products.size(); i++) {
-			products.get(i).setCurrency(currencyService.getCurrencyById(Long.parseLong(products.get(i).getCurrencyId()+"")).get());
-		}
 		return products.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
  
