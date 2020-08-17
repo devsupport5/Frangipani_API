@@ -10,13 +10,13 @@ setTimeout(function() {
 // carousel function for main slider
 slider
     .owlCarousel({
-        loop: true,
+        //loop: true,
        // nav: true,
         //navText: ["", ""],
         items: 1,
         lazyLoad: true,
-dots:false,
-        //autoplay: true,
+dots:false, 
+        autoplay: false,
         smartSpeed: 600
     })
     .on("changed.owl.carousel", syncPosition);

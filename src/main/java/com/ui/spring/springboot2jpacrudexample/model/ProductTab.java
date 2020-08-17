@@ -36,7 +36,7 @@ public class ProductTab {
 		this.id = id;
 	}
 
-	@Column(name = "description")
+	@Column(name = "description" , columnDefinition = "LONGTEXT")
 	public String getDescription() {
 		return description;
 	}

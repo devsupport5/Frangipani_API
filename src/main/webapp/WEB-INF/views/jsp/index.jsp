@@ -74,14 +74,11 @@ function getSliderList(){
 		
 		
 	});
-}
-
-
-
-</script>
-
+ }
+  </script>
+ 
 </head>
-<body onload="">
+<body  >
 
 <div class="wrapper home2">
 
@@ -153,8 +150,8 @@ function getSliderList(){
 				<c:when test="${featuredProduct.image ne null }"> 
 					<img class="img-responsive" src="${featuredProduct.image }"  alt="">	
 				</c:when>
-				<c:otherwise>
-					<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${featuredProduct.bookTitle }" title="${productList.bookTitle }">
+				<c:otherwise>  
+					<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpg" alt="${featuredProduct.bookTitle }" title="${productList.bookTitle }">
 				</c:otherwise>
 			</c:choose>
 		 </div>
@@ -207,7 +204,7 @@ function getSliderList(){
 					<img src="${categories.image}" alt="${categories.categoryName }" title="${categories.categoryName }">	
 				</c:when>
 				<c:otherwise>
-					<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${categories.categoryName }" title="${categories.categoryName }">
+					<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpg" alt="${categories.categoryName }" title="${categories.categoryName }">
 				</c:otherwise>
 			</c:choose>
 			
@@ -289,8 +286,8 @@ function getSliderList(){
 <div class="section-title-2">
 <h2 style="    color: #fff;"> Authors  </h2>
 </div>
-</div>
-<div class="col-md-6"> <a href="#" class="view-more"> View All </a> </div>
+</div> 
+<div class="col-md-6"> <a href="<%=request.getContextPath() %>/authors" class="view-more"> View All </a> </div>
 </div>
     
 <div class="row">

@@ -14,4 +14,7 @@ public interface CurrencyRepository extends JpaRepository<Currency, Long>{
 	@Query("SELECT u FROM Currency u WHERE u.isDefault = 1")
 	List<Currency> getDefaultCurrency();
 	
+	@Query("SELECT u FROM Currency u WHERE u.isActive = 0")
+	List<Currency> getActiveCurrencys();
+	
 }

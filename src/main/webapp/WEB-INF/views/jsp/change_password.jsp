@@ -203,15 +203,15 @@ function checkValidation(){
 	
 	var pass = true;
 	if($("#confirmPassword").val()==""){
-		$("#errorConfirmPassword").html("Please enter confirm password");
+		$("#errorConfirmPassword").html("Please retype password");
 		setTimeout(function(){ $("#errorConfirmPassword").html(""); }, 7000);
 		$("#confirmPassword").focus();
 		status = false;
 		pass = false;
 	}  
 	  
-	if($("#confirmPassword").val()!=$("#newPassword").val() && pass){ 
-		$("#errorConfirmPassword").html("Password and confirm password not match.");
+	if($("#confirmPassword").val()!=$("#newPassword").val() && pass){  
+		$("#errorConfirmPassword").html("Password and retyped password did not match");
 		setTimeout(function(){ $("#errorConfirmPassword").html(""); }, 7000);
 		$("#confirmPassword").focus();
 		status = false; 
@@ -233,7 +233,8 @@ function checkValidation(){
 					setTimeout(function(){ $("#successCurrentPassword").html(""); }, 7000);
 					$("#currentPassword").val("");
 					$("#newPassword").val("");
-					$("#confirmPassword").val("");
+					$("#confirmPassword").val(""); 
+					window.location = "<%=request.getContextPath()%>/logout";
 				}
 				
 				 

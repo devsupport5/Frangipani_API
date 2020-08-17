@@ -1,20 +1,20 @@
-package com.ui.spring.springboot2jpacrudexample.beans;
+package com.ui.spring.springboot2jpacrudexample.model.view;
 
 import java.io.Serializable;
 
-public class AuthorDTO implements Serializable{
+public class AuthorListViewDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private long id;
 	private String authorName;
 	private String description;
-	private String image;	 
+	/*private String image;*/	 
 	private int isActive;
 	private int isDeleted;
 	private String createdDate;
 	 
 	
-	public AuthorDTO() {
+	public AuthorListViewDTO() {
 		
 	}
 
@@ -47,12 +47,14 @@ public class AuthorDTO implements Serializable{
 	}
 
 
-	public String getImage() {
+	/*public String getImage() {
 		return image;
 	}
+
+
 	public void setImage(String image) {
 		this.image = image;
-	}
+	}*/
 
 
 	public int getIsActive() {

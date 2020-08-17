@@ -3,7 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
-
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,8 +12,6 @@
 
 <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 <meta name="theme-color" content="#ED008C">
- 
-
 
 <link rel="apple-touch-icon" sizes="152x152" href="<%=request.getContextPath() %>/resources/images/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="<%=request.getContextPath() %>/resources/images/favicon/favicon-32x32.png">
@@ -23,9 +20,6 @@
 <link rel="mask-icon" href="<%=request.getContextPath() %>/resources/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
-
-
-
 
 
 <!-- Font Awesome -->
@@ -41,11 +35,11 @@
 <link href="<%=request.getContextPath() %>/resources/css/all.min.css" rel="stylesheet">
 <!-- CSS  -->
 
-
 <link rel='stylesheet' href='https://cdn.rawgit.com/OwlCarousel2/OwlCarousel2/develop/dist/assets/owl.carousel.min.css'>
 
 
 <!-- Pretty Photo Light box Scrept start-->
+
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
 <!-- Pretty Photo Light box Scrept End-->
 
@@ -53,6 +47,8 @@
 <!-- includes js File START-->
 <script src="<%=request.getContextPath() %>/resources/js/w3data.js"></script>
 <!-- includes js File END-->
+
+
 
 </head>
 <body>
@@ -69,7 +65,7 @@
 <section class="wf100 inner-header">
 <div class="container">
 <ul>
-<li><a href="<%=request.getContextPath() %>/">Home</a></li>
+<li><a href="<%=request.getContextPath() %>/">Home</a></li> 
 	<c:if test="${fn:length(category.categoryName) > 0 }">  
 		<li><a href="<%=request.getContextPath() %>/productList/${category.id}/${category.categoryName }"> ${category.categoryName } </a></li> 
 	</c:if> 
@@ -83,33 +79,82 @@
 
 
 <!--Blog Start-->
-<section class="wf100  shop">
+<section class="wf100 gallery clearfix  shop">
 <div class="product-details">
 <div class="container">
-
 <div class="row">
 
 <!--<li style="display: none"><a href="" rel="prettyPhoto[gallery1]" title=""></a></li>-->
 
+
+
+
 <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
-<!--<div class="pro-large">
-<img src="images/books/shoplarge.jpg" alt="">
-</div>-->
-
-
 
 <div class="wrapCarouselFull">
 
-<li class="d-none"><a href="" rel="prettyPhoto[gallery0]" title=""></a></li>
+<!--<li class="d-none"><a href="" rel="prettyPhoto[gallery1]" title=""></a></li>-->
     
-<div class="owl-carousel carousel-full  gallery clearfix">
+<div class="owl-carousel carousel-full">
+
+<div class="item-carousel-full gallery clearfix">
+<div class="gallery-img"> 
+<a href="<%=request.getContextPath() %>/resources/images/book-default.jpg" rel="prettyPhoto[gallery1]" title="Things Every Child Show Know About J.B .Danquah">
+<i class="fas fa-search"></i>
+</a> 
+<img src="<%=request.getContextPath() %>/resources/images/book-default.jpg">
+</div>
+</div>
+
+<div class="item-carousel-full"> 
+<div class="gallery-img">
+<a href="<%=request.getContextPath() %>/resources/images/books/2.jpg" rel="prettyPhoto[gallery1]" title="Things Every Child Show Know About J.B .Danquah">
+<i class="fas fa-search"></i>
+</a> 
+<img src="<%=request.getContextPath() %>/resources/images/books/2.jpg">
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="wrapCarouselThumbs">
+<div class="owl-carousel carousel-thumbs"> 
+<div class="item-carousel-thumbs"><img src="<%=request.getContextPath() %>/resources/images/book-default.jpg" alt=""></div>
+<div class="item-carousel-thumbs"><img src="<%=request.getContextPath() %>/resources/images/books/2.jpg" alt=""></div>
+</div>
+</div>
+
+</div>
 
 
-		<c:choose> 
-			<c:when test="${fn:length(product.image) > 10  }">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+<!--<div class="pro-large">
+<img src="<%=request.getContextPath() %>/resources/images/books/shoplarge.jpg" alt="">
+</div>-->
+<div class="wrapCarouselFull">
+<div class="owl-carousel carousel-full">
+		
+		
+		<c:choose>
+			<c:when test="${product.image ne null }">
 				<div class="item-carousel-full">
 					<div class="gallery-img">
-						<a href="${product.image }" rel="prettyPhoto[gallery1]">
+						<a href="${product.image }" rel="prettyPhoto[product]">
 							<i class="fas fa-search"></i>
 						</a>
 						<img class="img-responsive" src="${product.image }" alt="">
@@ -117,10 +162,10 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				  
+				 
 				<div class="item-carousel-full">
 					<div class="gallery-img">
-						<a href="<%=request.getContextPath() %>/resources/images/book-default.jpg" rel="prettyPhoto[gallery1]">
+						<a href="<%=request.getContextPath() %>/resources/images/book-default.jpg" rel="prettyPhoto[product]">
 							<i class="fas fa-search"></i>
 						</a>
 						<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpg" alt="${productList.bookTitle }" title="${productList.bookTitle }">
@@ -131,141 +176,51 @@
 			</c:otherwise>
 		</c:choose> 
 				
-		<c:if test="${fn:length(product.image1) > 10  }">
-			<div class="item-carousel-full">
-				<div class="gallery-img">
-					<a href="${product.image1 }" rel="prettyPhoto[gallery1]">
-						<i class="fas fa-search"></i>
-					</a>
-					<img class="img-responsive" src="${product.image1 }" alt="">
-				</div>
-			</div>
-		</c:if>
-		<c:if test="${fn:length(product.image2) > 10  }">
-			<div class="item-carousel-full">
-				<div class="gallery-img">
-					<a href="${product.image2 }" rel="prettyPhoto[gallery1]">
-						<i class="fas fa-search"></i>
-					</a>
-					<img class="img-responsive" src="${product.image2 }" alt="">
-				</div>
-			</div>
-		</c:if>
-		<c:if test="${fn:length(product.image3) > 10  }">
-			<div class="item-carousel-full">
-				<div class="gallery-img">
-					<a href="${product.image3 }" rel="prettyPhoto[gallery1]">
-						<i class="fas fa-search"></i>
-					</a>
-					<img class="img-responsive" src="${product.image3 }" alt="">
-				</div>
-			</div>
-		</c:if>
-		<c:if test="${fn:length(product.image4) > 10  }">
-			<div class="item-carousel-full">
-				<div class="gallery-img">
-					<a href="${product.image4 }" rel="prettyPhoto[gallery1]">
-						<i class="fas fa-search"></i>
-					</a>
-					<img class="img-responsive" src="${product.image4 }" alt="">
-				</div>
-			</div>
-		</c:if>
-		<c:if test="${fn:length(product.image5) > 10  }">
-			<div class="item-carousel-full">
-				<div class="gallery-img">
-					<a href="${product.image5 }" rel="prettyPhoto[gallery1]">
-						<i class="fas fa-search"></i>
-					</a>
-					<img class="img-responsive" src="${product.image5 }" alt="">
-				</div>
-			</div>
-		</c:if>
-
-
-<%-- <div class="item-carousel-full">
-<div class="gallery-img ">
-<a href="<%=request.getContextPath() %>/resources/images/book-default.jpg" rel="prettyPhoto[gallery1]" title="Things Every Child Show Know About J.B .Danquah">
-<i class="fas fa-search"></i>
-</a> 
-<img src="<%=request.getContextPath() %>/resources/images/book-default.jpg">
-</div>
-</div> --%>
-
+		
+		
 <%-- <div class="item-carousel-full">
 <div class="gallery-img">
-<a href="<%=request.getContextPath() %>/resources/images/books/2.jpg" rel="prettyPhoto[gallery1]" title="Things Every Child Show Know About J.B .Danquah">
+<a href="<%=request.getContextPath() %>/resources/images/books/2.jpg" rel="prettyPhoto[product]">
 <i class="fas fa-search"></i>
 </a>
 <img src="<%=request.getContextPath() %>/resources/images/books/2.jpg">
 </div>
+</div> --%> 
+</div>
+</div>
+
+<%-- <div class="wrapCarouselThumbs">
+<div class="owl-carousel carousel-thumbs">
+<div class="item-carousel-thumbs"><img src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt=""></div>
+<div class="item-carousel-thumbs"><img src="<%=request.getContextPath() %>/resources/images/books/2.jpg" alt=""></div>
+</div>
 </div> --%>
 
-<%-- <div class="item-carousel-full">
-<div class="gallery-img">
-<a href="<%=request.getContextPath() %>/resources/images/books/3.jpg" rel="prettyPhoto[gallery1]" title="Things Every Child Show Know About J.B .Danquah">
-<i class="fas fa-search"></i>
-</a>
-<img src="<%=request.getContextPath() %>/resources/images/books/3.jpg">
-</div>
-</div> --%> 
-
-</div>
 </div>
 
-<div class="wrapCarouselThumbs">
-<div class="owl-carousel carousel-thumbs">     
 
-		<c:choose>
-			<c:when test="${fn:length(product.image) > 10 }"> 
-				<img class="item-carousel-thumbs" src="${product.image }" alt="">
-			</c:when>
-			<c:otherwise>
-				  <div class="item-carousel-thumbs"><img src="<%=request.getContextPath() %>/resources/images/book-default.jpg" alt=""></div>
-			</c:otherwise>
-		</c:choose>	  
- 		<c:if test="${fn:length(product.image1) > 10  }">
- 			<img class="item-carousel-thumbs" src="${product.image1 }" alt="">
- 		</c:if>
- 		<c:if test="${fn:length(product.image2) > 10  }">
- 			<img class="item-carousel-thumbs" src="${product.image2 }" alt="">
- 		</c:if>
- 		<c:if test="${fn:length(product.image3) > 10  }">
- 			<img class="item-carousel-thumbs" src="${product.image3 }" alt="">
- 		</c:if>
- 		<c:if test="${fn:length(product.image4) > 10  }"> 
- 			<img class="item-carousel-thumbs" src="${product.image4 }" alt="">
- 		</c:if>
- 		<c:if test="${fn:length(product.image5) > 10  }">
- 			<img class="item-carousel-thumbs" src="${product.image5 }" alt="">
- 		</c:if>
-
-<%-- <div class="item-carousel-thumbs"><img src="<%=request.getContextPath() %>/resources/images/book-default.jpg" alt=""></div>
-<div class="item-carousel-thumbs"><img src="<%=request.getContextPath() %>/resources/images/books/2.jpg" alt=""></div>
-<div class="item-carousel-thumbs"><img src="<%=request.getContextPath() %>/resources/images/books/3.jpg" alt=""></div> --%>
-</div>
-</div>
-
-</div>
- 
 <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
 <div class="product-text">
 <h2> ${product.bookTitle } </h2>
 
 <h6> <span>by: </span> ${author.authorName }</h6>
+
+
 <p>  ${product.description } </p>
-
+  
 <h6> <span>ISBN:</span> ${product.bookISNB } </h6>
-
+  
 <div class="pro-pricing">${product.currency.currencySymbol}<fmt:formatNumber type = "number"  minFractionDigits="2" value =" ${product.originalPrice } "></fmt:formatNumber></div>
+  
+<span><font size="3" id="successAddtoCart${product.id}" color="green"></font> </span> 
 
-<span><font size="3" id="successAddtoCart${product.id}" color="green"></font> </span>
 <div class="add-2-cart"> <strong>Quantity:</strong>  
 <input type="text" name="quantity" onblur="allnumeric(this)"  id="quantity" min="1" max="99" maxlength="2" placeholder="1" value="1" >   
 <input type="submit" value="Add to Cart" name="Add to Cart" onclick="addToCart('${product.id}')" >
 </div>  
 <span><font size="errorQTY" id="errorQTY" color="red"></font> </span>
 
+ 
 
 
 </div>
@@ -276,6 +231,8 @@
 <div class="row">
 <div class="col-md-12">
 <div class="products-tabs wf100 p80">
+
+
 <nav>
 	<div class="nav nav-tabs" id="nav-tab" role="tablist">
 		<c:forEach items="${productTabList }" var="productTabList" varStatus="coun">
@@ -293,10 +250,7 @@
 </nav>
 
 
-
-
-
-<div class="tab-content" id="nav-tabContent">
+	<div class="tab-content" id="nav-tabContent">
 		<c:forEach items="${productTabList }" var="productTabList" varStatus="coun">
 			<c:choose>
 				<c:when test="${coun.index == 0 }">
@@ -313,12 +267,13 @@
 				
 					
 		</c:forEach>
-	</div> 
+	</div>
+
 </div>
-</div>
+</div> 
 </div>
 
- 
+
 
 </div>
 </div>
@@ -327,28 +282,34 @@
 </section>
 <!--Blog End--> 
 
- <%@include file="includes/footer.jsp" %>
- 
+<!--/#footer START-->
+<%@include file="includes/footer.jsp" %>
+<!--/#footer END-->
 
 </div>
 
- 
+
+
+<!-- includes function START-->
+<script>
+w3IncludeHTML();
+</script>
+<!-- includes function END-->   
+
 
 <!--   JS Files Start  --> 
 <script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
-<!--<script src="js/popper.min.js"></script> -->
-<script src="<%=request.getContextPath() %>/resources/js/prettyphoto.jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
-
-
-<!--<script src="js/jquery.prettyPhoto.js"></script> -->
-<!--<script src="js/isotope.min.js"></script> -->
+<script src="<%=request.getContextPath() %>/resources/js/prettyphoto.jquery.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> -->
+<%-- <script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> --%>  
 <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 
-
-<!--<script src="js/prettyphoto-jquery.min.js" type="text/javascript"></script>-->
+<!--<script src="<%=request.getContextPath() %>/resources/js/prettyphoto-jquery.min.js" type="text/javascript"></script>-->
 
 
 <script  src="<%=request.getContextPath() %>/resources/js/script.js"></script>
@@ -372,8 +333,10 @@ custom_markup: '<div id="bsap_1259344" class="bsarocks bsap_d49a0984d0f377271ccb
 changepicturecallback: function(){ _bsap.exec(); }
 });
 });
+
 </script>
 <!-- Pretty Photo Light box Scrept End-->	
+
 
 <script type="text/javascript">
 
@@ -423,10 +386,7 @@ function getCart(){
 					  
 					cartTotal = data[i].qty * data[i].price; 
 					cartFinalTotal = parseInt(cartTotal) + parseInt(cartFinalTotal);					   
-				} 
-				
-				$("#cartTotal").html("Total: "+$("#currencySymbol").val()+""+cartFinalTotal);
-				$("#cateItemTotal").html(data.length); 
+				}  
 			}else{
 				cartData = "Cart is empty";
 			}
@@ -435,7 +395,8 @@ function getCart(){
 				$("#cartData").html("");
 			 else
 				$("#cartData").html(cartData);
-			
+			$("#cartTotal").html("Total: "+$("#currencySymbol").val()+""+cartFinalTotal);
+			$("#cateItemTotal").html(data.length);
 		},error : function(e){ 
 			console.log("Error :::"+e)
 		}
@@ -468,7 +429,7 @@ function allnumeric(inputtxt)
     padding: 0 10px;
     margin-right: 10px;
 }
-</style> 
+</style>
 
 </body>
 

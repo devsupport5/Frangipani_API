@@ -54,8 +54,8 @@
 <!--Inner Header Start-->
 <section class="wf100 inner-header">
 <div class="container">
-<ul>
-<li><a href="index.html">Home</a></li>
+<ul> 
+<li><a href="<%=request.getContextPath() %>/">Home</a></li>
 <li> Manage Addresses </li>
 </ul>
 </div>
@@ -70,8 +70,8 @@
 <div style="padding-bottom: 2em" class="row">
 <div class="col-lg-12 text-right">
 <button style="color: #fff;
-    background-color: #ed008c;
-    border-color: #ed008c;" data-toggle="modal" data-target="#AddNewAddressModal"  type="submit" class="btn-upper  btn btn-primary checkout-page-button checkout-continue "> ADD A NEW ADDRESS </button>
+    background-color: #ed008c; 
+    border-color: #ed008c;" data-toggle="modal" data-target="#AddNewAddressModal"  onclick="resetAddress();setTitle('ADD A NEW ADDRESS')"  type="submit" class="btn-upper  btn btn-primary checkout-page-button checkout-continue "> ADD A NEW ADDRESS </button>
 </div>
 </div>
 
@@ -152,42 +152,45 @@ border-bottom: 1px solid #ccc;" class="box-title"> Bargav N. Bhatt
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
 <h3 class="modal-title" id="lineModalLabel">
-Add a new address
+<span id="addressTitle"></span> 
 </h3>
 </div>
 <div class="modal-body">
 <form class="">
 
+<span><font size="errorfullName" id="errorfullName" color="red"></font> </span>
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<input class="form-control" name="fullName" id="fullName" placeholder="Full Name" type="text" />
+<input class="form-control" name="fullName" id="fullName" placeholder="Full Name" type="text" maxlength="150" />
 </div>
 </div>
 
+
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="E-mail" name="newUserEmail" id="newUserEmail" type="text"  />
+<input class="form-control" placeholder="E-mail" name="newUserEmail" id="newUserEmail" type="text" maxlength="250"  />
 </div>
 </div>
+
  
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="Mobile Number" id="mobileNumber" name="mobileNumber" type="text" />
+<input class="form-control" placeholder="Mobile Number" id="mobileNumber" name="mobileNumber" type="text" maxlength="20" />
 </div>
 </div>
 
-
+<span><font size="3" id="errorAdd1" color="red"></font> </span>
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="Address line 1" name="add1" id="add1" type="text" />
+<input class="form-control" placeholder="Address line 1" name="add1" id="add1" type="text" maxlength="150" />
 </div>
 </div>
 
 
-
+<span><font size="3" id="errorAdd2" color="red"></font> </span>
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="Address line 2" id="add2" name="add2" type="text" />
+<input class="form-control" placeholder="Address line 2" id="add2" name="add2" type="text" maxlength="150" />
 </div>
 </div>
 
@@ -195,13 +198,16 @@ Add a new address
 
 <div class="form-group row">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<span><font size="3" id="errorCountry" color="red"></font> </span> 
 		<select class="form-control" name="country" id="country">
-			<option>Select Country</option>
+			<option value="">Select Country</option>
 			<option value="Ghana">Ghana </option>
-		</select>
+		</select> 
 	</div>
 	
+
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<span><font size="3" id="errorState" color="red"></font> </span>	
 		<select class="form-control"id="state" name="state">
 			<option value="State">State </option>
 			<option value="Ashanti">Ashanti</option>
@@ -227,18 +233,21 @@ Add a new address
 
 <div class="form-group row">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-		<input class="form-control" placeholder="City" name="city" id="city" type="text" />
+	<span><font size="3" id="errorCity" color="red"></font> </span>
+		<input class="form-control" placeholder="City" name="city" id="city" type="text"  />
 	</div>
 
+
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+<span><font size="3" id="errorpinCode" color="red"></font> </span>
 <input class="form-control" placeholder="PIN" name="pinCode" id="pinCode" type="text" />
 </div>
 </div>
 
 
 <div class="form-group row">
-<div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<textarea class="form-control" name="specialInstruction" id="specialInstruction" placeholder="Special Instructions: (Max Length: 500 Characters)" rows="3"></textarea>
+<div class="col-lg-12 col-md-12 col-sm-12  col-xs-12"> 
+<textarea class="form-control" name="specialInstruction" id="specialInstruction" maxlength="500" placeholder="Special Instructions: (Max Length: 500 Characters)" rows="3"></textarea>
 <input type="hidden" name="addressId" id="addressId">
 
 </div>
@@ -267,7 +276,64 @@ Add a new address
 $( document ).ready(function() {
 	getAddAddress();
 });  
+
+function resetAddress(){
+	$("#fullName").val("");
+	$("#newUserEmail").val("");
+	$("#mobileNumber").val("");
+	$("#add1").val("");
+	$("#add2").val("");  
+	$('#country').val("").change();
+	$("#state").val("State").change();  
+	$("#city").val(""); 
+	$("#pinCode").val("");
+	$("#specialInstruction").val("");
+} 
+
 function addNewAddress(){
+	 
+	 
+	
+	var status = true;
+	if($("#fullName").val()==""){
+		$("#errorfullName").html("Please enter name");
+		setTimeout(function(){ $("#errorfullName").html(""); }, 7000);
+		$("#fullName").focus();
+		status = false;
+	}else if($("#add1").val()==""){
+		$("#errorAdd1").html("Please enter address line 1");
+		setTimeout(function(){ $("#errorAdd1").html(""); }, 7000);
+		$("#add1").focus();
+		status = false;
+	}else if($("#add2").val()==""){
+		$("#errorAdd2").html("Please enter address line 2");
+		setTimeout(function(){ $("#errorAdd2").html(""); }, 7000);
+		$("#add2").focus();
+		status = false; 
+	}else if($("#country").val()=="Select Country"){
+		$("#errorCountry").html("Please select country");
+		setTimeout(function(){ $("#errorCountry").html(""); }, 7000);
+		$("#country").focus();
+		status = false;
+	} else if($("#state").val()=="State"){
+		$("#errorState").html("Please select state");
+		setTimeout(function(){ $("#errorState").html(""); }, 7000);
+		$("#state").focus(); 
+		status = false;
+	} else if($("#city").val()==""){
+		$("#errorCity").html("Please enter country");
+		setTimeout(function(){ $("#errorCity").html(""); }, 7000);
+		$("#city").focus();
+		status = false;
+	} else if($("#pinCode").val()==""){ 
+		$("#errorpinCode").html("Please enter pincode");
+		setTimeout(function(){ $("#errorpinCode").html(""); }, 7000);
+		$("#pinCode").focus();
+		status = false;
+	}   
+	
+	if(status){
+if($("#addressId").val()==""){		
 	$.ajax({
 		type : "POST",
 		url : "addNewAddress",
@@ -281,15 +347,21 @@ function addNewAddress(){
 			state : $("#state").val(),
 			city : $("#city").val(),
 			pinCode : $("#pinCode").val(),
-			specialInstruction : $("#specialInstruction").val(),
-			id : $("#addressId").val()   
+			specialInstruction : $("#specialInstruction").val() 
+			 
 		},success:function(data){
 			getAddAddress();  
+			$('body').removeClass('modal-open');
+			$('.modal-backdrop').remove();   
 			$('#AddNewAddressModal').modal('hide');
 		},error : function(e){
 			console.log("Error :::"+e)
 		} 
 	});
+}else{
+	updateNewAddress(); 
+}
+   }
 }
 
 function updateNewAddress(){
@@ -307,7 +379,7 @@ function updateNewAddress(){
 			city : $("#city").val(),
 			pinCode : $("#pinCode").val(),
 			specialInstruction : $("#specialInstruction").val(),
-			
+			id : $("#addressId").val()   
 			
 		},success:function(data){
 			getAddAddress();  
@@ -334,9 +406,9 @@ function getAddAddress(){
 				'<h3 style="font-size: 17px;padding: 15px 0px 15px 0px;border-bottom: 1px solid #ccc;" class="box-title">'+data[i].fullName +  
 				    /* '<span class="label label-default">Home</span>'+ */ 
 				'</h3>'+
-				
-					'<div class="box-tools pull-right">'+ 
-					'<button data-toggle="modal" data-target="#AddNewAddressModal"  style="margin-top: -97px;  padding: 5px 15px 5px 15px;" onclick="getAddressById('+data[i].id+')"  class="btn bg-teal btn-sm"><i class="fa fa-ellipsis-v"></i></button>'+
+				      
+					'<div class="box-tools pull-right">  <span  onclick="deleteUserAddress('+data[i].id+')" style="margin-top: -97px;  padding: 5px 15px 5px 15px;cursor:pointer;">  Delete </span>'+   
+					'<button data-toggle="modal" data-target="#AddNewAddressModal" onclick="setTitle(\'Edit Address details\');getAddressById('+data[i].id+')"  style="margin-top: -97px;  padding: 5px 15px 5px 15px;"   class="btn bg-teal btn-sm"><i class="fa fa-ellipsis-v"></i></button>'+
 					'</div>'+				
 				'</div>'+
 				
@@ -385,19 +457,44 @@ function getAddressById(addressId){
 		}
 	});
 }
+ 
+function setTitle(title){
+	$("#addressTitle").html(title);
+} 
+
+function deleteUserAddress(addressId){  
+  if(confirm("Are you sure you want to delete address?")){
+	$.ajax({  
+		type : "POST",
+		url : "<%=request.getContextPath()%>/deleteUserAddress",
+		data : {
+			addressId : addressId,
+		},success:function(data){	
+			getAddAddress();  
+			 
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});
+  }  	
+}
+
 
 </script>
 
 <script src="<%=request.getContextPath() %>/resources/checkout/bootstrap.min.js"></script> 
 
 <!--   JS Files Start  --> 
-<%-- <script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js"></script> --%> 
+<script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js"></script>
+
+ 
 <script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
-<script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script>  
+<%-- <script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> 
-<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script>  --%> 
 <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
 
 </body>

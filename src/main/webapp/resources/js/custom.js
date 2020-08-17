@@ -469,4 +469,15 @@ jQuery(document).ready(function($) {
 			});
 		}
 	});
+  	
+	$(document).ready(function()
+			{ 
+			   var a = $(".pro-thumb");
+			   a.click(function()
+			   {
+			       return false;
+
+			   });
+			});
+	
 	// ------- Masonry End ------- //

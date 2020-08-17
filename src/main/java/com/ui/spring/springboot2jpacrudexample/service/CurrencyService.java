@@ -19,4 +19,5 @@ public interface CurrencyService {
 	
 	Currency getDefaultCurrency();
 	
+	List<Currency> getActiveCurrencys();
 }

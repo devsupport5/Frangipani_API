@@ -17,6 +17,7 @@ public class RegisterUser {
 	private String userEmail;
 	private String userName;
 	private String password;
+	private int termsCondition;
 	private int isActive;
 	private int isDeleted;
 	private String createdDate;
@@ -105,4 +106,16 @@ public class RegisterUser {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	@Column(name = "terms_condition", columnDefinition = "integer default 0")
+	public int getTermsCondition() {
+		return termsCondition;
+	}
+
+	public void setTermsCondition(int termsCondition) {
+		this.termsCondition = termsCondition;
+	}
+	
+	
+	
 }

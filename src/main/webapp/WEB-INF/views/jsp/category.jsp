@@ -75,8 +75,8 @@
 									<img class="img-responsive" src="${categories.image }" alt=""  >	
 								</c:when>
 								<c:otherwise>
-									<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${products.categoryName }" title="${products.categoryName }">
-								</c:otherwise>
+									<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpg" alt="${products.categoryName }" title="${products.categoryName }">
+								</c:otherwise> 
 							</c:choose>
 						</div> 
 						<div class="vol-txt"> 

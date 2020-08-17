@@ -2393,6 +2393,7 @@ box-shadow: 0 0 25px rgba(0,0,0,.04) inset;
 -moz-box-shadow: 0 0 25px rgba(0,0,0,.04) inset;
 -webkit-box-shadow: 0 0 25px rgba(0,0,0,.04) inset;
 padding: 8px;
+margin-bottom: 25px;  
 }
 
 .product-box .pro-txt {
@@ -3424,7 +3425,8 @@ color: #fff;
 width: 100%;
 float: left;
 overflow: hidden;
-position: relative;
+position: relative; 
+margin-bottom: 30px;
 }
 .team-box:after {
 position: absolute;
@@ -3457,7 +3459,7 @@ width: 100%;
 padding: 20px;
 z-index: 999;
 text-align: center;
-height: 90px;
+/*height: 90px;*/
 }
 .team-box .team-info h3 {
 color: #fff;

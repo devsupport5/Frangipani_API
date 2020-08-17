@@ -105,13 +105,14 @@ border-bottom: 1px solid #ccc;" class="box-title"> Forgot Password
 <span><font size="3" id="errorEmailAddress" color="red"></font> </span>
 <div class="form-group input-group">
 <span class="input-group-addon"><i class="fa fa-key"></i></span>
-<input type="text" class="form-control" placeholder="Email address" id="emailAddress">
+<input type="text" class="form-control" placeholder="Email address" onchange="checkUserName(this,'userEmail')"  id="emailAddress">
 </div>
 
  
 </form>
 
 </div><!-- /.box-body -->
+
 <center><span><font size="3" id="successCurrentEmail" color="red"></font> </span></center> 
 <div class="box-footer">  
 <a class="checkout-btn1" href="#" onclick="return checkValidation();"> SEND </a>
@@ -239,6 +240,37 @@ function checkUserPassword(){
 		}
 	});
   	
+}
+function checkUserName(type,action){
+	
+	//alert("hello")
+	 $.ajax({
+		type : "POST",
+		url : "checkUserStatus",
+		data : {  
+			"value" : type.value,
+			"action" : action, 
+		},success:function(data){
+			if(data==true){  
+				if(action=="userEmail"){
+					$("#userEmail").focus();
+					$("#userEmail").val("");
+					
+					$("#errorEmailAddress").html("Email address already registered.");
+					setTimeout(function(){ $("#errorEmailAddress").html(""); }, 7000);
+					
+				}/* else if(action=="userName"){
+					$("#userName").focus();
+					$("#userName").val("");
+					 
+					$("#errorUserName").html("Username already registered.");
+					setTimeout(function(){ $("#errorUserName").html(""); }, 7000);
+				} */
+			}
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});   
 }
 
 </script>

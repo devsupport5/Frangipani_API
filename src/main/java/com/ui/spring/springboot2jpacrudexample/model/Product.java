@@ -39,6 +39,9 @@ public class Product {
 	private String image;
 	private String image1;
 	private String image2;
+	private String image3;
+	private String image4;
+	private String image5;
 	private String imageString;
 	private Currency currency;
 	
@@ -252,9 +255,39 @@ public class Product {
 	public void setImage2(String image2) {
 		this.image2 = image2;
 	}
+	
+	
+	@Column(name = "product_image3", columnDefinition = "LONGTEXT")
+	public String getImage3() {
+		return image3;
+	}
+
+	public void setImage3(String image3) {
+		this.image3 = image3;
+	}
+
+	@Column(name = "product_image4", columnDefinition = "LONGTEXT")
+	public String getImage4() {
+		return image4;
+	}
+
+	public void setImage4(String image4) {
+		this.image4 = image4;
+	}
+
+	@Column(name = "product_image5", columnDefinition = "LONGTEXT")
+	public String getImage5() {
+		return image5;
+	}
+
+	public void setImage5(String image5) {
+		this.image5 = image5;
+	}
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="id")
+	@JoinColumn(name = "id", referencedColumnName = "currencyId", insertable = false, updatable = true)
+
+	/*@JoinColumn(name="id")*/
 	public Currency getCurrency() {
 		return currency;
 	}

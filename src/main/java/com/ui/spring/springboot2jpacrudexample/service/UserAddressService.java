@@ -18,6 +18,8 @@ public interface UserAddressService {
 
 	void deleteAddress(UserAddress userAddress);
 	
+	void deleteAddressById(long addressId);
+	
 	Optional<UserAddress> getUserAddressById(Long sliderId);
 	
 	

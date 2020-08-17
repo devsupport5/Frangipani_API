@@ -84,7 +84,7 @@
 		<img class="img-responsive" src="${productList.image }" alt="">	
 	</c:when>
 	<c:otherwise>
-		<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${productList.bookPrice }" title="${productList.bookPrice }">
+		<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpg" alt="${productList.bookPrice }" title="${productList.bookPrice }">
 	</c:otherwise>
 </c:choose>
 

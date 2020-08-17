@@ -71,6 +71,7 @@
 
 <div class="row">
 
+
 <!--Team Box Start-->
 <c:forEach items="${authors }" var="authors">
 	<div class="col-md-3 col-sm-4">
@@ -82,6 +83,7 @@
 			</div>
 		</div>
 	</div>
+	<br /> 
 </c:forEach>
 
 <!--Team Box Start--> 

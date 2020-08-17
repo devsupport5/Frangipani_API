@@ -52,4 +52,10 @@ public class UserServiceImpl implements UserAddressService{
 		// TODO Auto-generated method stub
 		return this.userAddressRepository.getGuestUserAddress(emailAddress);
 	}
+
+	@Override
+	public void deleteAddressById(long addressId) {
+		// TODO Auto-generated method stub
+		this.userAddressRepository.deleteAddressById(addressId);
+	}
 }

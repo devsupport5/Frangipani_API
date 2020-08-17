@@ -18,8 +18,8 @@
 <link rel="mask-icon" href="<%=request.getContextPath() %>/resources/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
-
-
+  
+   
 <!-- Font Awesome -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/font-awesome-4.7.0/css/font-awesome.min.css">                
 
@@ -30,11 +30,11 @@
 <link href="<%=request.getContextPath() %>/resources/css/owl.carousel.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/resources/css/prettyPhoto.css" rel="stylesheet">
-<link href="<%=request.getContextPath() %>/resources/css/all.min.css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/resources/css/all.min.css" rel="stylesheet">  
 <!-- CSS  -->
-
+ 
 <!-- includes js File START-->
-<script src="resources/js/w3data.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/w3data.js"></script>
 <!-- includes js File END-->
 
 </head>
@@ -102,7 +102,7 @@
 <!--/#footer END-->
 
 </div>
-<!-- <!-- includes function START 
+<!-- <!-- includes function START  
 <script>
 w3IncludeHTML();
 </script>  
@@ -110,13 +110,13 @@ includes function END
  -->
 
 <!--   JS Files Start  --> 
-<script src="resources/js/jquery-3.3.1.min.js"></script> 
-<script src="resources/js/jquery-migrate-1.4.1.min.js"></script> 
-<script src="resources/js/popper.min.js"></script> 
-<script src="resources/js/bootstrap.min.js"></script> 
-<script src="resources/js/owl.carousel.min.js"></script> 
-<script src="resources/js/jquery.prettyPhoto.js"></script> 
-<script src="resources/js/isotope.min.js"></script> 
-<script src="resources/js/custom.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
 </body>
 </html>

@@ -41,6 +41,12 @@ public class CurrencyController {
 		List<Currency> currencies = currencyService.getAllCurrencys();
 		return currencies.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
+	
+	@GetMapping("/currencys/activeList")
+	public List<CurrencyDTO> getActiveListCurrencys() {
+		List<Currency> currencies = currencyService.getActiveCurrencys();
+		return currencies.stream().map(this::convertToDto).collect(Collectors.toList());
+	}
 
 	@GetMapping("/currencys/{id}")
 	public ResponseEntity<CurrencyDTO> getCurrencyById(@PathVariable(value = "id") Long CurrencyId) {

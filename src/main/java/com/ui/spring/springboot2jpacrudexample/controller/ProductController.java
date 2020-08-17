@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ui.spring.springboot2jpacrudexample.beans.ProductDTO;
+import com.ui.spring.springboot2jpacrudexample.beans.ProductViewDTO;
 import com.ui.spring.springboot2jpacrudexample.exception.ResourceNotFoundException;
 import com.ui.spring.springboot2jpacrudexample.model.Product;
 import com.ui.spring.springboot2jpacrudexample.service.CurrencyService;
@@ -39,16 +40,29 @@ public class ProductController {
 	
 	@Autowired
     private ModelMapper modelMapper;
-	
+	 
 	@GetMapping("/products")
 	public List<ProductDTO> getAllProducts() {
 		List<Product> products = ProductService.getAllProducts();
 		return products.stream().map(this::convertToDto).collect(Collectors.toList());
+	} 
+	
+	@GetMapping("/products/productsList")
+	public List<ProductViewDTO> getListProducts() {
+		List<Product> products = ProductService.getAllProducts();
+		return products.stream().map(this::convertToViewDto).collect(Collectors.toList());
+	}
+	
+	@GetMapping("/products/activeList")
+	public List<ProductViewDTO> getActiveListProducts() {
+		List<Product> products = ProductService.getActiveProducts();
+		return products.stream().map(this::convertToViewDto).collect(Collectors.toList());
 	}
  
 	@GetMapping("/products/{id}")
 	public ResponseEntity<ProductDTO> getProductById(@PathVariable(value = "id") Long ProductId) {
 		Product Product = ProductService.getProductById(ProductId).get();
+		System.out.println(Product.getCurrencyId());
 		return ResponseEntity.ok().body(convertToDto(Product));
 	}
 
@@ -74,6 +88,7 @@ public class ProductController {
 		Product.setBookTaxes(ProductDetails.getBookTaxes());
 		Product.setDescription(ProductDetails.getDescription());
 		Product.setIsActive(ProductDetails.getIsActive());
+		Product.setCurrencyId(ProductDetails.getCurrencyId());
 		final Product updatedProduct = ProductService.updateProduct(ProductDetails);
 		return ResponseEntity.ok(updatedProduct);
 	}
@@ -94,11 +109,21 @@ public class ProductController {
 	public ProductDTO convertToDto(Product Product) {
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		ProductDTO ProductDTO = modelMapper.map(Product, ProductDTO.class);
+		ProductDTO.setCurrencyId(Product.getCurrencyId());
+		return ProductDTO;
+	}
+	
+	public ProductViewDTO convertToViewDto(Product Product) {
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
+		ProductViewDTO ProductDTO = modelMapper.map(Product, ProductViewDTO.class);
+		ProductDTO.setCurrencyId(Product.getCurrencyId());
 		return ProductDTO;
 	}
 	
 	public Product  convertToEntity(ProductDTO ProductDTO) {
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		Product Product = modelMapper.map(ProductDTO, Product.class);
+		Product.setCurrencyId(ProductDTO.getCurrencyId());
 		return Product;
 	}
 	

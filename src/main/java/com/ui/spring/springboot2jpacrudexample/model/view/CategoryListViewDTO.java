@@ -1,20 +1,21 @@
-package com.ui.spring.springboot2jpacrudexample.beans;
+package com.ui.spring.springboot2jpacrudexample.model.view;
 
 import java.io.Serializable;
 
-public class AuthorDTO implements Serializable{
+public class CategoryListViewDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private long id;
-	private String authorName;
+	private String categoryName;
 	private String description;
-	private String image;	 
+	private int parentId;
 	private int isActive;
 	private int isDeleted;
 	private String createdDate;
+	/*private String image;*/
 	 
 	
-	public AuthorDTO() {
+	public CategoryListViewDTO() {
 		
 	}
 
@@ -28,6 +29,17 @@ public class AuthorDTO implements Serializable{
 		this.id = id;
 	}
 
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+
 	public String getDescription() {
 		return description;
 	}
@@ -37,21 +49,14 @@ public class AuthorDTO implements Serializable{
 		this.description = description;
 	}
 
-	public String getAuthorName() {
-		return authorName;
+
+	public int getParentId() {
+		return parentId;
 	}
 
 
-	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
-	}
-
-
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 
@@ -83,6 +88,16 @@ public class AuthorDTO implements Serializable{
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
+
+	/*public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}*/
 
 
 	public static long getSerialversionuid() {

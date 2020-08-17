@@ -43,7 +43,7 @@
 <div class="wrapper">
 
 <!--/header START-->
-<div w3-include-html="includes/header.html"></div> 
+ <div>  <%@include file="includes/header.jsp" %></div>  
 <!--/header END-->
 
 
@@ -103,7 +103,7 @@ We truly understand that any buyer trusts us solely while buying the products fr
 </div> 
 <!--/#footer END-->
 
-
+ 
 
 <!--   JS Files Start  --> 
 <script src="resources/js/jquery-3.3.1.min.js"></script> 

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title> Login | Signup | Frangipani Books </title>
+<title> Profile | Frangipani Books </title>
 
 <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 <meta name="theme-color" content="#ED008C">
@@ -54,7 +54,7 @@
 <div class="container">
 <ul>
 <li><a href="<%=request.getContextPath() %>/">Home</a></li>
-<li><a href="#"> Login / Signup </a></li>
+<li><a href="#"> Profile </a></li>
 </ul>
 </div>
 </section>
@@ -68,7 +68,7 @@
 
 
 <div class="col-lg-4">
-<div class="login-box">
+<%-- <div class="login-box">
 <h3>Login Account</h3> 
 <span><font size="errorValidUser" id="errorValidUser" color="white"></font> </span> 
 <span><font size="erroruserEmailId" id="erroruserEmailId" color="white"></font> </span>
@@ -89,63 +89,55 @@
 <div class="input-group">
 <button class="login-btn" onclick="return checkLogin();">Login Account</button>
 </div>
+</div> --%>
 </div>
+<div class="col-lg-2">
 </div>
-
 <div class="col-lg-8">
 <div class="myaccount-form">
-<h3>Register Your Account</h3>
+<h3>Edit Profile</h3>
 <form >
 <ul class="row">
+
 <li class="col-md-6">
 <span><font size="errorCheckName" id="errorCheckName" color="red"></font> </span>
 <div class="input-group">   
-<input type="text" class="form-control" name="yourName" id="yourName" placeholder="Your Name*" required>
+<input type="text" class="form-control"   name="yourName" id="yourName" value="${userRegister.yourName }" placeholder="Your Name*" required>
 </div>
 </li>
+
+<li class="col-md-6"></li>
 <li class="col-md-6">
 <span><font size="errorContact" id="errorContact" color="red"></font> </span>
 <div class="input-group">
-<input type="text" class="form-control" name="contact" id="contact" placeholder="Contact*" required>
+<input type="text" class="form-control" name="contact" id="contact" value="${userRegister.contact }" placeholder="Contact*" required>
 </div>
 </li>
+
+<li class="col-md-6"></li>
 <li class="col-md-6">
 <span><font size="errorUserEmail" id="errorUserEmail" color="red"></font> </span>
 <div class="input-group">
-<input type="email" class="form-control" name="userEmail" id="userEmail" onchange="checkUserName(this,'userEmail')" placeholder="Email Address*" required>
+<input type="email" class="form-control" name="userEmail" id="userEmail" value="${userRegister.userEmail}" onchange="checkUserName(this,'userEmail')" placeholder="Email Address*" required>
 </div> 
 </li>
+
+
+
+<li class="col-md-6"></li>    
 <li class="col-md-6">
+	<center><span><font size="4" id="successMessage" color="green"></font> </span></center>    
+	<button class="register" onclick="return registration();">Update</button>
+</li>
+
+ <li class="col-md-6">
 <span><font size="errorUserName" id="errorUserName" color="red"></font> </span>
 <div class="input-group">
-<input type="text" class="form-control" placeholder="User Name*" name="userName" id="userName" onchange="checkUserName(this,'userName')" required>
-</div>
-</li>
-<li class="col-md-6">
-<span><font size="errorPassword" id="errorPassword" color="red"></font> </span>
-<div class="input-group">
-<input type="password" class="form-control" tabindex="1" placeholder="Password*" name="password" id="password" required>
-</div>
-</li>
-<li class="col-md-6"> 
-<span><font size="errorRePassword" id="errorRePassword" color="red"></font> </span>
-<div class="input-group"> 
-<input type="password" class="form-control" tabindex="2" placeholder="Re-enter Password*" name="repassword" id="repassword">
-</div>
+<input type="hidden" class="form-control" placeholder="User Name*" name="userName" value="${userRegister.userName}" id="userName" onchange="checkUserName(this,'userName')" required>
+</div> 
 </li> 
 
-<li class="col-md-12"> 
-<span><font size="errortermsConditionChk" id="errortermsConditionChk" color="red"></font> </span>
-<div class="input-group form-check">
-<input type="checkbox" class="form-check-input" id="termsConditionChk"> 
-<label class="form-check-label" for="exampleCheck1">I agree to the Terms of <a href="#">Services & Privacy Policy</a></label>
-</div>
-</li>
-  
-			<li class="col-md-12">   
-				<button class="register" onclick="return registration();">Register Your Account</button>
-			</li>
-
+ 
 </ul>
 </form>
 </div>
@@ -213,51 +205,26 @@ function registration(){
 		setTimeout(function(){ $("#errorUserName").html(""); }, 7000);
 		status = false;
 	}
-	if($("#password").val()==""){
-		$("#errorPassword").html("Please enter password");
-		$("#password").focus();  
-		setTimeout(function(){ $("#errorPassword").html(""); }, 7000);
-		status = false;
-	}else if($("#password").val().length < 6){
-		$("#errorPassword").html("Password length greter then six characters");
-		$("#password").focus();  
-		setTimeout(function(){ $("#errorPassword").html(""); }, 7000);
-		status = false;
-	} 
-	 
-	if($("#repassword").val()==""){
-		$("#errorRePassword").html("Please retype password");
-		$("#repassword").focus();
-		setTimeout(function(){ $("#errorRePassword").html(""); }, 7000);
-		status = false;  
-	}else if($("#password").val() != $("#repassword").val()){
-		$("#errorRePassword").html("Passwords did not match."); 
-		$("#repassword").focus(); 
-		setTimeout(function(){ $("#errorRePassword").html(""); }, 7000);
-		status = false;
-	}
-	
-	
-	if($("#termsConditionChk").is(":checked")==false){ 
-		$("#errortermsConditionChk").html("Please check Services & Privacy Plicy");
-		setTimeout(function(){ $("#errortermsConditionChk").html(""); }, 7000);
-		status = false;
-	}
+	   
   
 	if(status){  
  	 $.ajax({
 		type : "POST",
-		url : "registration",
-		data : {
+		url : "updateRegistration",
+		data : { 
 			
 			yourName : $("#yourName").val(),
 			contact : $("#contact").val(), 
 			userEmail : $("#userEmail").val(),
 			userName : $("#userName").val(),
-			password : $("#password").val(),
+			
 			
 		},success:function(data){
-			window.location.reload(); 
+			//window.location.reload();
+			 
+		    $("#successMessage").html("Profile updated successfully");
+			setTimeout(function(){ $("#successMessage").html(""); }, 7000);
+			
 		},error : function(e){
 			console.log("Error :::"+e)
 		}

@@ -35,7 +35,11 @@ public class AdminController {
 		
 		Optional<AdminLogin> authors = adminService.checkValidAdmin(adminLogin.getUserName(), adminLogin.getPassword());
 		if(authors.isPresent()) {
-			return true;
+			if(adminLogin.getPassword().equals(authors.get().getPassword())) {
+				return true;	
+			}else {
+				return false;
+			}
 		}else {
 			return false;
 		}

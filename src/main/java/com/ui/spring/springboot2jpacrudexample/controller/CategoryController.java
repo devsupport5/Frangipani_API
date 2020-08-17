@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ui.spring.springboot2jpacrudexample.beans.CategoryDTO;
 import com.ui.spring.springboot2jpacrudexample.exception.ResourceNotFoundException;
 import com.ui.spring.springboot2jpacrudexample.model.Category;
+import com.ui.spring.springboot2jpacrudexample.model.view.CategoryListViewDTO;
 import com.ui.spring.springboot2jpacrudexample.service.CategoryService;
 
 @CrossOrigin
@@ -44,6 +45,28 @@ public class CategoryController {
 		
 		return categories.stream()
         .map(this::convertToDto)
+        .collect(Collectors.toList());
+	}
+	
+	@GetMapping("/categorys/categoryList")
+	public List<CategoryListViewDTO> getViewcategorys() {
+		List<Category> categories = categoryService.getAllCategorys();
+		
+		System.out.println("Size :::::::::::"+ categories.size());
+		
+		return categories.stream()
+        .map(this::convertToViewDto)
+        .collect(Collectors.toList());
+	}
+	
+	@GetMapping("/categorys/categoryActiveList")
+	public List<CategoryListViewDTO> getcategoryActiveList() {
+		List<Category> categories = categoryService.getActiveCategory();
+		
+		System.out.println("Size :::::::::::"+ categories.size());
+		
+		return categories.stream()
+        .map(this::convertToViewDto)
         .collect(Collectors.toList());
 	}
 
@@ -89,6 +112,11 @@ public class CategoryController {
 	
 	public CategoryDTO convertToDto(Category category) {
 		CategoryDTO categoryDTO = modelMapper.map(category, CategoryDTO.class);
+		return categoryDTO;
+	}
+	
+	public CategoryListViewDTO convertToViewDto(Category category) {
+		CategoryListViewDTO categoryDTO = modelMapper.map(category, CategoryListViewDTO.class);
 		return categoryDTO;
 	}
 	

@@ -52,6 +52,12 @@ public class CurrencyServiceImpl implements CurrencyService{
 			return new Currency();
 	}
 
+	@Override
+	public List<Currency> getActiveCurrencys() {
+		// TODO Auto-generated method stub
+		return this.CurrencyRepository.getActiveCurrencys();
+	}
+
 	 
 
 }

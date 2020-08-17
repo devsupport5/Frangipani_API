@@ -346,8 +346,8 @@ function getCart(){
 			}
 			
 			 
-			$("#cartData").html(cartData); 
-			$("#cartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+			$("#cartData").html(cartData);  
+			$("#cartTotal").html("Total: "+$("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
 			$("#cateItemTotal").html(data.length);
 		},error : function(e){ 
 			console.log("Error :::"+e)

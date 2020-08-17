@@ -22,6 +22,7 @@ import com.ui.spring.springboot2jpacrudexample.model.Product;
 import com.ui.spring.springboot2jpacrudexample.model.RegisterUser;
 import com.ui.spring.springboot2jpacrudexample.model.Slider;
 import com.ui.spring.springboot2jpacrudexample.model.UserAddress;
+import com.ui.spring.springboot2jpacrudexample.model.view.ProductListDefaultView;
 import com.ui.spring.springboot2jpacrudexample.repository.ProductRepository;
 import com.ui.spring.springboot2jpacrudexample.service.AuthorService;
 import com.ui.spring.springboot2jpacrudexample.service.CategoryService;
@@ -108,10 +109,10 @@ public class FrontendController {
 		return "index";
 	}
 	 
-	/*@RequestMapping("/getProductListData" )
-	@ResponseBody public List<ProductList>  getProductListData() {
-		return productListRepository.getProductLists();
-	}*/
+	@RequestMapping("/getFeaturedProductList" )
+	@ResponseBody public List<ProductListDefaultView>  getFeaturedProductList() {
+		return productRepository.getFeaturedProduct().stream().map(this::convertToDefaultDto).collect(Collectors.toList());
+	}
 	
 	@RequestMapping("/getSliderList" )
 	@ResponseBody public List<Slider>  getSliderList() {
@@ -171,6 +172,9 @@ public class FrontendController {
 				if(categoryRepository.getCategoryById(Long.parseLong(product.getCategoryId()+"")).isPresent())
 					model.addAttribute("category",categoryRepository.getCategoryById(Long.parseLong(product.getCategoryId()+"")).get());
 				
+				/*System.out.println(categoryRepository.getCategoryById(Long.parseLong(product.getCategoryId()+"")).get().getCategoryName());*/
+				
+				
 				model.addAttribute("productTabList",productTabService.getActiveProductTabByProduct(Integer.parseInt(product.getId()+"")));
 				}
 				
@@ -229,6 +233,8 @@ public class FrontendController {
     		return "redirect:/";
         
     }
+
+   
     
     @RequestMapping("/addNewAddress" )
     @ResponseBody  public List<UserAddress> addNewAddress(UserAddress userAddress,HttpSession session) {
@@ -252,6 +258,16 @@ public class FrontendController {
     		return userAddressService.getUserAddress(Long.parseLong(session.getAttribute("userId")+""));
     	else
     		return null;
+    }
+    
+    @RequestMapping("/deleteUserAddress" )
+    @ResponseBody  public void deleteUserAddress(HttpSession session,String addressId) {
+    	UserAddress userAddress = null;
+    	if(userAddressService.getUserAddressById(Long.parseLong(addressId)).isPresent()){
+		userAddress = userAddressService.getUserAddressById(Long.parseLong(addressId)).get();
+		userAddress.setIsDeleted(1);
+		}
+		userAddressService.createAddress(userAddress);
     }
     
     @RequestMapping("/getGuestUserAddress" )
@@ -394,17 +410,53 @@ public class FrontendController {
       RegisterUser user = registerUserService.checkRegisterUser(request.getParameter("userEmailId"), request.getParameter("userPassword"));
       
       
-      //System.out.println(request.getParameter("userEmailId") +"-----------"+request.getParameter("password"));
-      
       if(user!=null) {
-    	  session.setAttribute("userId",user.getId());
-    	  session.setAttribute("userName",user.getYourName());
-    	  return true;
+    	  
+    	  System.out.println(user.getPassword() +"---"+request.getParameter("userPassword"));
+          System.out.println("condiroin :::::"+user.getPassword().equals(request.getParameter("userPassword")));
+          
+    	  
+    	  if(user.getPassword().equals(request.getParameter("userPassword"))) {
+	    	  session.setAttribute("userId",user.getId());
+	    	  session.setAttribute("userName",user.getYourName());
+	    	  return true;
+    	  	} 
+    	  return false;
       }else {
     	  return false;
       }
     }
      
+    
+    @RequestMapping("/myProfile" )
+    public String  myProfile(HttpSession session,Model model) {
+      
+    	if(session.getAttribute("userId")==null) {
+    		return "redirect:/";	
+    	}
+    if(registerUserService.getRegisterUserById(Long.parseLong(session.getAttribute("userId")+"")).isPresent())	
+    	model.addAttribute("userRegister",registerUserService.getRegisterUserById(Long.parseLong(session.getAttribute("userId")+"")).get());
+    	
+    		return "my_profile";	
+    }
+    
+    @RequestMapping("/updateRegistration" )
+    @ResponseBody public void  updateRegistration(HttpSession session,RegisterUser registerUser,HttpServletRequest request) {
+    
+    	 
+    	
+    	RegisterUser user = registerUserService.getRegisterUserById(Long.parseLong(session.getAttribute("userId")+"")).get();
+    	registerUser.setId(user.getId());
+    	registerUser.setTermsCondition(user.getTermsCondition());
+    	registerUser.setPassword(user.getPassword());
+    	registerUserService.createRegisterUser(registerUser);
+    	
+      if(user!=null) {
+    	  session.setAttribute("userId",user.getId());
+    	  session.setAttribute("userName",user.getYourName()); 
+      }
+    }
+    
     @RequestMapping("/registration" )
     @ResponseBody public void  registration(HttpSession session,RegisterUser registerUser,HttpServletRequest request) {
       RegisterUser user = registerUserService.createRegisterUser(registerUser);
@@ -545,6 +597,12 @@ public class FrontendController {
     public ProductDTO convertToDto(Product Product) {
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		ProductDTO ProductDTO = modelMapper.map(Product, ProductDTO.class);
+		return ProductDTO;
+	}
+    
+    public ProductListDefaultView convertToDefaultDto(Product Product) {
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
+		ProductListDefaultView ProductDTO = modelMapper.map(Product, ProductListDefaultView.class);
 		return ProductDTO;
 	}
     

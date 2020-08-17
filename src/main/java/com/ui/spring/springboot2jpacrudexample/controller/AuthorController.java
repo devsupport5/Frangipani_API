@@ -41,6 +41,12 @@ public class AuthorController {
 		List<Author> authors = authorService.getAllAuthors();
 		return authors.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
+	
+	@GetMapping("/authors/activeList")
+	public List<AuthorDTO> getAuthorsActiveList() {
+		List<Author> authors = authorService.getActiveAuthors();
+		return authors.stream().map(this::convertToDto).collect(Collectors.toList());
+	}
 
 	@GetMapping("/authors/{id}")
 	public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable(value = "id") Long authorId) {

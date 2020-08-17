@@ -12,7 +12,7 @@
 producer of coffee table books and other specialized printing matter. Our
 niche in the market is relatively untapped and we are proud to have transacted
 business with The Office of the President of Ghana... </p>
-<a href="about-frangipani-books.html" class="more"> Read More </a> 
+<a href="<%=request.getContextPath() %>/about-frangipani-books" class="more"> Read More </a> 
 </div>
 <!--Footer Widget End--> 
 </div>
@@ -24,7 +24,7 @@ business with The Office of the President of Ghana... </p>
 <ul class="quick-links">
 <li> <a href="<%=request.getContextPath() %>/about-frangipani-books"> About </a></li>
 <li> <a  href="<%=request.getContextPath() %>/book"> BOOKS </a></li>
-<li> <a href="<%=request.getContextPath() %>/books"> CATEGORY </a></li>
+<li> <a href="<%=request.getContextPath() %>/category"> CATEGORY </a></li>
 <li> <a href="<%=request.getContextPath() %>/authors"> AUTHORS </a></li>
 <!-- <li> <a href="#"> TESTIMONIALS </a></li> -->
 <li> <a href="<%=request.getContextPath() %>/contact"> CONTACT </a></li>
@@ -92,7 +92,7 @@ Powered by:  <a href="#"> Astar Technologies </a></p>
 <div class="col-md-5 col-sm-8 text-right">  
 <div class="payment">
 <span> Payments can be made by </span>
-<img class="img-responsive" src="resources/images/payment.png" alt="Payment">
+<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/payment.png" alt="Payment">
 </div>
 </div>
 

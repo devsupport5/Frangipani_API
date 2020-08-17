@@ -195,7 +195,7 @@ function registration(){
 <!-- Default box -->
 <div class="box register">
 <div class="box-header with-border">
-<h3 class="box-title"> Register and save time </h3>
+<h3 class="box-title"> Register and Save Time </h3>
 </div>
 <div class="box-body">
 <p> Register with us for future convenience: </p>
@@ -282,8 +282,8 @@ function registration(){
 
 
 
-<!-- Order Summary checkout-step-03  -->
-<div class="panel panel-default checkout-step-03">
+<!-- Order Summary checkout-step-03  --> 
+<div class="panel panel-default checkout-step-03" id="orderSummary">
 <div class="panel-heading">
 <h4 class="unicase-checkout-title">
 <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapseThree">
@@ -631,8 +631,8 @@ Register Your Account
 
 <span><font size="errortermsConditionChk" id="errortermsConditionChk" color="red"></font> </span>
 <div class="input-group form-check">
-<input type="checkbox" class="form-check-input" id="termsConditionChk" >
-<label class="form-check-label" for="exampleCheck1">I agree to the Terms of <a href="#">Services & Privacy Plicy</a></label>
+<input type="checkbox" class="form-check-input" id="termsConditionChk" > 
+<label class="form-check-label" for="exampleCheck1">I agree to the Terms of <a href="<%=request.getContextPath()%>/privacy_policy">Services & Privacy Plicy</a></label>
 </div>
 
 
@@ -778,6 +778,7 @@ Add a new address
 <div class="modal-body">
 <form class="">
 
+<span><font size="errorfullName" id="errorfullName" color="red"></font> </span>
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <input class="form-control" name="fullName" id="fullName" placeholder="Full Name" type="text" />
@@ -796,7 +797,7 @@ Add a new address
 </div>
 </div>
 
-
+<span><font size="3" id="errorAdd1" color="red"></font> </span>
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
 <input class="form-control" placeholder="Address line 1" name="add1" id="add1" type="text" />
@@ -804,7 +805,7 @@ Add a new address
 </div>
 
 
-
+<span><font size="3" id="errorAdd2" color="red"></font> </span>
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
 <input class="form-control" placeholder="Address line 2" id="add2" name="add2" type="text" />
@@ -815,6 +816,7 @@ Add a new address
 
 <div class="form-group row">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<span><font size="3" id="errorCountry" color="red"></font> </span>
 		<select class="form-control" name="country" id="country">
 			<option>Select Country</option>
 			<option value="Ghana">Ghana </option>
@@ -822,6 +824,7 @@ Add a new address
 	</div>
 	
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<span><font size="3" id="errorState" color="red"></font> </span>
 		<select class="form-control"id="state" name="state">
 			<option value="State">State </option>
 			<option value="Ashanti">Ashanti</option>
@@ -847,10 +850,12 @@ Add a new address
 
 <div class="form-group row">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<span><font size="3" id="errorCity" color="red"></font> </span>
 		<input class="form-control" placeholder="City" name="city" id="city" type="text" />
 	</div>
 
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+<span><font size="3" id="errorpinCode" color="red"></font> </span>
 <input class="form-control" placeholder="PIN" name="pinCode" id="pinCode" type="text" />
 </div>
 </div>
@@ -894,6 +899,46 @@ $( document ).ready(function() {
 });  	
 
 function addNewAddress(){
+	var status = true;
+	if($("#fullName").val()==""){
+		$("#errorfullName").html("Please enter name");
+		setTimeout(function(){ $("#errorfullName").html(""); }, 7000);
+		$("#fullName").focus();
+		status = false;
+	}else if($("#add1").val()==""){
+		$("#errorAdd1").html("Please enter address line 1");
+		setTimeout(function(){ $("#errorAdd1").html(""); }, 7000);
+		$("#add1").focus();
+		status = false;
+	}else if($("#add2").val()==""){
+		$("#errorAdd2").html("Please enter address line 2");
+		setTimeout(function(){ $("#errorAdd2").html(""); }, 7000);
+		$("#add2").focus();
+		status = false; 
+	}else if($("#country").val()==""){
+		$("#errorCountry").html("Please select country");
+		setTimeout(function(){ $("#errorCountry").html(""); }, 7000);
+		$("#country").focus();
+		status = false;
+	} else if($("#state").val()=="State"){
+		$("#errorState").html("Please select state");
+		setTimeout(function(){ $("#errorState").html(""); }, 7000);
+		$("#state").focus(); 
+		status = false;
+	} else if($("#city").val()==""){
+		$("#errorCity").html("Please enter country");
+		setTimeout(function(){ $("#errorCity").html(""); }, 7000);
+		$("#city").focus();
+		status = false;
+	} else if($("#pinCode").val()==""){ 
+		$("#errorpinCode").html("Please enter pincode");
+		setTimeout(function(){ $("#errorpinCode").html(""); }, 7000);
+		$("#pinCode").focus();
+		status = false;
+	}   
+	
+	if(status){
+	
 	$.ajax({
 		type : "POST",
 		url : "addNewAddress",
@@ -911,11 +956,14 @@ function addNewAddress(){
 			
 		},success:function(data){
 			getAddAddress();  
+			$('body').removeClass('modal-open');
+			$('.modal-backdrop').remove(); 
 			$('#AddNewAddressModal').modal('hide');
 		},error : function(e){
 			console.log("Error :::"+e)
 		} 
 	});
+   }
 }
 
 
@@ -948,8 +996,8 @@ function getCart(){
 			}
 			 
 			 
-			$("#cartData").html(cartData); 
-			$("#cartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+			$("#cartData").html(cartData);  
+			$("#cartTotal").html("Total: "+$("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
 			$("#cateItemTotal").html(data.length);
 			$("#orderCartItem").html(data.length);
 			$("#orderCartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2)); 
@@ -968,13 +1016,13 @@ function getCart(){
 <script src="<%=request.getContextPath() %>/resources/checkout/bootstrap.min.js"></script> 
 
 <!--   JS Files Start  --> 
-<!--<script src="js/jquery-3.3.1.min.js"></script> -->
-<script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
-<script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> 
-<!--<script src="js/bootstrap.min.js"></script> -->
-<script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js"></script>
+<%-- <script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> --%> 
+<script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script> 
+<%-- <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> 
-<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script> --%>  
 <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
 
 <script>
@@ -1130,8 +1178,9 @@ minusButtonStatus  +
 			 if(data.length==0){
 				 $("#pleaceOrder").hide();  
 				 $("#makePaymentButton").hide();  
-				 $("#cartMessage").html("<div style='text-align:center;padding: 15px;'> Cart is empty <div>"); 
-			 }
+				 $("#cartMessage").html("<div style='text-align:center;padding: 15px;'> Cart is empty <div>");
+				 $("#orderSummary").hide();
+			 } 
 			 
 			 
 			/* var subTotal = 0; 

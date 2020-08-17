@@ -5,7 +5,7 @@ import java.sql.Blob;
 
 import com.ui.spring.springboot2jpacrudexample.model.Currency;
 
-public class ProductDTO implements Serializable{
+public class ProductViewDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private long id;
@@ -28,16 +28,10 @@ public class ProductDTO implements Serializable{
 	private int isFeatured; 
 	private double originalPrice;
 	private double discountedPrice;
-	private String productImage;
-	private String image;
-	private String image1;
-	private String image2;
-	private String image3;
-	private Currency currency;
-	private String image4;
-	private String image5;
+	 
+	 
 	
-	public ProductDTO() {
+	public ProductViewDTO() {
 		
 	}
 
@@ -112,29 +106,8 @@ public class ProductDTO implements Serializable{
 		this.bookPrice = bookPrice;
 	}
 
-
-
-
-
-	public String getProductImage() {
-		return productImage;
-	}
-
-	public void setProductImage(String productImage) {
-		this.productImage = productImage;
-	}
-
 	public int getCurrencyId() {
 		return currencyId;
-	}
-
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 
 	public void setCurrencyId(int currencyId) {
@@ -221,53 +194,6 @@ public class ProductDTO implements Serializable{
 		this.discountedPrice = discountedPrice;
 	}
 
-	public String getImage1() {
-		return image1;
-	}
-	public void setImage1(String image1) {
-		this.image1 = image1;
-	}
-
-	public String getImage2() {
-		return image2;
-	}
-	public void setImage2(String image2) {
-		this.image2 = image2;
-	}
-	
-	
-
-	public String getImage4() {
-		return image4;
-	}
-
-	public void setImage4(String image4) {
-		this.image4 = image4;
-	}
-
-	public String getImage5() {
-		return image5;
-	}
-
-	public void setImage5(String image5) {
-		this.image5 = image5;
-	}
-
-	public Currency getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
-	}
-
-	public String getImage3() {
-		return image3;
-	}
-
-	public void setImage3(String image3) {
-		this.image3 = image3;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

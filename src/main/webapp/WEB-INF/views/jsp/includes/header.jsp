@@ -51,7 +51,8 @@
 <div style="width: 210px; padding: 10px 10px 20px 10px;" class="dropdown-menu cart-box" aria-labelledby="cartdropdown">
 
 
-<% if(session.getAttribute("userName")!=null) {%>
+<% if(session.getAttribute("userName")!=null) {%> 
+	<a href="<%=request.getContextPath() %>/myProfile">My Profile </a>
 	<a href="<%=request.getContextPath() %>/my_order"> My Orders </a>
 	<a href="<%=request.getContextPath() %>/manage_address"> Manage Addresses  </a>
 	<a href="<%=request.getContextPath() %>/changePasswprd"> Change Password </a>
@@ -94,7 +95,7 @@ Recently added item(s)
 </li> --%>
 
 </ul>   
-<div class="total">Total: <strong id="cartTotal"></strong></div>
+<div class="total"> <strong id="cartTotal"></strong></div>
 <div class="view-link"> 
 <a href="<%=request.getContextPath() %>/checkout">Proceed to Checkout</a> 
 <a href="<%=request.getContextPath() %>/viewCart">View cart </a></div>
@@ -168,7 +169,7 @@ function getCart(){
 				$("#cartData").html(cartData);
 		       
 			//$("#cartData").html(""); 
-			$("#cartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+			$("#cartTotal").html("Total: "+$("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
 			$("#cateItemTotal").html(data.length);
 		},error : function(e){ 
 			console.log("Error :::"+e)

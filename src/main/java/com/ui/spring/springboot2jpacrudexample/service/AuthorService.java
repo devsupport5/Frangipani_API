@@ -18,4 +18,6 @@ public interface AuthorService {
 	void deleteAuthor(Author author);
 	
 	List<Author> getActiveAuthors();
+	
+	
 }

@@ -199,7 +199,7 @@ function registration(){
 <!-- Default box -->
 <div class="box register">
 <div class="box-header with-border">
-<h3 class="box-title"> Register and save time </h3>
+<h3 class="box-title"> Register and Save Time </h3>
 </div>
 <div class="box-body">
 <p> Register with us for future convenience: </p>
@@ -274,7 +274,7 @@ function registration(){
     
 <div class="row">
 <div class="col-lg-12 text-center">
-<a  data-toggle="modal" data-target="#AddNewAddressModal" href="#" class="lm wf100"> Add a new address </a>
+<a  data-toggle="modal" data-target="#AddNewAddressModal" onclick="resetAddress();" href="#" class="lm wf100"> Add a new address </a>
 </div>
 </div>
 
@@ -287,7 +287,7 @@ function registration(){
 
 
 <!-- Order Summary checkout-step-03  -->
-<div class="panel panel-default checkout-step-03">
+<div class="panel panel-default checkout-step-03" id="orderSummary">
 <div class="panel-heading">
 <h4 class="unicase-checkout-title">
 <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapseThree">
@@ -610,13 +610,13 @@ Register Your Account
 <span><font size="errorUserEmail" id="errorUserEmail" color="red"></font> </span>
 <div class="form-group input-group">
 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-<input type="text" class="form-control" placeholder="Email Address" name="userEmail" id="userEmail" required>
+<input type="text" class="form-control" placeholder="Email Address" name="userEmail"  onchange="checkUserName(this,'userEmail')"  id="userEmail" required>
 </div>
 
 <span><font size="errorUserName" id="errorUserName" color="red"></font> </span>
 <div class="form-group input-group">
 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-<input type="text" class="form-control" placeholder="User Name" id="userName" name="userName" id="userName">
+<input type="text" class="form-control" placeholder="User Name" id="userName" onchange="checkUserName(this,'userName')" name="userName" id="userName">
 </div>
 
 
@@ -636,7 +636,7 @@ Register Your Account
 <span><font size="errortermsConditionChk" id="errortermsConditionChk" color="red"></font> </span>
 <div class="input-group form-check">
 <input type="checkbox" class="form-check-input" id="termsConditionChk" >
-<label class="form-check-label" for="exampleCheck1">I agree to the Terms of <a href="#">Services & Privacy Plicy</a></label>
+<label class="form-check-label" for="exampleCheck1">I agree to the Terms of <a href="<%=request.getContextPath()%>/privacy_policy">Services & Privacy Plicy</a></label>
 </div>
 
 
@@ -678,12 +678,13 @@ Continue as a guest user.
 
 <!-- content goes here -->
 
-
+<span><font size="3" id="errorguestEmailAddress" color="red"></font> </span>
 <div class="form-group input-group">
 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 <input type="text" class="form-control" placeholder="Email address *" id="guestEmailAddress" name="guestEmailAddress">
 </div>
 
+<span><font size="3" id="errorguestMobileNumber" color="red"></font> </span>
 <div class="form-group input-group">
 <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
 <input type="text" class="form-control" placeholder="Mobile Number *" name="guestMobileNumber" id="guestMobileNumber">
@@ -702,7 +703,7 @@ Continue as a guest user.
 <div class="modal-footer">
 <div class="row">
 <div class="col-lg-12"> 
-<button type="submit"   class="btn-upper wf100 btn btn-primary checkout-page-button checkout-continue "> CONTINUE </button>
+<button type="submit"  onclick="return checkGuestValidation()"  class="btn-upper wf100 btn btn-primary checkout-page-button checkout-continue "> CONTINUE </button>
 </div>
 </div> 	
 </div>  
@@ -783,9 +784,10 @@ Add a new address
 <div class="modal-body">
 <form class="">
 
+<span><font size="errorfullName" id="errorfullName" color="red"></font> </span>
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<input class="form-control" name="fullName" id="fullName" placeholder="Full Name" type="text" />
+<input class="form-control" name="fullName" id="fullName" placeholder="Full Name" type="text" maxlength="150" />
 </div>
 </div>
 
@@ -801,15 +803,15 @@ Add a new address
 </div>
 </div>
 
-
+<span><font size="3" id="errorAdd1" color="red"></font> </span>
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
-<input class="form-control" placeholder="Address line 1" name="add1" id="add1" type="text" />
+<input class="form-control" placeholder="Address line 1" name="add1" id="add1" type="text" maxlength="150" />
 </div>
 </div>
 
 
-
+<span><font size="3" id="errorAdd2" color="red"></font> </span>
 <div class="form-group row">
 <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12">
 <input class="form-control" placeholder="Address line 2" id="add2" name="add2" type="text" />
@@ -820,16 +822,18 @@ Add a new address
 
 <div class="form-group row">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<span><font size="3" id="errorCountry" color="red"></font> </span>
 		<select class="form-control" name="country" id="country">
-			<option>Select Country</option>
+			<option value="" > Select Country</option>
 			<option value="Ghana">Ghana </option>
-		</select>
+		</select> 
 	</div>
 	
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<span><font size="3" id="errorState" color="red"></font> </span>
 		<select class="form-control"id="state" name="state">
 			 
-			<option value="State">State </option>
+			<option value="State">Select State </option>
 			<option value="Ashanti">Ashanti</option>
 <option value="Bono Region">Bono Region</option>
 <option value="Bono East Region">Bono East Region</option>
@@ -850,13 +854,15 @@ Add a new address
 	</div>
 </div>
 
-
+ 
 <div class="form-group row">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<span><font size="3" id="errorCity" color="red"></font> </span>
 		<input class="form-control" placeholder="City" name="city" id="city" type="text" />
 	</div>
 
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+<span><font size="3" id="errorpinCode" color="red"></font> </span>
 <input class="form-control" placeholder="PIN" name="pinCode" id="pinCode" type="text" />
 </div>
 </div>
@@ -897,7 +903,60 @@ $( document ).ready(function() {
 	getAddAddress();
 });  	
 
+function resetAddress(){
+	$("#fullName").val("");
+	$("#newUserEmail").val("");
+	$("#mobileNumber").val("");
+	$("#add1").val("");
+	$("#add2").val("");  
+	$('#country').val("").change();
+	$("#state").val("State").change();  
+	$("#city").val(""); 
+	$("#pinCode").val("");
+	$("#specialInstruction").val("");
+} 
+
 function addNewAddress(){
+	
+	var status = true;
+	if($("#fullName").val()==""){
+		$("#errorfullName").html("Please enter name");
+		setTimeout(function(){ $("#errorfullName").html(""); }, 7000);
+		$("#fullName").focus();
+		status = false;
+	}else if($("#add1").val()==""){
+		$("#errorAdd1").html("Please enter address line 1");
+		setTimeout(function(){ $("#errorAdd1").html(""); }, 7000);
+		$("#add1").focus();
+		status = false;
+	}else if($("#add2").val()==""){
+		$("#errorAdd2").html("Please enter address line 2");
+		setTimeout(function(){ $("#errorAdd2").html(""); }, 7000);
+		$("#add2").focus();
+		status = false; 
+	}else if($("#country").val()==""){
+		$("#errorCountry").html("Please select country");
+		setTimeout(function(){ $("#errorCountry").html(""); }, 7000);
+		$("#country").focus();
+		status = false;
+	} else if($("#state").val()=="State"){
+		$("#errorState").html("Please select state");
+		setTimeout(function(){ $("#errorState").html(""); }, 7000);
+		$("#state").focus(); 
+		status = false;
+	} else if($("#city").val()==""){
+		$("#errorCity").html("Please enter country");
+		setTimeout(function(){ $("#errorCity").html(""); }, 7000);
+		$("#city").focus();
+		status = false;
+	} else if($("#pinCode").val()==""){ 
+		$("#errorpinCode").html("Please enter pincode");
+		setTimeout(function(){ $("#errorpinCode").html(""); }, 7000);
+		$("#pinCode").focus();
+		status = false;
+	}   
+	
+	if(status){
 	$.ajax({
 		type : "POST",
 		url : "addNewAddress",
@@ -914,12 +973,15 @@ function addNewAddress(){
 			specialInstruction : $("#specialInstruction").val(),
 			
 		},success:function(data){
+			$('body').removeClass('modal-open');
+			$('.modal-backdrop').remove();    
 			$('#AddNewAddressModal').modal('hide');
 			getAddAddress(); 			 
 		},error : function(e){
 			console.log("Error :::"+e)
 		} 
 	});
+  }
 }
 
 
@@ -950,13 +1012,22 @@ function getCart(){
 			}else{
 				cartData = "Cart is empty";
 			}
-			 
-			$("#cartData").html(cartData);  
-			$("#cartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+ 			 
+			$("#cartData").html(cartData);
 			$("#cateItemTotal").html(data.length);
-			$("#orderCartItem").html(data.length); 
-			$("#orderCartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2)); 
-			$("#orderCartFinalTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+			$("#orderCartItem").html(data.length);
+			
+			if(data.length > 0){
+				$("#cartTotal").html("Total: "+$("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+				$("#orderCartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2)); 
+				$("#orderCartFinalTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));	
+			}else{
+				$("#cartTotal").html("");
+				$("#orderCartTotal").html("");   
+				$("#orderCartFinalTotal").html("");
+			}
+			
+			
 		},error : function(e){  
 			console.log("Error :::"+e)
 		}
@@ -971,14 +1042,15 @@ function getCart(){
 <script src="<%=request.getContextPath() %>/resources/checkout/bootstrap.min.js"></script> 
 
 <!--   JS Files Start  -->  
-<!--<script src="js/jquery-3.3.1.min.js"></script> --> 
+<script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js"></script> 
 <%-- <script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> --%> 
-<%-- <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script> --%> 
-<script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script> 
+<%-- <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script>  
-<script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
+ --%>
+ <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
  
 <script>
 
@@ -1051,7 +1123,7 @@ function getAddAddress(){
 getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10px 0px 10px;" class="box  '+cssStyle+'">'+
 					'<div class="box-headerwith-border">'+ 
 					'<h3 style="font-size: 17px;padding: 15px 0px 15px 0px;border-bottom: 1px solid #ccc;" class="box-title">'+ data[i].fullName
-						+'<span class="label label-default">Home</span>'+
+						+'<span ></span>'+ 
 					'</h3>'+
 					'<div class="box-tools pull-right">'+
 						'<div  class="input-group form-check">'+  
@@ -1107,7 +1179,8 @@ function cartList(){
 			$('#cartList').empty();
 			var cartList = ""; 
 			var subTotal = 0; 
-			var cartFinalTotal = 0; 
+			var cartFinalTotal = 0;
+			 
 			for (var i = 0; i < data.length; i++) {
 				
 				var minusButtonStatus = "";
@@ -1164,11 +1237,13 @@ minusButtonStatus  +
 			 $("#subTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
 			 $("#finalTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
 			 $("#myCart").html(data.length); 
-			 
+			 /* $("#orderCartItem").html(data.length); */
+			       
 			 if(data.length==0){
 				 $("#pleaceOrder").hide();  
 				 $("#makePaymentButton").hide();  
 				 $("#cartMessage").html("<div style='text-align:center;padding: 15px;'> Cart is empty <div>"); 
+				 $("#orderSummary").hide(); 
 			 }
 			 
 			 
@@ -1300,6 +1375,56 @@ function removeToCart(orderId){
 	 
 	 
 	 
+ }
+ function checkUserName(type,action){
+	 $.ajax({
+		type : "POST",
+		url : "checkUserStatus",
+		data : {  
+			"value" : type.value,
+			"action" : action, 
+		},success:function(data){
+			if(data==true){  
+				if(action=="userEmail"){
+					$("#userEmail").focus();
+					$("#userEmail").val("");
+					
+					$("#errorUserEmail").html("Email address already registered.");
+					setTimeout(function(){ $("#errorUserEmail").html(""); }, 7000);
+					
+				}else if(action=="userName"){
+					$("#userName").focus();
+					$("#userName").val("");
+					 
+					$("#errorUserName").html("Username already registered.");
+					setTimeout(function(){ $("#errorUserName").html(""); }, 7000);
+				}
+			}
+		},error : function(e){
+			console.log("Error :::"+e)
+		}
+	});   
+} 
+ 
+ function checkGuestValidation(){
+	 var status = true;
+	 if($("#guestEmailAddress").val()==""){ 
+			$("#errorguestEmailAddress").html("Please enter email address");
+			setTimeout(function(){ $("#errorguestEmailAddress").html(""); }, 7000);
+			$("#guestEmailAddress").focus(); 
+			status = false;
+		}else if($("#guestMobileNumber").val()==""){ 
+			$("#errorguestMobileNumber").html("Please enter monile number");
+			setTimeout(function(){ $("#errorguestMobileNumber").html(""); }, 7000);
+			$("#guestMobileNumber").focus();
+			status = false;
+		}
+	 if(status){
+		 return true;
+	 }else{
+		 return false;
+	 }
+	   
  }
  
     </script>

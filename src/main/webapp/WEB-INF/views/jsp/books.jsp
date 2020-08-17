@@ -85,7 +85,7 @@
 					<img style="    height: 274px;" class="img-responsive" src="${products.image }" alt="">	
 				</c:when>
 				<c:otherwise>
-					<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpeg" alt="${products.bookTitle }" title="${products.bookTitle }">
+					<img class="img-responsive" src="<%=request.getContextPath() %>/resources/images/book-default.jpg" alt="${products.bookTitle }" title="${products.bookTitle }">
 				</c:otherwise>
 			</c:choose>
 			

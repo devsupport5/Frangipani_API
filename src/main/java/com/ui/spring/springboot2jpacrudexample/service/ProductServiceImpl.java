@@ -47,4 +47,10 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return this.ProductRepository.getProductByCategory(categoryId);
 	}
+
+	@Override
+	public List<Product> getActiveProducts() {
+		// TODO Auto-generated method stub
+		return this.ProductRepository.getActiveProducts();
+	}
 }
