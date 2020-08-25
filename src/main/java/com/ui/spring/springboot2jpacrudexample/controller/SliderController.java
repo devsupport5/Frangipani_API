@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ui.spring.springboot2jpacrudexample.beans.SliderDTO;
 import com.ui.spring.springboot2jpacrudexample.exception.ResourceNotFoundException;
 import com.ui.spring.springboot2jpacrudexample.model.Slider;
+import com.ui.spring.springboot2jpacrudexample.model.view.SliderListViewDTO;
 import com.ui.spring.springboot2jpacrudexample.service.SliderService;
 
 @CrossOrigin
@@ -41,7 +42,13 @@ public class SliderController {
 		List<Slider> sliders = SliderService.getAllSliders();
 		return sliders.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
-
+	
+	@GetMapping("/sliders/sliderList")
+	public List<SliderListViewDTO> getAllSlidersList() {
+		List<Slider> sliders = SliderService.getAllSliders();
+		return sliders.stream().map(this::convertListToDto).collect(Collectors.toList());
+	}
+	
 	@GetMapping("/sliders/{id}")
 	public ResponseEntity<SliderDTO> getSliderById(@PathVariable(value = "id") Long sliderDTO) {
 		Slider slider = SliderService.getSliderById(sliderDTO).get();
@@ -84,6 +91,12 @@ public class SliderController {
 		SliderDTO SliderDTO = modelMapper.map(slider, SliderDTO.class);
 		return SliderDTO;
 	}
+	
+	public SliderListViewDTO convertListToDto(Slider slider) {
+		SliderListViewDTO SliderDTO = modelMapper.map(slider, SliderListViewDTO.class);
+		return SliderDTO;
+	}
+	
 	
 	public Slider  convertToEntity(SliderDTO sliderDTO) {
 		Slider Slider = modelMapper.map(sliderDTO, Slider.class);

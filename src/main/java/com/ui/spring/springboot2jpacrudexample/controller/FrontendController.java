@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ui.spring.springboot2jpacrudexample.MailConfiguration;
 import com.ui.spring.springboot2jpacrudexample.beans.ProductDTO;
 import com.ui.spring.springboot2jpacrudexample.model.Inquiry;
 import com.ui.spring.springboot2jpacrudexample.model.OrderItem;
@@ -284,6 +285,7 @@ public class FrontendController {
     @RequestMapping("/insertContactus" )
     @ResponseBody  public boolean insertContactus(Inquiry inquiry) {
     	  inquiryService.createInquiry(inquiry);
+    	  MailConfiguration.sendMail("Inquiry Details",mailTemplate(inquiry));
     	  return true;
     }
     
@@ -539,6 +541,55 @@ public class FrontendController {
       
     }
     
+    @RequestMapping("/forgotPasswordSendMail")
+    @ResponseBody public boolean forgotPasswordSendMail(HttpSession session,String FGemailAddress) {
+
+    	System.out.println("GemailAddress-------->>>>"+FGemailAddress);
+    	
+    	RegisterUser userDetail = registerUserService.checkEmailAddress(FGemailAddress);
+    	if(userDetail != null) {
+    		String body = "Dear user, /n <a href='www.google.com' target='_blank'>  Please click on link to reset password.</a>";
+        	MailConfiguration.sendMail("Forgot Password Link",body);
+        	return true;
+    	}else {
+    		return false;
+    	}
+    }
+    
+    
+    
+    @RequestMapping("/setNewPassword")
+    public String setNewPassword(HttpSession session,String FGemailAddress,Model model) {
+
+    	System.out.println("GemailAddress-------->>>>"+FGemailAddress);
+    	
+    	RegisterUser userDetail = registerUserService.checkEmailAddress(FGemailAddress);
+    	if(userDetail != null) {
+    		
+    		model.addAttribute("FGemailAddress", FGemailAddress);
+    		
+    		//String body = "Dear user, /n <a href='www.google.com' target='_blank'>  Please click on link to reset password.</a>";
+        	//MailConfiguration.sendMail("Forgot Password Link",body);
+    	}else{
+    		return "redirect:/";
+    	}
+    	return "reset_password";
+    }
+    
+    @RequestMapping("/resetPassword")
+    @ResponseBody public boolean resetPassword(HttpSession session,HttpServletRequest request) {
+      
+      RegisterUser registerUser = registerUserService.checkEmailAddress(request.getParameter("FGemailAddress"));
+      if(registerUser!=null) {
+    	  //System.out.println("updatePassword---------->>>"+request.getParameter("updatePassword"));
+    	  registerUser.setPassword(request.getParameter("updatePassword"));
+          registerUserService.updateRegisterUser(registerUser);
+          return true;  
+      }else {
+    	  return false;
+      }
+    }
+    
     @RequestMapping("/checkUserStatus")
     @ResponseBody public boolean  checkUserStatus(HttpSession session,String value,String  action) {
       RegisterUser registerUser = new RegisterUser();
@@ -559,6 +610,24 @@ public class FrontendController {
       
     }
     
+    @RequestMapping("/setDefaultAddress")
+    @ResponseBody public boolean  setDefaultAddress(HttpSession session,long  id) {
+    
+    	Integer userId = 0;
+  		if(session.getAttribute("userId")!=null)    	
+		{
+  			
+  			
+			userId = Integer.parseInt(session.getAttribute("userId")+"");
+			
+			System.out.println(userId +"---"+ id);
+			
+			userAddressService.updateDefaultAddressByUserId(userId);
+			userAddressService.setDefaultAddressById(id);
+		}
+    	return false;
+    } 	
+    
     
     @RequestMapping("/manage_address")
     public String  manage_address(HttpSession session,Model model) {
@@ -566,9 +635,14 @@ public class FrontendController {
       //System.out.println("-------manage_address------->>>");
       Integer userId = 0;
   		if(session.getAttribute("userId")!=null)    	
-  			userId = Integer.parseInt(session.getAttribute("userId")+"");
+		{
+			userId = Integer.parseInt(session.getAttribute("userId")+"");
+			return "manage_addresses";
+		}else {
+			return "redirect:/";
+		}
   		
-        return "manage_addresses";
+        
     }
     
     @RequestMapping("/terms_conditions")
@@ -605,5 +679,55 @@ public class FrontendController {
 		ProductListDefaultView ProductDTO = modelMapper.map(Product, ProductListDefaultView.class);
 		return ProductDTO;
 	}
+    
+    
+
+    public String mailTemplate(Inquiry inquiry) {
+    	
+    	String html = "<html><head>"+
+    	"<style>"+
+    	"table {"+
+    	  "font-family: arial, sans-serif;"+
+    	  "border-collapse: collapse;"+
+    	  "width: 100%;"+
+    	"}"+
+
+    	"td, th {"+
+    	  "border: 1px solid #dddddd;"+
+    	  "text-align: left;"+
+    	  "padding: 8px;"+
+    	"}"+
+
+    	"tr:nth-child(even) {"+
+    	  "background-color: #dddddd;"+
+    	"}"+
+    	"</style>"+
+    	"</head>"+
+    	"<body>"+
+
+    	"<h2>Inquiry Details</h2>"+
+
+    	"<table>"+
+    	  "<tr>"+
+    	    "<th>Full Name</th>"+
+    	    "<th>Email Address</th>"+
+    	    "<th>Contact</th>"+
+    	    "<th>Subject</th>"+
+    	    "<th>Message</th>"+
+    	  "</tr>"+
+    	  "<tr>"+
+    	   " <td>"+inquiry.getFullName() +"</td>"+
+    	    "<td>"+inquiry.getEmailAddress() +"</td>"+
+    	    "<td>"+inquiry.getContactNumber() +"</td>"+
+    	    "<td>"+inquiry.getContactSubject() +"</td>"+
+    	    "<td>"+inquiry.getMessage() +"</td>"+
+    	  "</tr>"+
+    	"</table>"+
+
+    	"</body>"+
+    	"</html>";
+    	
+    	return html;
+    }
     
 }

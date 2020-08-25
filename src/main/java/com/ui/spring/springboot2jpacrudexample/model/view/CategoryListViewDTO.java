@@ -7,7 +7,7 @@ public class CategoryListViewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private long id;
 	private String categoryName;
-	private String description;
+	/*private String description;*/
 	private int parentId;
 	private int isActive;
 	private int isDeleted;
@@ -40,14 +40,14 @@ public class CategoryListViewDTO implements Serializable{
 	}
 
 
-	public String getDescription() {
+	/*public String getDescription() {
 		return description;
 	}
 
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
+	}*/
 
 
 	public int getParentId() {

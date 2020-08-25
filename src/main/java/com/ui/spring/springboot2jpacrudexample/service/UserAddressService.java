@@ -22,5 +22,7 @@ public interface UserAddressService {
 	
 	Optional<UserAddress> getUserAddressById(Long sliderId);
 	
+	void setDefaultAddressById(long addressId);
 	
+	void updateDefaultAddressByUserId(long userId);
 }

@@ -125,6 +125,14 @@ public class CategoryController {
 		return category;
 	}
 	
+	@GetMapping("/categorys/allsubcategorys")
+	public List<CategoryDTO> getAllSubCategorys() {
+		List<Category> categories = categoryService.getAllSubCategorys();
+		return categories.stream()
+        .map(this::convertToDto)
+        .collect(Collectors.toList());
+	}
+	
 	@GetMapping("/subcategorys/{id}")
 	public List<CategoryDTO> getSubCategorys(@PathVariable(value = "id") Integer categoryId) {
 		List<Category> categories = categoryService.getSubCategorys(categoryId);

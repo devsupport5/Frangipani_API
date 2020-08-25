@@ -200,8 +200,8 @@ function registration(){
 <div class="box-body">
 <p> Register with us for future convenience: </p>
 <ul style="margin: 0; padding: 0px 0px 16px 20px;" class="text instruction inner-bottom-30">
-<li class="save-time-reg">- Fast and easy check out</li>
-<li>- Easy access to your order history and status</li>
+<li class="save-time-reg"> Fast and easy check out</li>
+<li> Easy access to your order history and status</li>
 </ul>
 <button data-toggle="modal" data-target="#RegisterModal" type="submit" class="btn-upper wf100 btn btn-primary checkout-page-button checkout-continue "> Register Now </button>
 </div><!-- /.box-body -->

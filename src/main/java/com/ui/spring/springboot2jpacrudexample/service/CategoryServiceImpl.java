@@ -53,4 +53,10 @@ public class CategoryServiceImpl implements CategoryService{
 		return this.categoryRepository.getActiveCategory();
 	}
 
+	@Override
+	public List<Category> getAllSubCategorys() {
+		// TODO Auto-generated method stub
+		return this.categoryRepository.getAllSubCategorys();
+	}
+
 }

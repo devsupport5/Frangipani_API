@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<UserDetail, Long>{
 	@Query("SELECT u FROM UserDetail u WHERE u.userEmail = ?1 and u.password = ?2")
 	UserDetail checkValidUser(String userEmail,String password);
 	
+	@Query("SELECT u FROM UserDetail u WHERE u.userEmail = ?1")
+	UserDetail checkValidEmail(String userEmail);
+	
 }

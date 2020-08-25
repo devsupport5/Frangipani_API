@@ -18,5 +18,7 @@ public interface UserService {
 	UserDetail updateUser(UserDetail User);
 
 	void deleteUser(UserDetail User);
+
+	UserDetail checkValidEmail(String userEmail);
 	
 }

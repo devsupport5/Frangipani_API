@@ -20,4 +20,6 @@ public interface CategoryService {
 	List<Category> getSubCategorys(Integer categoryId);
 	
 	List<Category> getActiveCategory();
+	
+	List<Category> getAllSubCategorys();
 }

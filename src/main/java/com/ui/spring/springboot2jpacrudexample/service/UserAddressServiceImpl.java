@@ -49,4 +49,12 @@ public class UserAddressServiceImpl implements UserService{
 		return this.userRepository.checkValidUser(userEmail, password);
 	}
 
+	@Override
+	public UserDetail checkValidEmail(String userEmail) {
+		// TODO Auto-generated method stub
+		return this.userRepository.checkValidEmail(userEmail);
+	}
+
+	
+	
 }

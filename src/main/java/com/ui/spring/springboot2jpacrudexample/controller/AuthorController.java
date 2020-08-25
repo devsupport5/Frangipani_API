@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ui.spring.springboot2jpacrudexample.beans.AuthorDTO;
 import com.ui.spring.springboot2jpacrudexample.exception.ResourceNotFoundException;
 import com.ui.spring.springboot2jpacrudexample.model.Author;
+import com.ui.spring.springboot2jpacrudexample.model.view.AuthorListViewDTO;
 import com.ui.spring.springboot2jpacrudexample.service.AuthorService;
 
 @CrossOrigin
@@ -41,6 +42,13 @@ public class AuthorController {
 		List<Author> authors = authorService.getAllAuthors();
 		return authors.stream().map(this::convertToDto).collect(Collectors.toList());
 	}
+	
+	@GetMapping("/authors/authorList")
+	public List<AuthorListViewDTO> getAuthorList() {
+		List<Author> authors = authorService.getAllAuthors();
+		return authors.stream().map(this::convertToViewDto).collect(Collectors.toList());
+	}
+	
 	
 	@GetMapping("/authors/activeList")
 	public List<AuthorDTO> getAuthorsActiveList() {
@@ -84,6 +92,11 @@ public class AuthorController {
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return response;
+	}
+	
+	public AuthorListViewDTO convertToViewDto(Author author) {
+		AuthorListViewDTO authorDTO = modelMapper.map(author, AuthorListViewDTO.class);
+		return authorDTO;
 	}
 	
 	public AuthorDTO convertToDto(Author author) {

@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -301,12 +302,12 @@
 			<c:choose>
 				<c:when test="${coun.index == 0 }">
 					<div class="tab-pane fade show active" id="nav-one${coun.count}" role="tabpanel" aria-labelledby="nav-one-tab">
-						<p>${productTabList.description } </p>
-					</div>
+						<p style="height: 500px;overflow: auto;padding-right: 10px;">${productTabList.description } </p>
+					</div>   
 				</c:when>
 				<c:otherwise> 
 					<div class="tab-pane fade show" id="nav-one${coun.count}" role="tabpanel" aria-labelledby="nav-one-tab">
-							<p>${productTabList.description } </p>
+							<p style="height: 500px;overflow: auto;padding-right: 10px;">${productTabList.description } </p>
 						</div>
 			</c:otherwise>
 			</c:choose>

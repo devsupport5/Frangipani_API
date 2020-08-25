@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title> Forgot Password | Frangipani Books </title>
+<title> Change Password | Frangipani Books </title>
 
 <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 <meta name="theme-color" content="#ED008C">
@@ -69,7 +69,7 @@
 <div class="container">
 <ul>  
 <li><a href="<%=request.getContextPath()%>/">Home</a></li>
-<li> Forgot Password </li>
+<li> Change Password </li>
 </ul>
 </div>
 </section>
@@ -93,7 +93,7 @@
 
 <h3 style="font-size: 17px;
 padding: 15px 0px 15px 0px;
-border-bottom: 1px solid #ccc;" class="box-title"> Forgot Password 
+border-bottom: 1px solid #ccc;" class="box-title"> Change Password 
 </h3>
 
 
@@ -102,20 +102,27 @@ border-bottom: 1px solid #ccc;" class="box-title"> Forgot Password
 <div class="box-body">
 <!-- content goes here -->
 <form>
-<span><font size="3" id="errorEmailAddress" color="red"></font> </span>
+ 
+
+<span><font size="3" id="errorNewPassword" color="red"></font> </span>
 <div class="form-group input-group">
 <span class="input-group-addon"><i class="fa fa-key"></i></span>
-<input type="text" class="form-control" placeholder="Email address"   id="emailAddress">
+<input type="password" class="form-control" placeholder="New Password" id="newPassword">
+</div>
+ 
+<span><font size="3" id="errorConfirmPassword" color="red"></font> </span>
+<div class="form-group input-group">
+<span class="input-group-addon"><i class="fa fa-key"></i></span>
+<input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword">
+<input type="hidden" name="FGemailAddress" id="FGemailAddress" value="${FGemailAddress }"> 
 </div>
 
- 
 </form>
 
 </div><!-- /.box-body -->
-
-<center><span><font size="3" id="successCurrentEmail" color="red"></font> </span></center> 
-<div class="box-footer">  
-<a class="checkout-btn1" href="#" onclick="return checkValidation();"> SEND </a>
+<center><span><font size="3" id="successCurrentPassword" color="red"></font> </span></center> 
+<div class="box-footer"> 
+<a class="checkout-btn1" href="#" onclick="return checkValidation();"> SAVE </a>
 </div>
     
 </div><!-- /.box -->
@@ -178,47 +185,40 @@ w3IncludeHTML();
 
 function checkValidation(){
 	var status = true;
-	if($("#emailAddress").val()==""){ 
-		$("#errorEmailAddress").html("Please enter email address");
-		setTimeout(function(){ $("#errorEmailAddress").html(""); }, 7000);
-		$("#emailAddress").focus();
-		status = false;
-	}  
 	 
+	if($("#newPassword").val()==""){
+		$("#errorNewPassword").html("Please enter new password");
+		setTimeout(function(){ $("#errorNewPassword").html(""); }, 7000);
+		$("#newPassword").focus();
+		status = false;
+	}   
+	
+	var pass = true;
+	if($("#confirmPassword").val()==""){
+		$("#errorConfirmPassword").html("Please retype password");
+		setTimeout(function(){ $("#errorConfirmPassword").html(""); }, 7000);
+		$("#confirmPassword").focus();
+		status = false;
+		pass = false;
+	}  
+	  
+	if($("#confirmPassword").val()!=$("#newPassword").val() && pass){  
+		$("#errorConfirmPassword").html("Password and retyped password did not match");
+		setTimeout(function(){ $("#errorConfirmPassword").html(""); }, 7000);
+		$("#confirmPassword").focus();
+		status = false; 
+	}
 	
 	
   if(status){
 	   
 	  $.ajax({
 			type : "POST", 
-			url : "<%=request.getContextPath()%>/forgotPasswordSendMail",
-			data : {
-				FGemailAddress : $("#emailAddress").val(),
-				
-			},success:function(data){ 
-				alert(data); 
-				
-				if(data==true){ 
-					$("#successCurrentEmail").html("Please check your email address to reset password.");
-					setTimeout(function(){ $("#successCurrentEmail").html(""); }, 7000);
-				}else if(data==false){
-					$("#successCurrentEmail").html("Email address not registerd with us.");
-					setTimeout(function(){ $("#successCurrentEmail").html(""); }, 7000);
-				}
-				
-			},error : function(e){ 
-				console.log("Error :::"+e)
-			}
-	  
-	  });
-	  
-	
-	  <%-- $.ajax({
-			type : "POST", 
-			url : "<%=request.getContextPath()%>/updatePassword",
+			url : "<%=request.getContextPath()%>/resetPassword",
 			data : {
 				updatePassword : $("#newPassword").val(),
-				
+				FGemailAddress : $("#FGemailAddress").val(),
+				   
 			},success:function(data){
 				     
 				if(data==true){ 
@@ -226,15 +226,16 @@ function checkValidation(){
 					setTimeout(function(){ $("#successCurrentPassword").html(""); }, 7000);
 					$("#currentPassword").val("");
 					$("#newPassword").val("");
-					$("#confirmPassword").val("");
+					$("#confirmPassword").val(""); 
+					window.location = "<%=request.getContextPath()%>/logout";
+				}else{
+					$("#successCurrentPassword").html("Email id not registered with us.");
+					setTimeout(function(){ $("#successCurrentPassword").html(""); }, 7000);
 				}
-				
-				 
-				
 			},error : function(e){ 
 				console.log("Error :::"+e)
 			}
-		}); --%>
+		});
 	  
   }
 }
@@ -262,37 +263,6 @@ function checkUserPassword(){
 		}
 	});
   	
-}
-function checkUserName(type,action){
-	
-	//alert("hello")
-	 $.ajax({
-		type : "POST",
-		url : "checkUserStatus",
-		data : {  
-			"value" : type.value,
-			"action" : action, 
-		},success:function(data){
-			if(data==true){  
-				if(action=="userEmail"){
-					$("#userEmail").focus();
-					$("#userEmail").val("");
-					
-					$("#errorEmailAddress").html("Email address already registered.");
-					setTimeout(function(){ $("#errorEmailAddress").html(""); }, 7000);
-					
-				}/* else if(action=="userName"){
-					$("#userName").focus();
-					$("#userName").val("");
-					 
-					$("#errorUserName").html("Username already registered.");
-					setTimeout(function(){ $("#errorUserName").html(""); }, 7000);
-				} */
-			}
-		},error : function(e){
-			console.log("Error :::"+e)
-		}
-	});   
 }
 
 </script>

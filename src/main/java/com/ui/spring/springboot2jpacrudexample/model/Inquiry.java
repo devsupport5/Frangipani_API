@@ -46,7 +46,7 @@ public class Inquiry {
 		this.fullName = fullName;
 	}
 
-	@Column(name = "message")
+	@Column(name = "message", columnDefinition = "LONGTEXT")
 	public String getMessage() {
 		return message;
 	}

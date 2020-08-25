@@ -58,4 +58,19 @@ public class UserServiceImpl implements UserAddressService{
 		// TODO Auto-generated method stub
 		this.userAddressRepository.deleteAddressById(addressId);
 	}
+
+  
+	@Override
+	public void setDefaultAddressById(long addressId) {
+		// TODO Auto-generated method stub
+		this.userAddressRepository.setDefaultAddressById(addressId);
+	}
+
+   
+	@Override
+	public void updateDefaultAddressByUserId(long userId) {
+		// TODO Auto-generated method stub
+		this.userAddressRepository.updateDefaultAddressByUserId(userId);
+		
+	}
 }

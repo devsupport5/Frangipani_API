@@ -204,8 +204,8 @@ function registration(){
 <div class="box-body">
 <p> Register with us for future convenience: </p>
 <ul style="margin: 0; padding: 0px 0px 16px 20px;" class="text instruction inner-bottom-30">
-<li class="save-time-reg">- Fast and easy check out</li>
-<li>- Easy access to your order history and status</li>
+<li class="save-time-reg"> Fast and easy check out</li>
+<li> Easy access to your order history and status</li>
 </ul>
 <button data-toggle="modal" data-target="#RegisterModal" type="submit" class="btn-upper wf100 btn btn-primary checkout-page-button checkout-continue "> Register Now </button>
 </div><!-- /.box-body -->
@@ -254,7 +254,11 @@ function registration(){
 </a>
 </h4>
 </div>
-<div id="collapseTwo" class="panel-collapse collapse">
+<% if(session.getAttribute("userName")==null) {%> 
+<div id="collapseTwo" class="panel-collapse collapse">  
+<% }else{ %>
+<div id="collapseTwo" class="panel-collapse collapse in show">
+<% } %>
 <div class="panel-body">
 
 <div class="row">
@@ -740,6 +744,7 @@ Forgot Password?
 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 <input type="text" class="form-control" placeholder="Enter your Email" id="FGemailAddress">
 </div>
+<center><span><font size="3" id="successCurrentEmail" color="red"></font> </span></center> 
 </div>
 </div>
 
@@ -1109,17 +1114,18 @@ function getAddAddress(){
 				var cssStyle = ""; 
 				var backStyle = "";
 				var isActive = "";
-				
+				 
 				if(data[i].defaultAddress=="0"){
 					cssStyle = "box-success";
 					backStyle = "aliceblue";
-					//isActive ="checked";
+					isActive ="";
 				}else{
 					cssStyle = "box-default";
 					backStyle = "#fff";
-					isActive ="";
-				}  					
-					 
+					isActive ="checked";
+				}  	
+				//alert(data[i].defaultAddress +"---"+isActive);
+					  
 getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10px 0px 10px;" class="box  '+cssStyle+'">'+
 					'<div class="box-headerwith-border">'+ 
 					'<h3 style="font-size: 17px;padding: 15px 0px 15px 0px;border-bottom: 1px solid #ccc;" class="box-title">'+ data[i].fullName
@@ -1364,10 +1370,13 @@ function removeToCart(orderId){
 		}  
 		 
 		
-		
+		 
 	  if(status){
-		  $('#FPasswordModal').modal('hide');
-		  $("#successCurrentEmail").html("Password sent successfully.");
+		  //$('body').removeClass('modal-open');
+		  //$('.modal-backdrop').remove(); 
+		  //$('#FPasswordModal').modal('hide');
+		  $("#FGemailAddress").val("");
+		  $("#successCurrentEmail").html("Please check your email address to reset password.");
 			setTimeout(function(){ $("#successCurrentEmail").html(""); }, 7000);
 			
 	  }	

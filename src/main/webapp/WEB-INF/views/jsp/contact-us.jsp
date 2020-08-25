@@ -102,23 +102,23 @@ Osu- Accra P.O. Box 0259 00000 Osu, Accra
 <ul class="cform">
 <li class="half pr-15"> 
 <span><font size="errorUserName" id="errorUserName" color="red"></font> </span>
-<input type="text" class="form-control" placeholder="Full Name" id="fullName" required>
+<input type="text" class="form-control" placeholder="Full Name" id="fullName" required maxlength="150">
 </li>
 <li class="half pl-15">
 <span><font size="errorUserName" id="errorEmailAddress" color="red"></font> </span>
-<input type="text" class="form-control" placeholder="Email" id="emailAddress">
+<input type="text" class="form-control" placeholder="Email" id="emailAddress" maxlength="250">
 </li>
 <li class="half pr-15">
 <span><font size="errorContactNumber" id="errorContactNumber" color="red"></font> </span>
-<input type="text" class="form-control" placeholder="Contact" id="contactNumber" >
+<input type="text" class="form-control" placeholder="Contact" id="contactNumber" maxlength="30">
 </li>
 <li class="half pl-15">
 <span><font size="errorUserName" id="errorUserName" color="red"></font> </span>
-<input type="text" class="form-control" placeholder="Subject" id="contactSubject">
+<input type="text" class="form-control" placeholder="Subject" id="contactSubject" maxlength="250">
 </li>
 <li class="full">
 
-<textarea class="textarea-control" placeholder="Message" id="message"></textarea>
+<textarea class="textarea-control" placeholder="Message" id="message" maxlength="500"></textarea>
 </li>
 <li class="full"> 
 <div style="text-align: center;"><font size="4" color="red" id="successMessage"></font> </div> 
@@ -161,6 +161,16 @@ includes function END
 
 <script type="text/javascript">
 
+function resetForm(){
+	
+	$("#fullName").val("");
+	$("#message").val("");
+	$("#contactSubject").val("");
+	$("#emailAddress").val("");
+	$("#contactNumber").val(""); 
+	
+}
+
 function saveInquiryData(){
 	
 	var status = true;
@@ -201,6 +211,7 @@ function saveInquiryData(){
 				
 				if(data==true){
 					$("#successMessage").html("We will contact you soon.");		
+					resetForm(); 
 				}
 				
 				  

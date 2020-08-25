@@ -389,8 +389,8 @@ function updateNewAddress(){
 		} 
 	});
 }
-
-
+//  <span  onclick="deleteUserAddress('+data[i].id+')" style="margin-top: -97px;  padding: 5px 15px 5px 15px;cursor:pointer;">  Delete </span>'+
+ 
 function getAddAddress(){
 	$.ajax({  
 		type : "POST",
@@ -400,6 +400,14 @@ function getAddAddress(){
 			
 			var getAddressList = "";
 			for (var i = 0; i < data.length; i++) {
+				
+				status = "";
+				if(data[i].defaultAddress=="1"){
+					status = "checked";	
+				}else{
+					status = "";
+				} 
+				
 				getAddressList +=	'<div style="padding: 0px 10px 0px 10px;     background: #f8f9fa;border: 1px solid #eeeeee;" class="box  box-default">'+
 				'<div class="box-headerwith-border">'+
 				 
@@ -407,9 +415,16 @@ function getAddAddress(){
 				    /* '<span class="label label-default">Home</span>'+ */ 
 				'</h3>'+
 				      
-					'<div class="box-tools pull-right">  <span  onclick="deleteUserAddress('+data[i].id+')" style="margin-top: -97px;  padding: 5px 15px 5px 15px;cursor:pointer;">  Delete </span>'+   
+					'<div class="box-tools pull-right">'+  
 					'<button data-toggle="modal" data-target="#AddNewAddressModal" onclick="setTitle(\'Edit Address details\');getAddressById('+data[i].id+')"  style="margin-top: -97px;  padding: 5px 15px 5px 15px;"   class="btn bg-teal btn-sm"><i class="fa fa-ellipsis-v"></i></button>'+
-					'</div>'+				
+					'<button onclick="deleteUserAddress('+data[i].id+')" style="margin-top: -97px;  padding: 5px 15px 5px 15px; color: #d43f3a;margin-left: 5px;" class="btn bg-teal btn-sm ">'+
+					'<i class="fa fa-trash" aria-hidden="true"></i>'+
+					'</button>'+ 
+					'<input '+status+' type="checkbox" onclick="defaultUserAddress('+data[i].id+')" style="margin-top: -97px;  padding: 5px 15px 5px 15px; color: #d43f3a;margin-left: 5px;" >'+
+					'</div>'+ 	
+					 
+					
+					
 				'</div>'+
 				
 				'<div class="box-body">'+
@@ -478,7 +493,23 @@ function deleteUserAddress(addressId){
 	});
   }  	
 }
-
+ 
+function defaultUserAddress(addressId){
+	 if(confirm("Are you sure you want to set default address?")){
+			$.ajax({  
+				type : "POST",
+				url : "<%=request.getContextPath()%>/setDefaultAddress",
+				data : {
+					id : addressId,
+				},success:function(data){	 
+					getAddAddress();  
+					 
+				},error : function(e){
+					console.log("Error :::"+e)
+				}
+			});
+		  }  	
+}
 
 </script>
 
