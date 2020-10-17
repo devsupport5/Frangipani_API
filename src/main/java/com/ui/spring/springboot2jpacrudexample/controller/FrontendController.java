@@ -18,17 +18,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ui.spring.springboot2jpacrudexample.MailConfiguration;
 import com.ui.spring.springboot2jpacrudexample.beans.ProductDTO;
 import com.ui.spring.springboot2jpacrudexample.model.Inquiry;
+import com.ui.spring.springboot2jpacrudexample.model.Order;
 import com.ui.spring.springboot2jpacrudexample.model.OrderItem;
+import com.ui.spring.springboot2jpacrudexample.model.OrderItems;
 import com.ui.spring.springboot2jpacrudexample.model.Product;
 import com.ui.spring.springboot2jpacrudexample.model.RegisterUser;
 import com.ui.spring.springboot2jpacrudexample.model.Slider;
 import com.ui.spring.springboot2jpacrudexample.model.UserAddress;
+import com.ui.spring.springboot2jpacrudexample.model.UserDetail;
 import com.ui.spring.springboot2jpacrudexample.model.view.ProductListDefaultView;
 import com.ui.spring.springboot2jpacrudexample.repository.ProductRepository;
 import com.ui.spring.springboot2jpacrudexample.service.AuthorService;
 import com.ui.spring.springboot2jpacrudexample.service.CategoryService;
 import com.ui.spring.springboot2jpacrudexample.service.CurrencyService;
 import com.ui.spring.springboot2jpacrudexample.service.InquiryService;
+import com.ui.spring.springboot2jpacrudexample.service.OrderItemService;
 import com.ui.spring.springboot2jpacrudexample.service.OrderService;
 import com.ui.spring.springboot2jpacrudexample.service.ProductService;
 import com.ui.spring.springboot2jpacrudexample.service.ProductTabService;
@@ -81,6 +85,9 @@ public class FrontendController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private OrderItemService itemService;
 	
 	@Autowired
 	private ProductTabService productTabService;
@@ -507,10 +514,125 @@ public class FrontendController {
     public String  my_order(HttpSession session,Model model) {
         
       //System.out.println("-------my-orders------->>>");
-      Long userId =  (long) session.getAttribute("userId");
-      model.addAttribute("orderList",orderService.getUserOrdersHistory(Integer.parseInt(userId+"")));
-      
+    	
+    	if(session.getAttribute("userId")!=null) {
+    		 Long userId =  (long) session.getAttribute("userId");
+    	      model.addAttribute("orderList",orderService.getUserOrdersHistory(Long.parseLong(userId+"")));
+    	      
+    	      List<Order> orders =  orderService.getUserOrdersHistory(Long.parseLong(userId+""));
+    	      for(int i=0;i < orders.size();i++) {
+    	    	  System.out.println(orders.get(i).getAmount());
+    	    	  System.out.println(orders.get(i).getDeliveryAdd1()+"-"+orders.get(i).getDeliveryAdd2());
+    	      }
+    	}
+    	
+     
       return "my_orders";
+    }
+    
+    @RequestMapping("/orderDetails/{orderId}")
+    public String  orderDetails(@PathVariable(value = "orderId") String orderId ,HttpSession session,Model model) {
+    
+    	System.out.println(orderService.getOrderById(Long.parseLong(orderId+"")).isPresent());
+    	
+    	if(orderService.getOrderById(Long.parseLong(orderId+"")).isPresent()){
+    			model.addAttribute("orderList",orderService.getOrderById(Long.parseLong(orderId+"")).get());
+    		}
+    	
+    	System.out.println(itemService.getUserOrderItemsHistory(Long.parseLong(orderId)).size());
+    	
+    	model.addAttribute("orderDetails",itemService.getUserOrderItemsHistory(Long.parseLong(orderId)));
+    	
+    	return "order_details";
+    }
+    
+    @RequestMapping("/checkoutAddress")
+    @ResponseBody public void  checkoutAddress(HttpSession session,String deliveryAddreessId) {
+    	
+    	System.out.println("checkoutAddress ::::"+deliveryAddreessId);
+    	
+    	
+    	session.setAttribute("deliveryAddressId", deliveryAddreessId);
+    }	
+    
+    @RequestMapping("/saveOrder")
+    public String  saveOrder(HttpSession session,Model model) {
+        
+      //System.out.println("-------my-orders------->>>");
+      Long userId =  (long) session.getAttribute("userId");
+      //model.addAttribute("orderList",orderService.getUserOrdersHistory(Integer.parseInt(userId+"")));
+      
+      UserDetail userDetails = null;
+      UserAddress userAddress = null;
+      if(userService.getUserById(userId).isPresent()) {
+    	   userDetails =  userService.getUserById(userId).get();  
+      }
+      
+      System.out.println("USer address ::"+userAddressService.getUserAddressById(Long.parseLong(session.getAttribute("deliveryAddressId")+"")).isPresent());
+      if(userAddressService.getUserAddressById(Long.parseLong(session.getAttribute("deliveryAddressId")+"")).isPresent()) {
+    	  userAddress = userAddressService.getUserAddressById(Long.parseLong(session.getAttribute("deliveryAddressId")+"")).get();  
+      }
+      
+      
+      Order order = new Order();
+      order.setAmount(0.0d);
+      order.setCurrencyType("USD");
+      order.setDeliveryAdd1(userAddress.getAdd1());
+      order.setDeliveryAdd2(userAddress.getAdd2());
+      order.setDeliveryCity(userAddress.getCity());
+      order.setDeliveryCountry(userAddress.getCountry());
+      order.setDeliveryMobileNumber(userAddress.getMobileNumber());
+      order.setDeliveryPinCode(userAddress.getPinCode());
+      order.setDeliveryState(userAddress.getState());
+      order.setDeliveryUserEmail(userAddress.getUserEmail());
+      order.setUserId(userId);
+      
+      order.setOrderStatus("Pending");
+	     if(userDetails!=null){
+	    	 order.setFullName(userDetails.getFirstName());
+	    	 order.setEmailAddress(userDetails.getUserEmail());
+	     }
+      
+      
+      
+      
+      Order finalOrder = orderService.createOrder(order);
+      
+    @SuppressWarnings("unchecked")
+	List<OrderItem> items =  (List<OrderItem>) session.getAttribute("orderItem");
+    
+    double finalAmount = 0.0d;
+    double amount = 0.0d;
+    int qty = 0;
+    for(int i=0;i<items.size();i++) {
+	    	OrderItems orderItems= new OrderItems();
+	    	orderItems.setAuthorName(items.get(i).getAuthorName());
+	    	orderItems.setBookTitle(items.get(i).getBookTitle());
+	    	orderItems.setCategoryName(items.get(i).getCategoryName());
+	    	orderItems.setCurrencySymbol(items.get(i).getCurrencySymbol());
+	    	orderItems.setImage(items.get(i).getImage());
+	    	orderItems.setOrderId(finalOrder.getId());
+	    	orderItems.setPrice(items.get(i).getPrice());
+	    	orderItems.setQty(items.get(i).getQty());
+	    	orderItems.setUserId(items.get(i).getUserId());
+	    	
+	    	amount  =  (items.get(i).getQty() * items.get(i).getPrice()); 
+	    	finalAmount = finalAmount + amount;
+	    	qty += items.get(i).getQty();
+	    	itemService.createOrderItem(orderItems);
+	    }
+      
+    finalOrder.setOrderQty(qty);
+    finalOrder.setAmount(finalAmount);
+    orderService.createOrder(finalOrder);
+    
+    	session.setAttribute("orderItem",null);
+    	session.setAttribute("deliveryAddressId",null);
+    	session.setAttribute("","");
+    	session.setAttribute("","");
+    	session.setAttribute("","");
+    
+      return "redirect:/";
     }
     
     @RequestMapping("/changePasswprd")

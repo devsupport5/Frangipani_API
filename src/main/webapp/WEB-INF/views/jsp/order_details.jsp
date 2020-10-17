@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title> My Orders | Frangipani Books </title>
+<title> My Orders Details | Frangipani Books </title>
 
 <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 <meta name="theme-color" content="#ED008C">
@@ -73,54 +73,80 @@
 
 
 <!--Order Box Start-->
-<c:forEach items="${orderList }" var="orderList">
-<a href="<%=request.getContextPath()%>/orderDetails/${orderList.id}">
+
+<a href=""></a>
 <div class="event-list-box">
 
 <div class="event-thumb"> 
 <%-- <a href="#"><i class="fas fa-link"></i></a> <img src="<%=request.getContextPath() %>/resources/images/books/1.jpg" alt=""> --%> 
 </div>
 
-<div class="event-txt">
-<h4>  ${orderList.bankName }  </h4>
+<div class="event-txt"> 
+<h4> <a href="#">  ${orderList.bankName }  </a> </h4>
 <p> ${orderList.otherInformation }  </p>
  
-  
- <ul class="event-meta">  
+ <%-- <strong>Order Number : </strong> ORD${orderList.id} 
+ <strong>Tracking ID : </strong> ${orderList.paymentId } 
+ --%>
+
+<ul class="" style="list-style: none;">  
  	 <li> <strong class="strong_data">Order Number :</strong>ORD${orderList.id}<br/> </li>
  	 <li> <strong class="strong_data">Quantity : </strong> ${orderList.orderQty } <br/> </li>
  	 <li> <strong class="strong_data">Amount : </strong> ${orderList.currencyType }<fmt:formatNumber type = "number"  minFractionDigits="2" value ="${orderList.amount }"></fmt:formatNumber> <br/> </li>
- 	 <li> <strong class="strong_data">Order Date : </strong> <fmt:parseDate value = "${orderList.createdDate}" var = "parsedEmpDate" pattern = "yyyy-MM-dd HH:mm:ss" />
-      <fmt:formatDate  pattern = "dd-MM-yyyy HH:mm:ss" value = "${parsedEmpDate}" /><br/> </li>
- 	  
- </ul>
-<%-- <p style="font-size: 13px;padding-top: 7px;color: #878787;" class="product-category"><strong>Quantity :</strong> ${orderList.orderQty } </p>
-<p style="    font-size: 13px;color: #878787;" class="product-category"><strong>Amount :</strong>  
-    ${orderList.currencyType }<fmt:formatNumber type = "number"  minFractionDigits="2" value ="${orderList.amount }"></fmt:formatNumber>    </p>
-<p style="font-size: 13px;color: #878787;" class="product-category"><strong>Transaction Date :</strong> 
- <fmt:parseDate value = "${orderList.createdDate}" var = "parsedEmpDate" pattern = "yyyy-MM-dd HH:mm:ss" />
-      <p>Parsed Date: <c:out value = "${parsedEmpDate}" /></p>
-      <fmt:formatDate  pattern = "dd-MM-yyyy HH:mm:ss"
-         value = "${parsedEmpDate}" /> 
-      </p>     
-      --%>
+ 	 
+ 	 <%-- <li> <strong class="strong_data">Tracking ID : </strong> ${orderList.paymentId }<br/> </li> --%>
+ 	 <li>
+	 	 <p><strong class="strong_data"> Delivery Address </strong></p>    
+	   <p>${orderList.deliveryAdd1} ${orderList.deliveryAdd2}</p>
+	   <p>${orderList.deliveryCountry} ${orderList.deliveryState}</p>
+	   <p>${orderList.deliveryCity} ${orderList.deliveryPinCode}</p>
+ 	 </li> 
+ 	 
+ </ul> 
+
+<%-- <p style="    font-size: 13px;
+    padding-top: 7px;     color: #878787;" class="product-category"><strong>Quantity : </strong>${orderList.orderQty } </p>
+<p style="    font-size: 13px;
+    padding-top: 7px;     color: #878787;" class="product-category"><strong>Amount :</strong>  
+    ${orderList.currencyType }<fmt:formatNumber type = "number"  minFractionDigits="2" value ="${orderList.amount }"></fmt:formatNumber>    </p> --%>
+    
+ 
 </div>
-
-<ul class="event-meta" style="    margin: 40px 0 0;">
-<li> <strong class="strong_data">Name : </strong> ${orderList.billerName } <br/> </li>
-<li> <strong class="strong_data">Order Status : </strong> ${orderList.orderStatus } <br/> </li>
-<li> <strong class="strong_data">Payment Status : </strong> ${orderList.paymentStatus } <br/> </li>
-<li> <strong class="strong_data">Tracking ID : </strong> ${orderList.paymentId } </li>
-   
-<%-- <li>   <fmt:formatNumber type = "number"  minFractionDigits="2" value ="${orderList.amount }"></fmt:formatNumber>
-		${orderList.currencyType }
-</li>  --%> 
-
+ 
+<ul class="event-meta"  style="margin: 40px 0 0;">
+<li> <strong class="strong_data">Tracking ID : </strong> ${orderList.paymentId }<br/> </li>
+<li> <strong class="strong_data">Order Date : </strong> <fmt:parseDate value = "${orderList.createdDate}" var = "parsedEmpDate" pattern = "yyyy-MM-dd HH:mm:ss" />
+      <fmt:formatDate  pattern = "dd-MM-yyyy HH:mm:ss" value = "${parsedEmpDate}" /><br/> </li>
+  <li> <strong class="strong_data"> Payment Status :</strong> ${orderList.orderStatus } </li>
 </ul>
 </div>
-</a> 
-</c:forEach>
 <!--Order Box Start-->
+<c:forEach items="${orderDetails }" var="orderDetails">
+<div class="event-list-box">
+
+<div class="event-thumb"> 
+<a href="#"><i class="fas fa-link"></i></a> <img src="${orderDetails.image }" alt=""> 
+</div>
+
+<div class="event-txt">
+<h4> <a href="#">  ${orderDetails.bookTitle }  </a> </h4>
+<%-- <p>  ${orderDetails.bookTitle } </p> --%>
+ 
+<a href="#" class="attbtn"><strong> by: </strong> ${orderDetails.categoryName }</a> 
+
+<p style="font-size: 13px;padding-top: 7px;color: #878787;" class="product-category"> ${orderDetails.authorName } </p>
+    
+</div>
+
+<ul class="event-meta">
+<%-- <li> <div class="_30ud5x _3ELbo9"></div> Delivered on ${orderList.createdDate } </li> --%> 
+<li> <strong class="strong_data">Price :</strong> ${orderList.currencyType }<fmt:formatNumber type = "number"  minFractionDigits="2" value ="${orderDetails.price }"></fmt:formatNumber> </li>
+<li> <strong class="strong_data">Quantity : </strong> ${orderDetails.qty }</li>
+</ul> 
+     
+</div>
+</c:forEach> 
+
 
 <!--Order Box Start-->
 <!-- <div class="event-list-box">
@@ -144,7 +170,7 @@
 <li> <div class="_30ud5x _3ELbo9"></div> Delivered on Jun 24 </li>
 <li>  ₵40.00 </li>
 </ul>
-    
+     
 </div> -->
 <!--Order Box Start-->
 

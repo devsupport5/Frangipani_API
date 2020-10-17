@@ -80,7 +80,7 @@
 <h4> <a href="#">  Things Every Child Show Know About J.B .Danquah  </a> </h4>
 <p> Things Every Child Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,  </p>
 
-<a href="books-details.html" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
+<a href="#" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
 
 <p style="    font-size: 13px;
     padding-top: 7px;     color: #878787;" class="product-category"> DRAMA, ROMANCE </p>
@@ -103,10 +103,10 @@
 </div>
 
 <div class="event-txt">
-<h4> <a href="books-details.html">  Things Every Child Show Know About J.B .Danquah  </a> </h4>
+<h4> <a href="#">  Things Every Child Show Know About J.B .Danquah  </a> </h4>
 <p> Things Every Child Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,  </p>
 
-<a href="books-details.html" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
+<a href="#" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
 
 <p style="    font-size: 13px;
     padding-top: 7px;     color: #878787;" class="product-category"> DRAMA, ROMANCE </p>
@@ -134,7 +134,7 @@
 <h4> <a href="#">  Things Every Child Show Know About J.B .Danquah  </a> </h4>
 <p> Things Every Child Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,  </p>
 
-<a href="books-details.html" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
+<a href="#" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
 
 <p style="    font-size: 13px;
     padding-top: 7px;     color: #878787;" class="product-category"> DRAMA, ROMANCE </p>
@@ -159,10 +159,10 @@
 </div>
 
 <div class="event-txt">
-<h4> <a href="books-details.html">  Things Every Child Show Know About J.B .Danquah  </a> </h4>
+<h4> <a href="#">  Things Every Child Show Know About J.B .Danquah  </a> </h4>
 <p> Things Every Child Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,  </p>
 
-<a href="books-details.html" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
+<a href="#" class="attbtn">by: ABYNA-ANSAA ADJEI</a> 
 
 <p style="    font-size: 13px;
     padding-top: 7px;     color: #878787;" class="product-category"> DRAMA, ROMANCE </p>

@@ -26,7 +26,22 @@ public class OrderDTO implements Serializable{
 	private String bankName;
 	private String otherInformation;
  	private String createdDate;
-	 
+ 	private long  userId;
+ 	private String fullName;
+	private String deliveryUserEmail;
+	private String deliveryMobileNumber;
+	private String deliveryAdd1;
+	private String deliveryAdd2;
+	private String deliveryCountry;
+	private String deliveryState;
+	private String deliveryCity;
+	private String deliveryPinCode;
+	private int orderQty;
+	private String paymentId;
+ 	private String PayerID;
+ 	private String paymentType;
+	private String accountNumber;
+	private String paymentStatus;
 	
 	public OrderDTO() {
 		
@@ -332,6 +347,231 @@ public class OrderDTO implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+
+
+	public long getUserId() {
+		return userId;
+	}
+
+
+
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+
+
+
+	public String getFullName() {
+		return fullName;
+	}
+
+
+
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+
+
+
+	public String getDeliveryUserEmail() {
+		return deliveryUserEmail;
+	}
+
+
+
+
+	public void setDeliveryUserEmail(String deliveryUserEmail) {
+		this.deliveryUserEmail = deliveryUserEmail;
+	}
+
+
+
+
+	public String getDeliveryMobileNumber() {
+		return deliveryMobileNumber;
+	}
+
+
+
+
+	public void setDeliveryMobileNumber(String deliveryMobileNumber) {
+		this.deliveryMobileNumber = deliveryMobileNumber;
+	}
+
+
+
+
+	public String getDeliveryAdd1() {
+		return deliveryAdd1;
+	}
+
+
+
+
+	public void setDeliveryAdd1(String deliveryAdd1) {
+		this.deliveryAdd1 = deliveryAdd1;
+	}
+
+
+
+
+	public String getDeliveryAdd2() {
+		return deliveryAdd2;
+	}
+
+
+
+
+	public void setDeliveryAdd2(String deliveryAdd2) {
+		this.deliveryAdd2 = deliveryAdd2;
+	}
+
+
+
+
+	public String getDeliveryCountry() {
+		return deliveryCountry;
+	}
+
+
+
+
+	public void setDeliveryCountry(String deliveryCountry) {
+		this.deliveryCountry = deliveryCountry;
+	}
+
+
+
+
+	public String getDeliveryState() {
+		return deliveryState;
+	}
+
+
+
+
+	public void setDeliveryState(String deliveryState) {
+		this.deliveryState = deliveryState;
+	}
+
+
+
+
+	public String getDeliveryCity() {
+		return deliveryCity;
+	}
+
+
+
+
+	public void setDeliveryCity(String deliveryCity) {
+		this.deliveryCity = deliveryCity;
+	}
+
+
+
+
+	public String getDeliveryPinCode() {
+		return deliveryPinCode;
+	}
+
+
+
+
+	public void setDeliveryPinCode(String deliveryPinCode) {
+		this.deliveryPinCode = deliveryPinCode;
+	}
+
+
+
+
+	public int getOrderQty() {
+		return orderQty;
+	}
+
+
+
+
+	public void setOrderQty(int orderQty) {
+		this.orderQty = orderQty;
+	}
+
+
+
+
+	public String getPaymentId() {
+		return paymentId;
+	}
+
+
+
+
+	public void setPaymentId(String paymentId) {
+		this.paymentId = paymentId;
+	}
+
+
+
+
+	public String getPayerID() {
+		return PayerID;
+	}
+
+
+
+
+	public void setPayerID(String payerID) {
+		PayerID = payerID;
+	}
+
+
+
+
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+
+
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
+	}
+
+
+
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+
+
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+
+
+
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+
+
+
+
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
 	
 	  
+	
 }

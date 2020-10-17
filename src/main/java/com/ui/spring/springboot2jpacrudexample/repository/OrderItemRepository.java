@@ -6,14 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.ui.spring.springboot2jpacrudexample.model.Order;
+import com.ui.spring.springboot2jpacrudexample.model.OrderItems;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long>{
+public interface OrderItemRepository extends JpaRepository<OrderItems, Long>{
 
 	/*@Query("SELECT u FROM Category u WHERE u.parentId = 0 order by categoryName")
 	List<Category> getAllCategorys();*/
 	
-	@Query("SELECT u FROM Order u WHERE u.userId = ?1 order by id DESC")
-	List<Order> getUserOrdersHistory(Long userId);
+	@Query("SELECT u FROM OrderItems u WHERE u.orderId = ?1")
+	List<OrderItems> getUserOrderItemsHistory(Long orderId);
 }

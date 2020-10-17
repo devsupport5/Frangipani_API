@@ -35,6 +35,9 @@
 
 
 
+
+
+
 /****************************/
 
 .login-box-chec button.login-btn:hover, .myaccount-form button.register:hover {
@@ -185,8 +188,15 @@ text-decoration: underline;
       background-color: #fff;
     padding: 20px;
   border:none;
-  margin-bottom:15px
+  margin-bottom:15px;
+display: block;
+
+/*z-index: 20000;*/
+position: relative;
+
 }
+
+
 
 
 .checkout-box .panel-group .panel  .widget-thumb img {

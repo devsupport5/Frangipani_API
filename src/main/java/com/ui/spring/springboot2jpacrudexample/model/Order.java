@@ -14,6 +14,7 @@ public class Order {
 	private long id;
 	private String orderNumber;
 	private String orderStatus;
+	private String paymentStatus;
 	private String payeeName;
 	private String emailAddress;
 	private String contactNumber;
@@ -32,7 +33,22 @@ public class Order {
 	private String bankName;
 	private String otherInformation;
  	private String createdDate;
- 	private int  userId;
+ 	private long  userId;
+ 	private String fullName;
+	private String deliveryUserEmail;
+	private String deliveryMobileNumber;
+	private String deliveryAdd1;
+	private String deliveryAdd2;
+	private String deliveryCountry;
+	private String deliveryState;
+	private String deliveryCity;
+	private String deliveryPinCode;
+	private int orderQty;
+ 	private String paymentId;
+ 	private String PayerID;
+ 	private String paymentType;
+	private String accountNumber;
+	
 	
 	public Order() {
 		
@@ -47,10 +63,10 @@ public class Order {
 	}
 	
 	@Column(name = "user_id", columnDefinition = "integer default 0")
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 	@Column(name = "order_number")
@@ -212,4 +228,133 @@ public class Order {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+	
+	@Column(name = "full_name")
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+	
+	@Column(name = "delivery_user_email")
+	public String getDeliveryUserEmail() {
+		return deliveryUserEmail;
+	}
+	public void setDeliveryUserEmail(String deliveryUserEmail) {
+		this.deliveryUserEmail = deliveryUserEmail;
+	}
+	 
+	
+	@Column(name = "delivery_mobile_number")
+	public String getDeliveryMobileNumber() {
+		return deliveryMobileNumber;
+	}
+	public void setDeliveryMobileNumber(String deliveryMobileNumber) {
+		this.deliveryMobileNumber = deliveryMobileNumber;
+	}
+	
+	@Column(name = "delivery_address1")
+	public String getDeliveryAdd1() {
+		return deliveryAdd1;
+	}
+	
+	public void setDeliveryAdd1(String deliveryAdd1) {
+		this.deliveryAdd1 = deliveryAdd1;
+	}
+	
+	@Column(name = "delivery_address2")
+	public String getDeliveryAdd2() {
+		return deliveryAdd2;
+	}
+	public void setDeliveryAdd2(String deliveryAdd2) {
+		this.deliveryAdd2 = deliveryAdd2;
+	}
+	
+	@Column(name = "delivery_country")
+	public String getDeliveryCountry() {
+		return deliveryCountry;
+	}
+	public void setDeliveryCountry(String deliveryCountry) {
+		this.deliveryCountry = deliveryCountry;
+	}
+	
+	@Column(name = "delivery_state")
+	public String getDeliveryState() {
+		return deliveryState;
+	}
+	public void setDeliveryState(String deliveryState) {
+		this.deliveryState = deliveryState;
+	}
+	
+	@Column(name = "delivery_city")
+	public String getDeliveryCity() {
+		return deliveryCity;
+	}
+	public void setDeliveryCity(String deliveryCity) {
+		this.deliveryCity = deliveryCity;
+	}
+	
+	@Column(name = "delivery_pincode")
+	public String getDeliveryPinCode() {
+		return deliveryPinCode;
+	}
+	public void setDeliveryPinCode(String deliveryPinCode) {
+		this.deliveryPinCode = deliveryPinCode;
+	}
+	
+	@Column(name = "order_qty")
+	public int getOrderQty() {
+		return orderQty;
+	}
+	public void setOrderQty(int orderQty) {
+		this.orderQty = orderQty;
+	}
+	
+	@Column(name = "payment_id")
+	public String getPaymentId() {
+		return paymentId;
+	}
+	public void setPaymentId(String paymentId) {
+		this.paymentId = paymentId;
+	}
+	
+	@Column(name = "payer_id")
+	public String getPayerID() {
+		return PayerID;
+	}
+	public void setPayerID(String payerID) {
+		PayerID = payerID;
+	}
+	
+	@Column(name="account_number")
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	@Column(name="payment_type")
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
+	}
+	
+	
+	@Column(name="payment_status")
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+	
+	
+	
 }

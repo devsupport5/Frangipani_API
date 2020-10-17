@@ -9,11 +9,12 @@ public interface OrderService {
 	
 	List<Order> getAllOrders();
 	
-	List<Order> getUserOrdersHistory(Integer userId);
+	List<Order> getUserOrdersHistory(Long userId);
 
 	Optional<Order> getOrderById(Long sliderId);
 
 	Order createOrder(Order order);	
 
+	Order updateOrderStatus(Order order);
 		
 }

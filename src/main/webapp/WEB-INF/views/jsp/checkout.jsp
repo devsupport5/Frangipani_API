@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title> Check Out | Frangipani Books </title>
+<title>  Check Out | Frangipani Books </title>
 
 <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 <meta name="theme-color" content="#ED008C">
@@ -34,66 +34,67 @@
 <link href="resources/css/all.min.css" rel="stylesheet">
 <link href="resources/css/checkout.css" rel="stylesheet">
 <!-- CSS  -->
+<style type="text/css">
+.hidecss{ 
+	display: none !important;
+}
+</style>
 
-
-<!-- includes js File START-->
-<script src="resources/js/w3data.js"></script>
-<!-- includes js File END-->
 
 <script type="text/javascript">
- 
+
 function registration(){
-	 
-	if($("#yourName").val()==""){
-		$("#errorCheckName").html("Please enter user name");
-		$("#yourName").focus();
-	}else if($("#contact").val()==""){
-		$("#errorContact").html("Please enter contact number");
-		$("#contact").focus();
-		$("#errorCheckName").html("");
-	}else if($("#userEmail").val()==""){
-		$("#errorUserEmail").html("Please enter email");
-		$("#userEmail").focus();
-		$("#errorCheckName").html("");
-		$("#errorContact").html(""); 
-	}else if($("#userName").val()==""){
-		$("#errorUserName").html("Please enter user name");
-		$("#userName").focus(); 
-		$("#errorCheckName").html("");
-		$("#errorContact").html(""); 
-		$("#errorUserName").html(""); 
-	}else if($("#password").val()==""){
-		$("#errorPassword").html("Please enter password");
-		$("#password").focus();  
-	}else if($("#repassword").val()==""){
-		$("#errorRePassword").html("Please enter re-password");
-		$("#repassword").focus();   
-	}else if($("#termsConditionChk").is(":checked")==false){
-		$("#errortermsConditionChk").html("Please check terms and condition");
-	}else{  
- 	 $.ajax({
-		type : "POST",
-		url : "registration",
-		data : {
-			
-			yourName : $("#yourName").val(),
-			contact : $("#contact").val(), 
-			userEmail : $("#userEmail").val(),
-			userName : $("#userName").val(),
-			password : $("#password").val(),
-			
-		},success:function(data){
-			window.location.reload(); 
-		},error : function(e){
-			console.log("Error :::"+e)
-		}
-	}); 
-  }	 
- 	 return false; 
+
+if($("#yourName").val()==""){
+$("#errorCheckName").html("Please enter user name");
+$("#yourName").focus();
+}else if($("#contact").val()==""){
+$("#errorContact").html("Please enter contact number");
+$("#contact").focus();
+$("#errorCheckName").html("");
+}else if($("#userEmail").val()==""){
+$("#errorUserEmail").html("Please enter email");
+$("#userEmail").focus();
+$("#errorCheckName").html("");
+$("#errorContact").html(""); 
+}else if($("#userName").val()==""){
+$("#errorUserName").html("Please enter user name");
+$("#userName").focus(); 
+$("#errorCheckName").html("");
+$("#errorContact").html(""); 
+$("#errorUserName").html(""); 
+}else if($("#password").val()==""){
+$("#errorPassword").html("Please enter password");
+$("#password").focus();  
+}else if($("#repassword").val()==""){
+$("#errorRePassword").html("Please enter re-password");
+$("#repassword").focus();   
+}else if($("#termsConditionChk").is(":checked")==false){
+$("#errortermsConditionChk").html("Please check terms and condition");
+}else{  
+$.ajax({
+type : "POST",
+url : "registration",
+data : {
+
+yourName : $("#yourName").val(),
+contact : $("#contact").val(), 
+userEmail : $("#userEmail").val(),
+userName : $("#userName").val(),
+password : $("#password").val(),
+
+},success:function(data){
+window.location.reload(); 
+},error : function(e){
+console.log("Error :::"+e)
+}
+}); 
+}	 
+return false; 
 }
 </script>
 
-    
+
 
 </head>
 <body class="cnt-home">
@@ -146,7 +147,7 @@ function registration(){
 <!-- panel-heading -->
 <% if(session.getAttribute("userName")==null) {%>
 
-  
+
 <div id="collapseOne" class="panel-collapse collapse in" >
 
 <!-- panel-body  -->
@@ -175,14 +176,14 @@ function registration(){
 <input type="checkbox" class="form-check-input" id="exampleCheck2">
 <label class="form-check-label" for="exampleCheck2">Remember Me</label>
 
- 
-  
+
+
 <a data-toggle="modal" data-target="#FPasswordModal" href="#" class="fp">Forgot Password</a>
- 
+
 </div> 
 <div class="input-group">
 <button class="login-btn" onclick="return checkLogin();">Login Account</button>  
-  <center style="margin-top: 10px;" ><span><font color="white" size="3" id="errorLoginMessage"></font></center></span>
+<center style="margin-top: 10px;" ><span><font color="white" size="3" id="errorLoginMessage"></font></center></span>
 </div>   
 </form> 
 </div>
@@ -249,7 +250,7 @@ function registration(){
 <div class="panel panel-default checkout-step-02">
 <div class="panel-heading">
 <h4 class="unicase-checkout-title">
-<a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapseTwo">
+<a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseTwo">
 <span>2</span> Delivery Address
 </a>
 </h4>
@@ -257,7 +258,7 @@ function registration(){
 <% if(session.getAttribute("userName")==null) {%> 
 <div id="collapseTwo" class="panel-collapse collapse">  
 <% }else{ %>
-<div id="collapseTwo" class="panel-collapse collapse in show">
+<div id="collapseTwo" class="panel-collapse collapse in">
 <% } %>
 <div class="panel-body">
 
@@ -275,7 +276,7 @@ function registration(){
 
 
 
-    
+
 <div class="row">
 <div class="col-lg-12 text-center">
 <a  data-toggle="modal" data-target="#AddNewAddressModal" onclick="resetAddress();" href="#" class="lm wf100"> Add a new address </a>
@@ -313,18 +314,18 @@ function registration(){
 <div class="box-body">
 <div class="table-responsive">
 <table class="table table-bordered">
-	<thead>
-		<tr>
-			<th> Product </th>
-			<th  class="text-right"> Price </th>
-			<th class="text-center" style="width: 17%;"> Quantity </th>
-			<th  class="text-right"> Total </th>
-			<th  class="text-right">  </th>
-		</tr>
-	</thead>
+<thead>
+<tr>
+<th> Product </th>
+<th  class="text-right"> Price </th>
+<th class="text-center" style="width: 17%;"> Quantity </th>
+<th  class="text-right"> Total </th>
+<th  class="text-right">  </th>
+</tr>
+</thead>
 <tbody id="cartList">
- 
-	
+
+
 <!-- <tr>
 
 <td>
@@ -370,7 +371,7 @@ function registration(){
 </td>
 
 </tr>
- -->
+-->
 <!-- <tr>
 
 <td>
@@ -385,7 +386,7 @@ function registration(){
 <div class="clearfix"></div>
 </td>
 
-<td class="text-right"> µ40.00 </td>
+<td class="text-right"> ï¿½40.00 </td>
 
 <td>
 <div class="input-group">
@@ -407,7 +408,7 @@ function registration(){
 </div>
 </td>
 
-<td class="text-right"> µ40.00 </td>
+<td class="text-right"> ï¿½40.00 </td>
 
 <td class="text-right remove"> 
 <a href="#">
@@ -491,7 +492,7 @@ function registration(){
 </div><!-- /.box-body -->
 
 <div class="box-footer" id="pleaceOrderButton">  
-<a class="checkout-btn" href="#">  Make Payment  </a>
+<a class="checkout-btn" href="#"  onclick="setAddress()">  Make Payment  </a>
 </div>
 
 </div><!-- /.box -->
@@ -521,7 +522,7 @@ function registration(){
 <div class="box-body">
 <div class="order-summary">
 <ul class="list-group">
- 
+
 <li class="list-group-item">  
 Quantity <!-- (<span id="orderCartItem"></span>) -->
 <span class="pull-right"> <span id="orderCartItem"></span> <!-- <span id="orderCartTotal"></span> --> </span> 
@@ -536,7 +537,7 @@ Price <!-- (<span id="orderCartItem"></span>) -->
 Delivery Charges
 <span class="pull-right"> 00.00 </span>
 </li> 
- --> 
+--> 
 <li class="list-group-item">
 <strong>Amount Payable
 <span class="pull-right"> <span id="orderCartFinalTotal"></span> </span>
@@ -544,7 +545,7 @@ Delivery Charges
 </li> 
 
 </ul></div>
-  
+
 </div><!-- /.box-body -->
 
 </div>		 	
@@ -560,22 +561,12 @@ Delivery Charges
 
 
 
-<!--/#footer START-->
-<div w3-include-html="includes/footer.html"></div> 
+<!--/#footer START--> 
+<%@include file="includes/footer.jsp" %> 
 <!--/#footer END-->
 
 </div>
 
-
-
-
-
-
-<!-- includes function START-->
-<script>
-w3IncludeHTML();
-</script>
-<!-- includes function END-->   
 
 
 
@@ -694,7 +685,7 @@ Continue as a guest user.
 <input type="text" class="form-control" placeholder="Mobile Number *" name="guestMobileNumber" id="guestMobileNumber">
 </div>
 
- 
+
 
 <div class="alert alert-info mb-0">
 <strong>Note:</strong> Your order details will be sent to this email address & Mobile Number.
@@ -735,7 +726,7 @@ Forgot Password?
 
 <!-- content goes here -->
 <form>
- 
+
 <div class="row">
 <div class="col-lg-12">
 <label for="exampleInputEmail1"> Email address *</label> <br/> 
@@ -748,11 +739,11 @@ Forgot Password?
 </div>
 </div>
 
- 
-<div class="alert alert-info mb-0">
+
+<!-- <div class="alert alert-info mb-0">
 <strong>Note:</strong> 
 You have received Email from us
-</div>
+</div> -->
 
 </form>
 
@@ -826,20 +817,20 @@ Add a new address
 
 
 <div class="form-group row">
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	<span><font size="3" id="errorCountry" color="red"></font> </span>
-		<select class="form-control" name="country" id="country">
-			<option value="" > Select Country</option>
-			<option value="Ghana">Ghana </option>
-		</select> 
-	</div>
-	
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	<span><font size="3" id="errorState" color="red"></font> </span>
-		<select class="form-control"id="state" name="state">
-			 
-			<option value="State">Select State </option>
-			<option value="Ashanti">Ashanti</option>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+<span><font size="3" id="errorCountry" color="red"></font> </span>
+<select class="form-control" name="country" id="country">
+<option value="" > Select Country</option>
+<option value="Ghana">Ghana </option>
+</select> 
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+<span><font size="3" id="errorState" color="red"></font> </span>
+<select class="form-control"id="state" name="state">
+
+<option value="State">Select State </option>
+<option value="Ashanti">Ashanti</option>
 <option value="Bono Region">Bono Region</option>
 <option value="Bono East Region">Bono East Region</option>
 <option value="Ahafo Region">Ahafo Region</option>
@@ -855,16 +846,16 @@ Add a new address
 <option value="Oti">Oti</option>
 <option value="Western Region">Western Region</option>
 <option value="Western North">Western North</option>
-		</select> 
-	</div>
+</select> 
+</div>
 </div>
 
- 
+
 <div class="form-group row">
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	<span><font size="3" id="errorCity" color="red"></font> </span>
-		<input class="form-control" placeholder="City" name="city" id="city" type="text" />
-	</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+<span><font size="3" id="errorCity" color="red"></font> </span>
+<input class="form-control" placeholder="City" name="city" id="city" type="text" />
+</div>
 
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 <span><font size="3" id="errorpinCode" color="red"></font> </span>
@@ -897,548 +888,573 @@ Add a new address
 </div>
 <!-- Add a new address Modal End-->
 
- 
 
-
-<script src="<%=request.getContextPath() %>/resources/checkout/jquery-1.11.1.min.js"></script> 
-
-<script type="text/javascript">
-$( document ).ready(function() {
-	cartList(); 
-	getAddAddress();
-});  	
-
-function resetAddress(){
-	$("#fullName").val("");
-	$("#newUserEmail").val("");
-	$("#mobileNumber").val("");
-	$("#add1").val("");
-	$("#add2").val("");  
-	$('#country').val("").change();
-	$("#state").val("State").change();  
-	$("#city").val(""); 
-	$("#pinCode").val("");
-	$("#specialInstruction").val("");
-} 
-
-function addNewAddress(){
-	
-	var status = true;
-	if($("#fullName").val()==""){
-		$("#errorfullName").html("Please enter name");
-		setTimeout(function(){ $("#errorfullName").html(""); }, 7000);
-		$("#fullName").focus();
-		status = false;
-	}else if($("#add1").val()==""){
-		$("#errorAdd1").html("Please enter address line 1");
-		setTimeout(function(){ $("#errorAdd1").html(""); }, 7000);
-		$("#add1").focus();
-		status = false;
-	}else if($("#add2").val()==""){
-		$("#errorAdd2").html("Please enter address line 2");
-		setTimeout(function(){ $("#errorAdd2").html(""); }, 7000);
-		$("#add2").focus();
-		status = false; 
-	}else if($("#country").val()==""){
-		$("#errorCountry").html("Please select country");
-		setTimeout(function(){ $("#errorCountry").html(""); }, 7000);
-		$("#country").focus();
-		status = false;
-	} else if($("#state").val()=="State"){
-		$("#errorState").html("Please select state");
-		setTimeout(function(){ $("#errorState").html(""); }, 7000);
-		$("#state").focus(); 
-		status = false;
-	} else if($("#city").val()==""){
-		$("#errorCity").html("Please enter country");
-		setTimeout(function(){ $("#errorCity").html(""); }, 7000);
-		$("#city").focus();
-		status = false;
-	} else if($("#pinCode").val()==""){ 
-		$("#errorpinCode").html("Please enter pincode");
-		setTimeout(function(){ $("#errorpinCode").html(""); }, 7000);
-		$("#pinCode").focus();
-		status = false;
-	}   
-	
-	if(status){
-	$.ajax({
-		type : "POST",
-		url : "addNewAddress",
-		data : { 
-			fullName : $("#fullName").val(),
-			userEmail : $("#newUserEmail").val(),
-			mobileNumber : $("#mobileNumber").val(),
-			add1 : $("#add1").val(),
-			add2 : $("#add2").val(),
-			country : $("#country").val(),
-			state : $("#state").val(),
-			city : $("#city").val(),
-			pinCode : $("#pinCode").val(),
-			specialInstruction : $("#specialInstruction").val(),
-			
-		},success:function(data){
-			$('body').removeClass('modal-open');
-			$('.modal-backdrop').remove();    
-			$('#AddNewAddressModal').modal('hide');
-			getAddAddress(); 			 
-		},error : function(e){
-			console.log("Error :::"+e)
-		} 
-	});
-  }
-}
-
-
-function getCart(){
-	$.ajax({
-		type : "POST", 
-		url : "<%=request.getContextPath()%>/getCart",
-		data : {
-		},success:function(data){
-			var cartTotal = "";
-			var cartData = ""; 
-			var cartFinalTotal = "0";  
-			if(data.length > 0){	
-				for (var i = 0; i < data.length; i++) {
-					cartData += '<li class="item">'+
-					'<a href="#" class="preview-image">'+
-					'<img class="preview" src="'+data[i].image+'" alt="">'+
-					'</a>'+
-					'<div class="description">'+ 
-					'<a href="#"> '+data[i].bookTitle+'</a>'+ 
-					'<strong class="price"> '+data[i].qty+' x '+data[i].currencySymbol +data[i].price+' </strong> '+
-					'</div>'+
-					'</li> <br /> '; 
-					  
-					cartTotal = data[i].qty * data[i].price; 
-					cartFinalTotal = parseInt(cartTotal) + parseInt(cartFinalTotal);					   
-				}  
-			}else{
-				cartData = "Cart is empty";
-			}
- 			 
-			$("#cartData").html(cartData);
-			$("#cateItemTotal").html(data.length);
-			$("#orderCartItem").html(data.length);
-			
-			if(data.length > 0){
-				$("#cartTotal").html("Total: "+$("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
-				$("#orderCartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2)); 
-				$("#orderCartFinalTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));	
-			}else{
-				$("#cartTotal").html("");
-				$("#orderCartTotal").html("");   
-				$("#orderCartFinalTotal").html("");
-			}
-			
-			
-		},error : function(e){  
-			console.log("Error :::"+e)
-		}
-	});
-
-}  
-
-
-</script>
-
-
-<script src="<%=request.getContextPath() %>/resources/checkout/bootstrap.min.js"></script> 
+<!-- <script src="<%=request.getContextPath() %>/resources/checkout/jquery-1.11.1.min.js"></script>  -->
 
 <!--   JS Files Start  -->  
 <script src="<%=request.getContextPath() %>/resources/js/jquery-3.3.1.min.js"></script> 
-<%-- <script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script> 
-<script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> --%> 
+<script src="<%=request.getContextPath() %>/resources/checkout/bootstrap.min.js"></script> 
+
+<script src="<%=request.getContextPath() %>/resources/js/popper.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/jquery-migrate-1.4.1.min.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/bootstrap.min.js"></script> 
-<%-- <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
+<!-- <script src="<%=request.getContextPath() %>/resources/js/owl.carousel.min.js"></script> 
 <script src="<%=request.getContextPath() %>/resources/js/jquery.prettyPhoto.js"></script> 
-<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script>  
- --%>
- <script src="<%=request.getContextPath() %>/resources/js/custom.js"></script>
- 
+<script src="<%=request.getContextPath() %>/resources/js/isotope.min.js"></script>   -->
+
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+    cartList(); 
+    getAddAddress();
+    });  	
+    
+    function resetAddress(){
+    $("#fullName").val("");
+    $("#newUserEmail").val("");
+    $("#mobileNumber").val("");
+    $("#add1").val("");
+    $("#add2").val("");  
+    $('#country').val("").change();
+    $("#state").val("State").change();  
+    $("#city").val(""); 
+    $("#pinCode").val("");
+    $("#specialInstruction").val("");
+    } 
+    
+    function addNewAddress(){
+    
+    var status = true;
+    if($("#fullName").val()==""){
+    $("#errorfullName").html("Please enter name");
+    setTimeout(function(){ $("#errorfullName").html(""); }, 7000);
+    $("#fullName").focus();
+    status = false;
+    }else if($("#add1").val()==""){
+    $("#errorAdd1").html("Please enter address line 1");
+    setTimeout(function(){ $("#errorAdd1").html(""); }, 7000);
+    $("#add1").focus();
+    status = false;
+    }else if($("#add2").val()==""){
+    $("#errorAdd2").html("Please enter address line 2");
+    setTimeout(function(){ $("#errorAdd2").html(""); }, 7000);
+    $("#add2").focus();
+    status = false; 
+    }else if($("#country").val()==""){
+    $("#errorCountry").html("Please select country");
+    setTimeout(function(){ $("#errorCountry").html(""); }, 7000);
+    $("#country").focus();
+    status = false;
+    } else if($("#state").val()=="State"){
+    $("#errorState").html("Please select state");
+    setTimeout(function(){ $("#errorState").html(""); }, 7000);
+    $("#state").focus(); 
+    status = false;
+    } else if($("#city").val()==""){
+    $("#errorCity").html("Please enter country");
+    setTimeout(function(){ $("#errorCity").html(""); }, 7000);
+    $("#city").focus();
+    status = false;
+    } else if($("#pinCode").val()==""){ 
+    $("#errorpinCode").html("Please enter pincode");
+    setTimeout(function(){ $("#errorpinCode").html(""); }, 7000);
+    $("#pinCode").focus();
+    status = false;
+    }   
+    
+    if(status){
+    $.ajax({
+    type : "POST",
+    url : "addNewAddress",
+    data : { 
+    fullName : $("#fullName").val(),
+    userEmail : $("#newUserEmail").val(),
+    mobileNumber : $("#mobileNumber").val(),
+    add1 : $("#add1").val(),
+    add2 : $("#add2").val(),
+    country : $("#country").val(),
+    state : $("#state").val(),
+    city : $("#city").val(),
+    pinCode : $("#pinCode").val(),
+    specialInstruction : $("#specialInstruction").val(),
+    
+    },success:function(data){  
+    	document.getElementById("AddNewAddressModal").className = "hidecss";
+    	$('#AddNewAddressModal').modal('hide');
+    	$('.modal-backdrop').remove();    
+    $('body').removeClass('modal-open');
+    
+    
+    getAddAddress(); 			 
+    },error : function(e){
+    console.log("Error :::"+e)
+    } 
+    });
+    }
+    }
+    
+    
+    function getCart(){
+    $.ajax({
+    type : "POST", 
+    url : "<%=request.getContextPath()%>/getCart",
+    data : {
+    },success:function(data){
+    var cartTotal = "";
+    var cartData = ""; 
+    var cartFinalTotal = "0";  
+    if(data.length > 0){	
+    for (var i = 0; i < data.length; i++) {
+    cartData += '<li class="item">'+
+    '<a href="#" class="preview-image">'+
+    '<img class="preview" src="'+data[i].image+'" alt="">'+
+    '</a>'+
+    '<div class="description">'+ 
+    '<a href="#"> '+data[i].bookTitle+'</a>'+ 
+    '<strong class="price"> '+data[i].qty+' x '+data[i].currencySymbol +data[i].price+' </strong> '+
+    '</div>'+
+    '</li> <br /> '; 
+    
+    cartTotal = data[i].qty * data[i].price; 
+    cartFinalTotal = parseInt(cartTotal) + parseInt(cartFinalTotal);					   
+    }  
+    }else{
+    cartData = "Cart is empty";
+    }
+    
+    $("#cartData").html(cartData);
+    $("#cateItemTotal").html(data.length);
+    $("#orderCartItem").html(data.length);
+    
+    if(data.length > 0){
+	    $("#cartTotal").html("Total: "+$("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+	    $("#orderCartTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2)); 
+	    $("#orderCartFinalTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));	
+    }else{ 
+	    $("#cartTotal").html("");
+	    $("#orderCartTotal").html("");   
+	    $("#orderCartFinalTotal").html("");
+    }
+    
+    
+    },error : function(e){  
+    console.log("Error :::"+e)
+    }
+    });
+    
+    }  
+    
+    
+    </script>
+    
+    
+
+
 <script>
 
 
 
 function checkLogin(){
-	
-	var status = true;
-	if($("#userEmailId").val()==""){ 
-		$("#erroruserEmailId").html("Please enter username");
-		setTimeout(function(){ $("#erroruserEmailId").html(""); }, 7000);
-		$("#userEmailId").focus();
-		status = false;
-	}  
-	if($("#userPassword").val()==""){
-		$("#erroruserPassword").html("Please enter password");
-		setTimeout(function(){ $("#erroruserPassword").html(""); }, 7000);
-		$("#userPassword").focus(); 
-		status = false;
-	}  
-	
-	if(status){
-	$.ajax({
-		type : "POST",
-		url : "checkValidUser",
-		data : {
-			"userEmailId" : $("#userEmailId").val(),
-			"userPassword" : $("#userPassword").val(), 
-		},success:function(data){
-			 
-			if(data==true){ 
-				window.location.reload();
-			}else{ 
-				$("#errorLoginMessage").html("Username and password incorrect.");
-				setTimeout(function(){ $("#errorLoginMessage").html(""); }, 7000);
-				return false;   
-			}
-		},error : function(e){
-			console.log("Error :::"+e)
-		}
-	});
-  }	
-	return false;
+
+var status = true;
+if($("#userEmailId").val()==""){ 
+$("#erroruserEmailId").html("Please enter username");
+setTimeout(function(){ $("#erroruserEmailId").html(""); }, 7000);
+$("#userEmailId").focus();
+status = false;
+}  
+if($("#userPassword").val()==""){
+$("#erroruserPassword").html("Please enter password");
+setTimeout(function(){ $("#erroruserPassword").html(""); }, 7000);
+$("#userPassword").focus(); 
+status = false;
+}  
+
+if(status){
+$.ajax({
+type : "POST",
+url : "checkValidUser",
+data : {
+"userEmailId" : $("#userEmailId").val(),
+"userPassword" : $("#userPassword").val(), 
+},success:function(data){
+
+if(data==true){ 
+window.location.reload();
+}else{ 
+$("#errorLoginMessage").html("Username and password incorrect.");
+setTimeout(function(){ $("#errorLoginMessage").html(""); }, 7000);
+return false;   
+}
+},error : function(e){
+console.log("Error :::"+e)
+}
+});
+}	
+return false;
 }
 //setTimeout(function(){ alert("Hello"); }, 3000);
 var checkBoxs = "";
 function getAddAddress(){
-	$.ajax({  
-		type : "POST",
-		url : "<%=request.getContextPath()%>/getUserAddress",
-		data : {
-		},success:function(data){
-			
-			var getAddressList = "";
-			for (var i = 0; i < data.length; i++) {
-				var cssStyle = ""; 
-				var backStyle = "";
-				var isActive = "";
-				 
-				if(data[i].defaultAddress=="0"){
-					cssStyle = "box-success";
-					backStyle = "aliceblue";
-					isActive ="";
-				}else{
-					cssStyle = "box-default";
-					backStyle = "#fff";
-					isActive ="checked";
-				}  	
-				//alert(data[i].defaultAddress +"---"+isActive);
-					  
-getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10px 0px 10px;" class="box  '+cssStyle+'">'+
-					'<div class="box-headerwith-border">'+ 
-					'<h3 style="font-size: 17px;padding: 15px 0px 15px 0px;border-bottom: 1px solid #ccc;" class="box-title">'+ data[i].fullName
-						+'<span ></span>'+ 
-					'</h3>'+
-					'<div class="box-tools pull-right">'+
-						'<div  class="input-group form-check">'+  
-							'<input type="checkbox" '+isActive+' class="form-check-input"  onclick="deliveryHere('+data[i].id+')" id="address'+data[i].id+'">'+
-							'<label class="form-check-label" for="exampleCheck2"> Deliver Here </label>'+
-						'</div>'+ 
-					'</div>'+
-				'</div>'+
- 
-				'<div class="box-body">'+
-					'<p> '+data[i].add1  +', '+data[i].add2  +'</p>'+
-					'<p> '+data[i].city+' '+data[i].state +' </p>'+
-					'<p> '+data[i].country+' '+data[i].pinCode+'  </p>'+
-					'<p>Mobile: '+data[i].mobileNumber+' </p>'+
-				'</div>'+
-				'</div>';
-				
-				if(checkBoxs==""){ 
-					checkBoxs =   data[i].id;
-				}else{
-					checkBoxs =  checkBoxs +","+ data[i].id;
-				}
-					  
-			}
-			
-				$("#addreesList").html(getAddressList);
-		},error : function(e){
-			console.log("Error :::"+e)
-		}
-	});
-} 
- 
- function deliveryHere(addressId){
-	/* alert(checkBoxs);
-	alert(addressId); */  
-	var res = checkBoxs.split(",");
-	for (var i = 0; i < res.length; i++) {
-		if(res[i]==addressId){  
-			$("#address"+res[i]).prop("checked", true); 	
-		}else{
-			$("#address"+res[i]).prop("checked", false);
-		}
-	}
- }
- 
-function cartList(){
-	$.ajax({  
-		type : "POST",
-		url : "<%=request.getContextPath()%>/getCart",
-		data : {
-		},success:function(data){
+$.ajax({  
+type : "POST",
+url : "<%=request.getContextPath()%>/getUserAddress",
+data : {
+},success:function(data){
 
-			$('#cartList').empty();
-			var cartList = ""; 
-			var subTotal = 0; 
-			var cartFinalTotal = 0;
-			 
-			for (var i = 0; i < data.length; i++) {
-				
-				var minusButtonStatus = "";
-				if(data[i].qty==1){
-					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">'; 
-				}else{ 
-					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number"  onclick="removeToCartButton('+data[i].orderId+')"  data-type="minus" data-field="quant[1]">';
-				}
-				
-				
-				cartList = '<tr><td>'+  
-								'<div class="widget-thumb">'+
-									'<a href="#"><img src="images/books/1.jpg" alt=""></a>'+
-								'</div>'+
-								'<div class="widget-content">'+
-									'<h5><a href="#"> '+data[i].bookTitle+' </a></h5>'+
-									'<span> <strong>Author:</strong> '+data[i].authorName+' </span> <br>'+
-									'<span> <strong>Book Category:</strong> '+data[i].categoryName+' </span>'+
-								'</div>'+ 
-								'<div class="clearfix"></div>'+	
-							'</td>'+
- 
-	'<td class="text-right"> '+$("#currencySymbol").val()+""+data[i].price.toFixed(2)+'</td>'+
-	'<td>'+
-	'<div class="input-group">'+
+var getAddressList = "";
+for (var i = 0; i < data.length; i++) {
+var cssStyle = ""; 
+var backStyle = "";
+var isActive = "";
+
+if(data[i].defaultAddress=="0"){
+cssStyle = "box-success";
+backStyle = "aliceblue";
+isActive ="";
+}else{
+cssStyle = "box-default";
+backStyle = "#fff";
+isActive ="checked";
+}  	
+//alert(data[i].defaultAddress +"---"+isActive);
+
+getAddressList += '<div style="background-color:'+backStyle+' ; padding: 0px 10px 0px 10px;" class="box  '+cssStyle+'">'+
+'<div class="box-headerwith-border">'+ 
+'<h3 style="font-size: 17px;padding: 15px 0px 15px 0px;border-bottom: 1px solid #ccc;" class="box-title">'+ data[i].fullName
++'<span ></span>'+ 
+'</h3>'+
+'<div class="box-tools pull-right">'+
+'<div  class="input-group form-check">'+  
+'<input type="checkbox" '+isActive+' class="form-check-input"  onclick="deliveryHere('+data[i].id+')" id="address'+data[i].id+'">'+
+'<label class="form-check-label" for="exampleCheck2"> Deliver Here </label>'+
+'</div>'+ 
+'</div>'+
+'</div>'+
+
+'<div class="box-body">'+
+'<p> '+data[i].add1  +', '+data[i].add2  +'</p>'+
+'<p> '+data[i].city+' '+data[i].state +' </p>'+
+'<p> '+data[i].country+' '+data[i].pinCode+'  </p>'+
+'<p>Mobile: '+data[i].mobileNumber+' </p>'+
+'</div>'+
+'</div>';
+
+if(checkBoxs==""){ 
+checkBoxs =   data[i].id+",";
+}else{
+checkBoxs =  checkBoxs +","+ data[i].id;
+}
+
+}
+
+$("#addreesList").html(getAddressList);
+},error : function(e){
+console.log("Error :::"+e)
+}
+});
+} 
+
+function deliveryHere(addressId){
+/* alert(checkBoxs);
+alert(addressId); */  
+var res = checkBoxs.split(",");
+for (var i = 0; i < res.length; i++) {
+if(res[i]==addressId){  
+$("#address"+res[i]).prop("checked", true); 	
+}else{
+$("#address"+res[i]).prop("checked", false);
+}
+}
+}
+
+function cartList(){
+$.ajax({  
+type : "POST",
+url : "<%=request.getContextPath()%>/getCart",
+data : {
+},success:function(data){
+
+$('#cartList').empty();
+var cartList = ""; 
+var subTotal = 0; 
+var cartFinalTotal = 0;
+
+for (var i = 0; i < data.length; i++) {
+
+var minusButtonStatus = "";
+if(data[i].qty==1){
+minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">'; 
+}else{ 
+minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number"  onclick="removeToCartButton('+data[i].orderId+')"  data-type="minus" data-field="quant[1]">';
+}
+
+
+cartList = '<tr><td>'+  
+'<div class="widget-thumb">'+
+'<a href="#"><img src="images/books/1.jpg" alt=""></a>'+
+'</div>'+
+'<div class="widget-content">'+
+'<h5><a href="#"> '+data[i].bookTitle+' </a></h5>'+
+'<span> <strong>Author:</strong> '+data[i].authorName+' </span> <br>'+
+'<span> <strong>Book Category:</strong> '+data[i].categoryName+' </span>'+
+'</div>'+ 
+'<div class="clearfix"></div>'+	
+'</td>'+
+
+'<td class="text-right"> '+$("#currencySymbol").val()+""+data[i].price.toFixed(2)+'</td>'+
+'<td>'+
+'<div class="input-group">'+
 '	<span class="input-group-btn">'+
 minusButtonStatus  +
-	'<i style="font-size: 11px;" class="fa fa-minus"></i>'+
-	'</button>'+
-	'</span>'+  
-	'<input style="    height: auto; padding: 5px 0px 0px 10px;" type="text" name="quant[1]" class="form-control input-sm input-number" value="'+data[i].qty+'" min="1" max="10">'+
-	'<span class="input-group-btn">'+
-	'<button type="button" class="btn btn-default btn-sm btn-number" data-type="plus" onclick="addToCart('+data[i].orderId+')"  data-field="quant[1]">'+
-	'<i style="font-size: 11px;" class="fa fa-plus"></i>'+
-	'</button>'+
-	'</span>'+
-	'</div>'+
-	'</td>'+
-	'<td class="text-right"> '+$("#currencySymbol").val()+""+(data[i].qty * data[i].price).toFixed(2)+' </td>'+
-	'<td class="text-right remove"> '+     
-	'<i style="cursor: pointer;" onclick="return removeToCart('+data[i].orderId+');" class="fa fa-trash"></i> '+
-	'</a>'+
-	'</td>'+
-	'</tr>';
-	
-	$('#cartList').append(cartList);
-	
-	subTotal = data[i].qty * data[i].price; 
-	cartFinalTotal = parseInt(subTotal) + parseInt(cartFinalTotal);
-	 
-	
-			}    
-			 
-			 $("#subTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
-			 $("#finalTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
-			 $("#myCart").html(data.length); 
-			 /* $("#orderCartItem").html(data.length); */
-			       
-			 if(data.length==0){
-				 $("#pleaceOrder").hide();  
-				 $("#makePaymentButton").hide();  
-				 $("#cartMessage").html("<div style='text-align:center;padding: 15px;'> Cart is empty <div>"); 
-				 $("#orderSummary").hide(); 
-			 }
-			 
-			 
-			/* var subTotal = 0; 
-			 subTotal =  data[i].qty * data[i].price;
-			 $("#subTotal").html(subTotal.toFixed(2));
-			 $("#finalTotal").html(subTotal.toFixed(2));
-			 $("#myCart").html(data.length); 
-			  */
-			//$("#cartList").html(cartList);
+'<i style="font-size: 11px;" class="fa fa-minus"></i>'+
+'</button>'+
+'</span>'+  
+'<input style="    height: auto; padding: 5px 0px 0px 10px;" type="text" name="quant[1]" class="form-control input-sm input-number" value="'+data[i].qty+'" min="1" max="10">'+
+'<span class="input-group-btn">'+
+'<button type="button" class="btn btn-default btn-sm btn-number" data-type="plus" onclick="addToCart('+data[i].orderId+')"  data-field="quant[1]">'+
+'<i style="font-size: 11px;" class="fa fa-plus"></i>'+
+'</button>'+
+'</span>'+
+'</div>'+
+'</td>'+
+'<td class="text-right"> '+$("#currencySymbol").val()+""+(data[i].qty * data[i].price).toFixed(2)+' </td>'+
+'<td class="text-right remove"> '+     
+'<i style="cursor: pointer;" onclick="return removeToCart('+data[i].orderId+');" class="fa fa-trash"></i> '+
+'</a>'+
+'</td>'+
+'</tr>';
 
-	
-		},error : function(e){
-			//console.log("Error :::"+e)
-		}
-	
+$('#cartList').append(cartList);
+
+subTotal = data[i].qty * data[i].price; 
+cartFinalTotal = parseInt(subTotal) + parseInt(cartFinalTotal);
+
+
+}    
+
+$("#subTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+$("#finalTotal").html($("#currencySymbol").val()+""+cartFinalTotal.toFixed(2));
+$("#myCart").html(data.length); 
+/* $("#orderCartItem").html(data.length); */
+
+if(data.length==0){
+$("#pleaceOrder").hide();  
+$("#makePaymentButton").hide();  
+$("#cartMessage").html("<div style='text-align:center;padding: 15px;'> Cart is empty <div>"); 
+$("#orderSummary").hide(); 
+}
+
+
+/* var subTotal = 0; 
+subTotal =  data[i].qty * data[i].price;
+$("#subTotal").html(subTotal.toFixed(2));
+$("#finalTotal").html(subTotal.toFixed(2));
+$("#myCart").html(data.length); 
+*/
+//$("#cartList").html(cartList);
+
+
+},error : function(e){
+//console.log("Error :::"+e)
+}
+
 }); 
 }
-  
+
 function removeToCart(orderId){
-	$.ajax({
-		type : "POST", 
-		url : "<%=request.getContextPath()%>/removeToCart",
-		data : {
-			orderId : orderId
-		},success:function(data){
-			getCart();		
-			cartList(); 
-			$("#deleteMessage").html("Book deleted successfully");
-			setTimeout(function(){ $("#deleteMessage").html(""); }, 7000); 
-		},error : function(e){
-			console.log("Error :::"+e)
-		}
-	});
+$.ajax({
+type : "POST", 
+url : "<%=request.getContextPath()%>/removeToCart",
+data : {
+orderId : orderId
+},success:function(data){
+getCart();		
+cartList(); 
+$("#deleteMessage").html("Book deleted successfully");
+setTimeout(function(){ $("#deleteMessage").html(""); }, 7000); 
+},error : function(e){
+console.log("Error :::"+e)
+}
+});
 } 
 
 
 </script>    
 <!-- <script src="resources/js/jquery-3.3.1.min.js"></script> -->
 <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
- 
-<script type="text/javascript" src="https://www.technicalkeeda.com/js/javascripts/plugin/jquery.js"></script>
-    <script type="text/javascript" src="https://www.technicalkeeda.com/js/javascripts/plugin/jquery.validate.js"></script>
+
+<!-- <script type="text/javascript" src="https://www.technicalkeeda.com/js/javascripts/plugin/jquery.js"></script>
+<script type="text/javascript" src="https://www.technicalkeeda.com/js/javascripts/plugin/jquery.validate.js"></script> -->
+
+
 <script>
-    function validatePassword() {
-        var validator = $("#loginForm").validate({
-            rules: {
-                password: "required",
-                confirmpassword: {
-                    equalTo: "#password"
-                }
-            },
-            messages: {
-                password: " Enter Password",
-                confirmpassword: " Enter Confirm Password Same as Password"
-            }
-        });
-        if (validator.form()) {
-            alert('Sucess');
-        }
-    }
- function checkoutGuest(){
-	 $.ajax({
-			type : "POST", 
-			url : "<%=request.getContextPath()%>/checkoutGuest",
-			data : {
-				guestMobileNumber : $("#guestMobileNumber").val(),
-				guestEmailAddress : $("#guestEmailAddress").val() 
-			},success:function(data){ 
-				 
-			},error : function(e){
-				console.log("Error :::"+e)
-			}
-		});
- }
-    
+function validatePassword() {
+var validator = $("#loginForm").validate({
+rules: {
+password: "required",
+confirmpassword: {
+equalTo: "#password"
+}
+},
+messages: {
+password: " Enter Password",
+confirmpassword: " Enter Confirm Password Same as Password"
+}
+});
+if (validator.form()) {
+alert('Sucess');
+}
+}
+function checkoutGuest(){
+$.ajax({
+type : "POST", 
+url : "<%=request.getContextPath()%>/checkoutGuest",
+data : {
+guestMobileNumber : $("#guestMobileNumber").val(),
+guestEmailAddress : $("#guestEmailAddress").val() 
+},success:function(data){ 
 
- function addToCart(orderId){
- 	$.ajax({
- 		type : "POST", 
- 		url : "<%=request.getContextPath()%>/addToCart",
- 		data : {
- 			orderId : orderId,
- 			qty : 1, 
- 		},success:function(data){
- 			cartList();  
- 			getCart();
- 		},error : function(e){
- 			console.log("Error :::"+e)
- 		}
- 	}); 
- }    
+},error : function(e){
+console.log("Error :::"+e)
+}
+});
+}
 
- function removeToCartButton(orderId){
- 	$.ajax({
- 		type : "POST",  
- 		url : "<%=request.getContextPath()%>/removeToCartButton",
- 		data : {
- 			orderId : orderId,
- 			qty : -1, 
- 		},success:function(data){
- 			cartList();  
- 			getCart();
- 		},error : function(e){
- 			console.log("Error :::"+e)
- 		}
- 	}); 
- }
- 
- function forgotPassword(){
-	 
-	 var status = true;
-		if($("#FGemailAddress").val()==""){ 
-			$("#errorEmailAddress").html("Please enter email address");
-			setTimeout(function(){ $("#errorEmailAddress").html(""); }, 7000);
-			$("#FGemailAddress").focus();
-			status = false;
-		}  
-		 
-		
-		 
-	  if(status){
-		  //$('body').removeClass('modal-open');
-		  //$('.modal-backdrop').remove(); 
-		  //$('#FPasswordModal').modal('hide');
-		  $("#FGemailAddress").val("");
-		  $("#successCurrentEmail").html("Please check your email address to reset password.");
-			setTimeout(function(){ $("#successCurrentEmail").html(""); }, 7000);
-			
-	  }	
-	 
-	 
-	 
-	 
- }
- function checkUserName(type,action){
-	 $.ajax({
-		type : "POST",
-		url : "checkUserStatus",
-		data : {  
-			"value" : type.value,
-			"action" : action, 
-		},success:function(data){
-			if(data==true){  
-				if(action=="userEmail"){
-					$("#userEmail").focus();
-					$("#userEmail").val("");
-					
-					$("#errorUserEmail").html("Email address already registered.");
-					setTimeout(function(){ $("#errorUserEmail").html(""); }, 7000);
-					
-				}else if(action=="userName"){
-					$("#userName").focus();
-					$("#userName").val("");
-					 
-					$("#errorUserName").html("Username already registered.");
-					setTimeout(function(){ $("#errorUserName").html(""); }, 7000);
-				}
-			}
-		},error : function(e){
-			console.log("Error :::"+e)
-		}
-	});   
+
+function addToCart(orderId){
+$.ajax({
+type : "POST", 
+url : "<%=request.getContextPath()%>/addToCart",
+data : {
+orderId : orderId,
+qty : 1, 
+},success:function(data){
+cartList();  
+getCart();
+},error : function(e){
+console.log("Error :::"+e)
+}
+}); 
+}    
+
+function removeToCartButton(orderId){
+$.ajax({
+type : "POST",  
+url : "<%=request.getContextPath()%>/removeToCartButton",
+data : {
+orderId : orderId,
+qty : -1, 
+},success:function(data){
+cartList();  
+getCart();
+},error : function(e){
+console.log("Error :::"+e)
+}
+}); 
+}
+
+function forgotPassword(){
+
+var status = true;
+if($("#FGemailAddress").val()==""){ 
+$("#errorEmailAddress").html("Please enter email address");
+setTimeout(function(){ $("#errorEmailAddress").html(""); }, 7000);
+$("#FGemailAddress").focus();
+status = false;
+}  
+
+
+
+if(status){
+//$('body').removeClass('modal-open');
+//$('.modal-backdrop').remove(); 
+//$('#FPasswordModal').modal('hide');
+$("#FGemailAddress").val("");
+$("#successCurrentEmail").html("Please check your email address to reset password.");
+setTimeout(function(){ $("#successCurrentEmail").html(""); }, 7000);
+
+}	
+
+
+
+
+}
+function checkUserName(type,action){
+$.ajax({
+type : "POST",
+url : "checkUserStatus",
+data : {  
+"value" : type.value,
+"action" : action, 
+},success:function(data){
+if(data==true){  
+if(action=="userEmail"){
+$("#userEmail").focus();
+$("#userEmail").val("");
+
+$("#errorUserEmail").html("Email address already registered.");
+setTimeout(function(){ $("#errorUserEmail").html(""); }, 7000);
+
+}else if(action=="userName"){
+$("#userName").focus();
+$("#userName").val("");
+
+$("#errorUserName").html("Username already registered.");
+setTimeout(function(){ $("#errorUserName").html(""); }, 7000);
+}
+}
+},error : function(e){
+console.log("Error :::"+e)
+}
+});   
 } 
- 
- function checkGuestValidation(){
-	 var status = true;
-	 if($("#guestEmailAddress").val()==""){ 
-			$("#errorguestEmailAddress").html("Please enter email address");
-			setTimeout(function(){ $("#errorguestEmailAddress").html(""); }, 7000);
-			$("#guestEmailAddress").focus(); 
-			status = false;
-		}else if($("#guestMobileNumber").val()==""){ 
-			$("#errorguestMobileNumber").html("Please enter monile number");
-			setTimeout(function(){ $("#errorguestMobileNumber").html(""); }, 7000);
-			$("#guestMobileNumber").focus();
-			status = false;
-		}
-	 if(status){
-		 return true;
-	 }else{
-		 return false;
-	 }
-	   
- }
- 
-    </script>
-    <input type="hidden" name="currencySymbol" id="currencySymbol" value="<%=session.getAttribute("currencySymbol")%>"> 
+
+function checkGuestValidation(){
+var status = true;
+if($("#guestEmailAddress").val()==""){ 
+$("#errorguestEmailAddress").html("Please enter email address");
+setTimeout(function(){ $("#errorguestEmailAddress").html(""); }, 7000);
+$("#guestEmailAddress").focus(); 
+status = false;
+}else if($("#guestMobileNumber").val()==""){ 
+$("#errorguestMobileNumber").html("Please enter monile number");
+setTimeout(function(){ $("#errorguestMobileNumber").html(""); }, 7000);
+$("#guestMobileNumber").focus();
+status = false;
+}
+if(status){
+return true;
+}else{
+return false;
+}
+
+}
+
+function setAddress() {
+var res = checkBoxs.split(",");
+for (var i = 0; i < res.length; i++) {
+if($("#address"+res[i]).prop("checked") == true){
+console.log("address id-->"+res[i]);
+$.ajax({
+type : "POST",
+url : "checkoutAddress",
+data : {
+deliveryAddreessId :res[i],
+},success:function(d){  
+window.location = "authorize_payment";
+},error : function(e){
+
+}
+});	
+
+}
+}
+} 
+</script>
+<input type="hidden" name="currencySymbol" id="currencySymbol" value="<%=session.getAttribute("currencySymbol")%>"> 
+
+
 </body>
-
-
 </html>
