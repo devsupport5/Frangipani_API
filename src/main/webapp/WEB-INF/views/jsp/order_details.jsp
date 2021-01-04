@@ -117,7 +117,8 @@
 <li> <strong class="strong_data">Tracking ID : </strong> ${orderList.paymentId }<br/> </li>
 <li> <strong class="strong_data">Order Date : </strong> <fmt:parseDate value = "${orderList.createdDate}" var = "parsedEmpDate" pattern = "yyyy-MM-dd HH:mm:ss" />
       <fmt:formatDate  pattern = "dd-MM-yyyy HH:mm:ss" value = "${parsedEmpDate}" /><br/> </li>
-  <li> <strong class="strong_data"> Payment Status :</strong> ${orderList.orderStatus } </li>
+  <li> <strong class="strong_data"> Payment Status :</strong> ${orderList.paymentStatus } </li>
+  <li> <strong class="strong_data"> Order Status :</strong> ${orderList.orderStatus } </li>
 </ul>
 </div>
 <!--Order Box Start-->
@@ -125,7 +126,7 @@
 <div class="event-list-box">
 
 <div class="event-thumb"> 
-<a href="#"><i class="fas fa-link"></i></a> <img src="${orderDetails.image }" alt=""> 
+ <img src="${orderDetails.image }" alt=""> 
 </div>
 
 <div class="event-txt">

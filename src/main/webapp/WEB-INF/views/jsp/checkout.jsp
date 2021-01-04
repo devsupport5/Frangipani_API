@@ -524,7 +524,7 @@ return false;
 <ul class="list-group">
 
 <li class="list-group-item">  
-Quantity <!-- (<span id="orderCartItem"></span>) -->
+Items <!-- (<span id="orderCartItem"></span>) -->
 <span class="pull-right"> <span id="orderCartItem"></span> <!-- <span id="orderCartTotal"></span> --> </span> 
 </li>
 
@@ -663,7 +663,7 @@ Register Your Account
 <div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">
-<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
+<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"  >X</span><span class="sr-only">Close</span></button>
 <h3 class="modal-title" id="lineModalLabel">
 Continue as a guest user. 
 </h3>
@@ -771,8 +771,8 @@ You have received Email from us
 <div class="checkout-process-modal modal fade" id="AddNewAddressModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
+<div class="modal-header"> 
+<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" onclick="modelClose()">X</span><span class="sr-only">Close</span></button>
 <h3 class="modal-title" id="lineModalLabel">
 Add a new address
 </h3>
@@ -1452,6 +1452,14 @@ window.location = "authorize_payment";
 }
 }
 } 
+ 
+function modelClose(){
+  $(".modal").removeClass("in");
+  $(".modal-backdrop").remove();
+  $('body').removeClass('modal-open');
+  $('body').css('padding-right', '');
+  $(".modal").hide();
+}
 </script>
 <input type="hidden" name="currencySymbol" id="currencySymbol" value="<%=session.getAttribute("currencySymbol")%>"> 
 

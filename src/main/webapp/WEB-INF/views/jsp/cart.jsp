@@ -375,15 +375,25 @@ function cartList(){
 					minusButtonStatus =	'<button type="button" class="btn btn-default btn-sm btn-number" onclick="removeToCartButton('+data[i].orderId+')"  data-type="minus" data-field="quant[1]">';
 				}
 				
+				author = data[i].authorName;
+				category = data[i].categoryName;
+				 
+				if(author==null){
+					author = "";
+				}
+				if(category==null){
+					category = "";
+				}
+				
 				
 				cartList = '<tr><td>'+  
 								'<div class="widget-thumb">'+
 									'<a href="#"><img src="images/books/1.jpg" alt=""></a>'+
-								'</div>'+
+								'</div>'+ 
 								'<div class="widget-content">'+
 									'<h5><a href="#"> '+data[i].bookTitle+' </a></h5>'+
-									'<span> <strong>Author:</strong> '+data[i].authorName+' </span> <br>'+
-									'<span> <strong>Book Category:</strong> '+data[i].categoryName+' </span>'+
+									'<span> <strong>Author:</strong> '+author+' </span> <br>'+
+									'<span> <strong>Book Category:</strong> '+category+' </span>'+
 								'</div>'+ 
 								'<div class="clearfix"></div>'+	
 							'</td>'+

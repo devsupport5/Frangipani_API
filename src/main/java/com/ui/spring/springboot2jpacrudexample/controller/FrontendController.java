@@ -767,6 +767,14 @@ public class FrontendController {
         
     }
     
+    @RequestMapping("/cancelPayment")
+    public String  cancelPayment(Model model) {
+        
+      //System.out.println("-------terms-conditions------->>>");
+      
+        return "cancel_payment";
+    }
+    
     @RequestMapping("/terms_conditions")
     public String  terms_conditions(Model model) {
         

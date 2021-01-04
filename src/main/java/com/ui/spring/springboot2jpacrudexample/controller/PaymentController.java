@@ -67,7 +67,7 @@ public class PaymentController {
 		 float price = 0.0f;
 		 for (int i = 0; i < items.size(); i++) {
 			
-			 price = (float) (items.get(i).getQty() + items.get(i).getPrice());
+			 price = (float) (items.get(i).getPrice());
 			 finalPrice = price + finalPrice;
 		}
 		 

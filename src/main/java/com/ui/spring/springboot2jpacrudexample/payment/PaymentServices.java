@@ -74,7 +74,7 @@ public class PaymentServices {
 	
 	private RedirectUrls getRedirectURLs() {
 		RedirectUrls redirectUrls = new RedirectUrls();
-		redirectUrls.setCancelUrl("http://frangipanibookstest.com/cancel.jsp");
+		redirectUrls.setCancelUrl("http://frangipanibookstest.com/cancelPayment");
 		//redirectUrls.setReturnUrl("http://localhost:8080/springboot-crud-rest/review_payment");
 		redirectUrls.setReturnUrl("http://frangipanibookstest.com/review_payment");
 		return redirectUrls;

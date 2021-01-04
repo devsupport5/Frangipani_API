@@ -23,8 +23,8 @@ business with The Office of the President of Ghana... </p>
 <h5> Quick Links </h5>
 <ul class="quick-links">
 <li> <a href="<%=request.getContextPath() %>/about-frangipani-books"> About </a></li>
-<li> <a  href="<%=request.getContextPath() %>/book"> BOOKS </a></li>
-<li> <a href="<%=request.getContextPath() %>/category"> CATEGORY </a></li>
+<li> <a  href="<%=request.getContextPath() %>/book"> BOOKS </a></li> 
+<li> <a href="<%=request.getContextPath() %>/category"> CATEGORIES </a></li>
 <li> <a href="<%=request.getContextPath() %>/authors"> AUTHORS </a></li>
 <!-- <li> <a href="#"> TESTIMONIALS </a></li> -->
 <li> <a href="<%=request.getContextPath() %>/contact"> CONTACT </a></li>

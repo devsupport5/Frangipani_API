@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title> Order Confirmation | Frangipani Books </title>
+<title> Cancel Payment | Frangipani Books </title>
 
 <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 <meta name="theme-color" content="#ED008C">
@@ -57,23 +57,7 @@
 </ul>
 </div>
 </section>
-<!--Inner Header End--> 
-
-<!--Blog Start-->
-<%-- <section class="wf100 p80 team">
-<div class="volunteers wf100">
-<div class="container">
-	<div class="row">
-		<font size="4">
-			Thank You Kindely note down below details for your reference. <br/>
-			 <strong>Order Number :</strong> ORD<c:out value="${orderId}"></c:out> <br/> 
-			 <strong>Transaction Number :</strong> <c:out value="${transactionNumber}"></c:out> 
-		</font>
-	</div>
-</div>
-</div> 
-</section> --%>
-<!--Blog End--> 
+ 
 
 <!--Why you Need to Choose Ecova Start-->
 <div style="padding-bottom: 9em" class="choose-ecova wf100 p80">
@@ -84,14 +68,11 @@
 <div class="order success">
 <i class="fa fa-check-circle"></i>
 <div class="section-title">
-<h3>  Order Successfully Placed  </h3>
+<h3>  Payment Canceled  </h3>
 </div>
 
-<p style="font-size: 18px"> Your order number is : <span>ORD<c:out value="${orderId}"></c:out></span>  </p>
-<p style="font-size: 18px"> Transaction Number : <span><c:out value="${transactionNumber}"></c:out></span>  </p>
+<p style="font-size: 18px"> Please try again  </p>
 
-<p style="font-size: 14px"> you'll receive an email confirmation shortly to <a href="mailto:frangipanibookstest.com"> info@frangipanibookstest.com </a>  </p>
- 
 <a style="margin-top: 2em;" href="<%=request.getContextPath() %>/" class="lm"> Continue Shopping </a>
 
 </div>
